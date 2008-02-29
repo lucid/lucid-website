@@ -14,9 +14,9 @@ from django.conf import settings
 import blogcosm.django_setup
 from django.core.mail import send_mail
 
-from blogmaker.blog.models import Entry
-from blogmaker.util import logToData
-from blogmaker.util.trap_errors import error_trapping
+from desktopsite.apps.blogmaker.blog.models import Entry
+from desktopsite.apps.blogmaker.util import logToData
+from desktopsite.apps.blogmaker.util.trap_errors import error_trapping
 
 
 def main():
@@ -109,7 +109,7 @@ def triples(seq, fill=''):
         
         
 def getLogger():
-    return logging.getLogger('blogmaker.blog.trackback_update')
+    return logging.getLogger('desktopsite.apps.blogmaker.blog.trackback_update')
     
     
 if __name__ == '__main__':

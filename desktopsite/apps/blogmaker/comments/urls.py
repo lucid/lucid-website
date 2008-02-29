@@ -3,7 +3,7 @@
 
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('blogmaker.comments.views',
+urlpatterns = patterns('desktopsite.apps.blogmaker.comments.views',
     (r'^post/$', 'post_comment'),
     (r'^posted/$', 'comment_was_posted'),
 )

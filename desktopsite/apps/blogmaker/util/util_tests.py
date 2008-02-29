@@ -2,7 +2,7 @@
 
 
 import unittest, sys
-from blogmaker.util import strip_domain, strip_tlds
+from desktopsite.apps.blogmaker.util import strip_domain, strip_tlds
 
 class util_tests(unittest.TestCase):
     def test_strip_domain(self):

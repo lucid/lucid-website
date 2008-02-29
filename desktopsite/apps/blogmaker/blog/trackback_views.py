@@ -7,7 +7,7 @@ from itertools import count
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-from blogmaker.blog.models import Entry, TrackbackStatus
+from desktopsite.apps.blogmaker.blog.models import Entry, TrackbackStatus
 
 def postTrackbacks(request, slug):
     ''' This view helps to post trackbacks for our entries '''

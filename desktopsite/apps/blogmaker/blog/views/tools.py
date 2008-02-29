@@ -17,9 +17,9 @@ from django.conf import settings
 from django.utils.translation import gettext
 from PIL import Image
 
-from blogmaker.util import formatChanges
+from desktopsite.apps.blogmaker.util import formatChanges
 
-from blogmaker.blog.models import Tag, Entry
+from desktopsite.apps.blogmaker.blog.models import Tag, Entry
 
 @user_passes_test(lambda u: u.has_perm('blogmaker.entry'))
 def existing_entries(request):

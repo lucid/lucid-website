@@ -7,7 +7,7 @@ Modified by PreFab Software, Inc.
 
 
 from django.conf import settings
-from blogmaker.comments.models import Comment
+from desktopsite.apps.blogmaker.comments.models import Comment
 from django.contrib.syndication.feeds import Feed
 from django.contrib.sites.models import Site
 

@@ -2,7 +2,7 @@
 
 
 from django.conf.urls.defaults import patterns
-from blogmaker.blog.admin_views import entryRedirect, trackbacksRedirect
+from desktopsite.apps.blogmaker.blog.admin_views import entryRedirect, trackbacksRedirect
 
 
 urlpatterns = patterns('',

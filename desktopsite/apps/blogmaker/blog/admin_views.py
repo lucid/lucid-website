@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 
-from blogmaker.blog.models import Entry
+from desktopsite.apps.blogmaker.blog.models import Entry
 
 @login_required
 def entryRedirect(request, id):

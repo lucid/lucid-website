@@ -3,7 +3,7 @@
 from django import template
 from django.conf import settings
 
-from blogmaker.util import expand_shortcuts
+from desktopsite.apps.blogmaker.util import expand_shortcuts
 
 register = template.Library()
 

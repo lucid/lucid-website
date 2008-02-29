@@ -6,7 +6,7 @@
 import datetime, gzip, re, urllib, urllib2, urlparse
 import cStringIO as StringIO
 
-from blogmaker.util.feedparser import _parse_date, _FeedURLHandler
+from desktopsite.apps.blogmaker.util.feedparser import _parse_date, _FeedURLHandler
 
 debuglevel=0
 

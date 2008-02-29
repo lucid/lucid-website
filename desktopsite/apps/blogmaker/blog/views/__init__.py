@@ -15,8 +15,8 @@ from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
 from django.views.generic.date_based import archive_day
 
-from blogmaker.blog.models import Tag, Entry
-import blogmaker.comments.views
+from desktopsite.apps.blogmaker.blog.models import Tag, Entry
+import desktopsite.apps.blogmaker.comments.views
 
 def view_tagged_items(request, tag):
     ''' View all blog entries for a given tag '''
@@ -115,4 +115,4 @@ def trackback(request, slug):
     ''' This is the view that receives external trackback requests '''
     blog = get_object_or_404(Entry, slug=slug)
     content_type = ContentType.objects.get(app_label__exact='blog', model__exact='entry')
-    return blogmaker.comments.views.trackback(request, content_type.id, blog.id, blog.get_absolute_url())
+    return desktopsite.apps.blogmaker.comments.views.trackback(request, content_type.id, blog.id, blog.get_absolute_url())

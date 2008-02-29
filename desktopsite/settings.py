@@ -1,4 +1,5 @@
 # Django settings for desktopsite project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,8 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
+DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
+DATABASE_NAME = '/var/db/desktop_redesign.db'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -30,22 +31,24 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
+SITE_ROOT = "http://redesign.psychdesktop.net/"
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/var/www/psychdesktop/desktopsite/media/'
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/admin-media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'sf+y41ck7n-y2^w($$e18hwl3$ei1682gr$3b7wvh1cbr)k&5='
@@ -64,7 +67,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
 
     # SNAPboard processors
-    "desktopsite.apps.forum.views.snapboard_default_context",
+    "desktopsite.apps.snapboard.views.snapboard_default_context",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'desktopsite.apps.forum.middleware.threadlocals.ThreadLocals',
+    'desktopsite.apps.snapboard.middleware.threadlocals.ThreadLocals',
 )
 
 ROOT_URLCONF = 'desktopsite.urls'
@@ -90,7 +93,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.markup',
     'django.contrib.admin',
-    'desktopsite.apps.forum',
+    'desktopsite.apps.snapboard',
     'desktopsite.apps.blogmaker.blog',
     'desktopsite.apps.blogmaker.comments',
     'desktopsite.apps.blogmaker.util',
@@ -98,7 +101,7 @@ INSTALLED_APPS = (
 
 
 ### SNAPBOARD ###
-SNAP_PREFIX = "forum/";
+SNAP_PREFIX = "/forum";
 SNAP_MEDIA_PREFIX = MEDIA_URL + '/forum'
 
 ### BLOGMAKER ###

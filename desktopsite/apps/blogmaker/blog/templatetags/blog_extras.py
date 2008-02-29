@@ -12,7 +12,7 @@ from django import template
 from django.template import resolve_variable
 from django.conf import settings
 
-from blogmaker.blog.models import Entry, Tag
+from desktopsite.apps.blogmaker.blog.models import Entry, Tag
 
 
 register = template.Library()

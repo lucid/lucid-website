@@ -4,7 +4,7 @@
 import datetime, unittest
 import blogcosm.django_tst_setup
 from django.contrib.auth.models import User
-from blogmaker.blog.models import Entry, TrackbackStatus
+from desktopsite.apps.blogmaker.blog.models import Entry, TrackbackStatus
 
 class EntryTest(unittest.TestCase):
     def test_entry(self):

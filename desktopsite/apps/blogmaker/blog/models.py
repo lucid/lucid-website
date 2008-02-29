@@ -15,8 +15,8 @@ from django.contrib.markup.templatetags.markup import markdown
 from django.conf import settings
 from django.utils.html import strip_tags
 
-from blogmaker.util import expand_shortcuts, strip_domain_and_rest, unescape
-import blogmaker.blog.trackback_client as tc
+from desktopsite.apps.blogmaker.util import expand_shortcuts, strip_domain_and_rest, unescape
+import desktopsite.apps.blogmaker.blog.trackback_client as tc
 
 ################################### Ping URL ###########################################
 

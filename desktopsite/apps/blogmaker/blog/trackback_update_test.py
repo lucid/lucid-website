@@ -3,7 +3,7 @@
 
 import unittest
 
-from blogmaker.blog.trackback_update import triples
+from desktopsite.apps.blogmaker.blog.trackback_update import triples
 
 
 class trackback_update_tests(unittest.TestCase):

@@ -19,10 +19,10 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.datastructures import MultiValueDictKeyError
 
-from blogmaker.util.fetch import read_html
+from desktopsite.apps.blogmaker.util.fetch import read_html
 
-from blogmaker.comments.models import Comment
-from blogmaker.comments.templatetags.comment_honeypot import makeFieldNames, makeSpinner
+from desktopsite.apps.blogmaker.comments.models import Comment
+from desktopsite.apps.blogmaker.comments.templatetags.comment_honeypot import makeFieldNames, makeSpinner
 
 COMMENTS_PER_PAGE = 20
 

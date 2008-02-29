@@ -10,7 +10,7 @@ Modified by PreFab Software, Inc.
 
 
 from django.db import backend, connection, models
-from blogmaker.comments.models import Comment
+from desktopsite.apps.blogmaker.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 
 

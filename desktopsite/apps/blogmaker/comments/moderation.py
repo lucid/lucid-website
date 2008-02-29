@@ -29,7 +29,7 @@ a weblog::
 Then we create a ``CommentModerator`` subclass specifying some
 moderation options::
     
-    from blogmaker.comments.moderation import CommentModerator, moderator
+    from desktopsite.apps.blogmaker.comments.moderation import CommentModerator, moderator
     
     class EntryModerator(CommentModerator):
         akismet = True
@@ -78,7 +78,7 @@ from django.db.models import signals
 from django.db.models.base import ModelBase
 from django.dispatch import dispatcher
 from django.template import Context, loader
-from blogmaker.comments.models import Comment
+from desktopsite.apps.blogmaker.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 

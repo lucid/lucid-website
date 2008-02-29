@@ -16,7 +16,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import get_model
 from django.contrib.contenttypes.models import ContentType
 
-from blogmaker.comments.models import Comment
+from desktopsite.apps.blogmaker.comments.models import Comment
 
 register = template.Library()
 
