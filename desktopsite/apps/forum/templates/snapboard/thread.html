@@ -1,0 +1,62 @@
+{% extends "snapboard/base_forum.html" %}
+
+{% block snap_extra_head %}
+    {{ block.super }}
+    <link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/post.css" />
+{% endblock %}
+
+{% load extras %}
+
+{% block snapboard_main %}
+    <div id="thread_rpc_feedback" class="rpc_message">
+        <!-- This DIV is for RPC feedback messages for the whole thread-->
+    </div>
+    <p>
+        <span class="thread_menu">
+            {% if user.is_staff %}
+                <span>
+                    <a id="csticky{{ thr.id }}" href="#" onclick="set_csticky('{{ thr.id }}');">
+                        {{ thr.csticky|yesno:"unset,set" }} csticky
+                    </a> 
+                </span>
+                &#149;
+                <span>
+                    <a id="gsticky{{ thr.id }}" href="#" onclick="set_gsticky('{{ thr.id }}');">
+                        {{ thr.gsticky|yesno:"unset,set" }} gsticky
+                    </a> 
+                </span>
+                &#149;
+                <span>
+                    <a id="close{{ thr.id }}" href="#" onclick="set_close('{{ thr.id }}');">
+                        {{ thr.closed|yesno:"open,close" }} thread
+                    </a> 
+                </span>
+            {% endif %}
+            {% if user.is_authenticated %}
+                &#149;
+                <span>
+                    <a id="watch{{ thr.id }}" href="#" onclick="set_watch('{{ thr.id }}');">
+                        {{ watched|yesno:"don't," }} watch
+                    </a> 
+                </span>
+            {% endif %}
+        </span>
+        <b style="font-size: large;">
+            <a href="{{ SNAP_PREFIX }}/threads/category/{{ thr.category.id }}">{{ thr.category }}</a>:
+            {{ thr.subject }}
+        </b>
+    </p>
+    <br />
+
+    {% include "snapboard/include/page_navigation.html" %}
+
+    {% include "snapboard/include/show_posts.html" %}
+
+    {% include "snapboard/include/page_navigation.html" %}
+    <br />
+    {% include "snapboard/include/addpost.html" %}
+
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

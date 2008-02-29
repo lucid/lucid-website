@@ -1,0 +1,35 @@
+{% extends "snapboard/base_forum.html" %}
+
+{% block snapboard_main %}
+    <div class="index_title">
+    <h2 style="font-size: 152%;">
+    Topics Category List
+    </h2>
+        {% if thread_page %}
+            {% include "snapboard/include/page_navigation.html" %}
+        {% endif %}
+    </div>
+    {% if cat_list %}
+        {% for category in cat_list %}
+        <div class="thread">
+            <span style="font-size:medium;">
+                <b><a href="{{ SNAP_PREFIX }}/threads/category/{{ category.id }}">{{ category.label }}</a></b>
+            </span>
+            <span style="color: #999; font-size: small; float: right;">
+                {% if category.moderators %}
+                moderators:  {{ category.moderators }}
+                {% endif %}
+            </span>
+            <br />
+            <span style="color: #999; padding-left:2em; font-size:small;">
+                {{ category.thread_count }} discussions
+            </span>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No categories are available.</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

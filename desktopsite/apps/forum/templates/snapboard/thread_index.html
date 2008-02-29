@@ -1,0 +1,62 @@
+{% extends "snapboard/base_forum.html" %}
+
+{% block snapboard_main %}
+    <div class="index_title">
+    <h2 style="font-size: 152%;">
+    {{ title }}
+    </h2>
+        {% if thread_page %}
+            {% include "snapboard/include/page_navigation.html" %}
+        {% endif %}
+    </div>
+
+    {% if thread_page %}
+        {% for thread in thread_page %}
+        <div class="thread">
+            <p style="margin-top: 10px; margin-bottom: 5px;">
+                <span style="color: #999; font-size: small; float:right;">
+                    {{ thread.post_count }} posts started by <b>{{ thread.starter }}</b>
+                </span>
+                <span style="font-size: 100%;">
+                    <b>
+                        {% if not category and thread.gsticky %}
+                        STICKY
+                        {% endif %}
+                        {% if category and thread.csticky %}
+                        STICKY
+                        {% endif %}
+                        {% if thread.closed %}
+                        CLOSED
+                        {% endif %}
+                        <a href="{{ SNAP_PREFIX }}/threads/id/{{ thread.id }}">{{ thread.subject }}</a>
+                    </b>
+                </span>
+            </p>
+            <span style="color: #677; font-size: small; float:right;">
+                last updated
+                <span class="datetime">{{ thread.date|date:"r T" }}</span>
+                {% ifnotequal thread.last_poster thread.starter %}
+                by {{ thread.last_poster }}
+                {% endifnotequal %}
+            </span>
+            <span style="color: #888; padding-left: 2em; font-size:small;">
+                category:
+                <a href="{{ SNAP_PREFIX }}/threads/category/{{ thread.category.id }}">
+                    {{ thread.category }}
+                </a>
+            </span>
+        </div>
+        {% endfor %}
+        {% if thread_page %}
+        <div class="index_title">
+            {% include "snapboard/include/page_navigation.html" %}
+        </div>
+        {% endif %}
+
+    {% else %}
+        <p>No threads are available.</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->

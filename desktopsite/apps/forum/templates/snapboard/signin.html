@@ -1,0 +1,26 @@
+{% extends "snapboard/base_forum.html" %}
+
+{% block side_panel %}
+<!-- empty for now -->
+{% endblock %}
+
+{% block snapboard_main %}
+    {% if not user.is_authenticated %}
+    <div style="margin-left: 25%; margin-right: 25%;">
+        <form method="post" action="{{ SNAP_PREFIX }}/signin/">
+            <table style="margin: 5px;">
+            {{ login_form.as_table }}
+            </table>
+            <p>
+            <input type="submit" value="Sign In" />
+            <input type="hidden" name="next" value="{{ login_next }}" />
+            </p>
+        </form>
+    </div>
+    {% else %}
+    <p>You are already signed in.</p>
+    {% endif %}
+{% endblock %}
+<!--
+vim: ai ts=4 sts=4 et sw=4 
+-->
