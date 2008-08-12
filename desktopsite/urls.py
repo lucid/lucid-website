@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^desktopsite/', include('desktopsite.foo.urls')),
     (r'^forum/', include('desktopsite.apps.snapboard.urls')),
-    (r'^blog/', include('desktopsite.apps.blogmaker.blog.urls')),
+    (r'^blog/', include('desktopsite.apps.blog.urls')),
     (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^dojango/', include('dojango.urls')),
+    (r'', include('desktopsite.apps.content.urls')),
+    (r'', include('django.contrib.flatpages.urls')),
 )

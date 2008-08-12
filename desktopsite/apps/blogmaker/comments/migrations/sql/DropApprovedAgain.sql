@@ -1,1 +1,0 @@
-ALTER TABLE "comments_comment" DROP COLUMN "approved";

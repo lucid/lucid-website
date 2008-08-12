@@ -11,7 +11,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = '/var/db/desktop_redesign.db'             # Or path to database file if using sqlite3.
+DATABASE_NAME = 'desktop.db'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -31,15 +31,17 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
-SITE_ROOT = "http://redesign.psychdesktop.net/"
+SITE_ROOT = "http://www.lucid-project.org/"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
 
+ROOT_PATH = "/home/HFLW/Projects/lucid/website/trunk/desktopsite"
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/var/www/psychdesktop/desktopsite/media/'
+MEDIA_ROOT = '%s/media/' % ROOT_PATH
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
@@ -81,30 +83,29 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'desktopsite.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    "%s/templates/" % ROOT_PATH,
+    "%s/dojango/templates/" % ROOT_PATH,
+    "%s/apps/blog/templates/" % ROOT_PATH,
+    "%s/apps/content/templates/" % ROOT_PATH,
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.comments',
+    'django.contrib.flatpages',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
     'django.contrib.admin',
     'desktopsite.apps.snapboard',
-    'desktopsite.apps.blogmaker.blog',
-    'desktopsite.apps.blogmaker.comments',
-    'desktopsite.apps.blogmaker.util',
+    'desktopsite.apps.comment_utils',
+    'desktopsite.apps.blog',
+    'desktopsite.apps.content',
+    'dojango',
 )
 
 
 ### SNAPBOARD ###
 SNAP_PREFIX = "/forum";
 SNAP_MEDIA_PREFIX = MEDIA_URL + '/forum'
-
-### BLOGMAKER ###
-BLOG_ROOT = '/blog/'
-BLOG_MEDIA_PREFIX = MEDIA_URL + '/blog/'
-DEFAULT_BLOG_USER = 'HFLW'
