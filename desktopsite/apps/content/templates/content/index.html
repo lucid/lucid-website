@@ -1,7 +1,41 @@
 {% extends "base.html" %}
 
-{% block title %}{% endblock %}
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/index.css" />
+{% endblock %}
 
 {% block content %}
-Welcome to lucid whoo!
+<div id="download">
+	<h2>Download</h2>
+	<a href="#">Lucid 1.0</a>
+	<ul>
+		<li><a href="#">Release Notes</a></li>
+		<li><a href="#">License</a></li>
+	</ul>
+	<h2>Documentation</h2>
+	<ul>
+		<li><a href="#">For Users</a></li>
+		<li><a href="#">For Developers</a></li>
+	</ul>
+</div>
+<div id="intro">
+	<h1>Awesomeness <sup style="color: #00E000;">2</sup></h1>
+	<p>
+		This ass-tastic product will improve your sex life, help you loose weight, and shut your kids up!
+	</p>
+	<a href="/overview/">Learn More...</a>
+</div>
+<div id="blogposts">
+	<h2>Recent Blog Posts</h2>
+	{% load comments comment_utils latestblogentry %}
+	{% get_latest_blog_entries 4 as latest_entries %}
+	
+	{% for latest_entry in latest_entries %}
+	    <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
+	    <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
+	    {{ latest_entry.summary }}
+	    <p class="more"><a href="{{ latest_entry.get_absolute_url }}">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
+	{% endfor %}
+	
+</div>
 {% endblock %}

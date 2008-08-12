@@ -23,7 +23,7 @@ class Entry(models.Model):
         return self.headline
 
     def get_absolute_url(self):
-        return "/weblog/%s/%s/" % (self.pub_date.strftime("%Y/%b/%d").lower(), self.slug)
+        return "/blog/%s/%s/" % (self.pub_date.strftime("%Y/%b/%d").lower(), self.slug)
         
     @property
     def comments_enabled(self):

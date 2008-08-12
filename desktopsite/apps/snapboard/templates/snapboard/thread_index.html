@@ -28,7 +28,7 @@
                         {% if thread.closed %}
                         CLOSED
                         {% endif %}
-                        <a href="{{ SNAP_PREFIX }}/threads/id/{{ thread.id }}">{{ thread.subject }}</a>
+                        <a href="{{ SNAP_PREFIX }}/threads/id/{{ thread.id }}/">{{ thread.subject }}</a>
                     </b>
                 </span>
             </p>
@@ -41,7 +41,7 @@
             </span>
             <span style="color: #888; padding-left: 2em; font-size:small;">
                 category:
-                <a href="{{ SNAP_PREFIX }}/threads/category/{{ thread.category.id }}">
+                <a href="{{ SNAP_PREFIX }}/threads/category/{{ thread.category.id }}/">
                     {{ thread.category }}
                 </a>
             </span>
