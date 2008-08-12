@@ -14,9 +14,9 @@
         </span>
     {% endif %}
 
-    {% if page_prev %}<a href="{{ page_nav_urlbase }}page{{ page_prev }}">previous</a> &#149; {% endif %}
+    {% if page_prev %}<a href="{{ page_nav_urlbase }}page{{ page_prev }}/">previous</a> &#149; {% endif %}
     page {{ page }} of {{ page_total }}
-    {% if page_next %} &#149; <a href="{{ page_nav_urlbase }}page{{ page_next }}">next</a> {% endif %}
+    {% if page_next %} &#149; <a href="{{ page_nav_urlbase }}page{{ page_next }}/">next</a> {% endif %}
 
     {% if page_range %}
     &#149; <a href="#" onclick="toggle('page_skip', 'inline');">skip to page...</a>

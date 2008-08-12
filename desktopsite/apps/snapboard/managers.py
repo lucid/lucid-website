@@ -36,7 +36,7 @@ class PostManager(models.Manager):
         # (although they can use the Django admin interface to do so)
         # TODO: there's gotta be a better way to filter out private messages
         # Tested with postgresql and sqlite
-        qs = self.get_query_set().filter(thread__id=thread_id)
+        qs = self.get_query_set().filter(thread__id=thread_id).order_by("date")
 
         if user.is_authenticated():
             qs = qs.filter((Q(user=user) | Q(private__isnull=True) | Q(private__exact=user)))
