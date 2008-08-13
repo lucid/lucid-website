@@ -1,0 +1,59 @@
+{% extends "dojango/base.html" %}
+
+{% block dojango_page_title %}Lucid Desktop{% block title %}{% endblock %}{% endblock %}
+
+{% block dojango_header_extra %}
+<link rel="stylesheet" type="text/css" href="/site_media/main.css" media="screen" />
+{% block extrahead %}{% endblock %}
+{% endblock %}
+
+{% comment %}
+<ul>
+	<li><a href="/">Index</a></li>
+	<li><a href="/blog/">Blog</a></li>
+	<li><a href="/forum/">Forum</a></li>
+</ul>
+{% block content %}
+{% endblock %}
+{% endcomment %}
+
+{% block dojango_content %}
+<div id="main">
+	<div id="header">
+		<div>The Lucid Desktop Project</div>
+		<div>The open web desktop</div>
+		<div>www.lucid-desktop.org</div>
+	</div>
+	<div id="menubar">
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/demo/">Demo</a></li>
+			<li><a href="/download/">Download</a></li>
+			<li><a href="/documentation/">Documentation</a></li>
+			<li><a href="/blog/">Blog</a></li>
+			<li><a href="/forum/">Forum</a></li>
+			<li><a href="http://trac.lucid-desktop.org/">Code</a></li>
+		</ul>
+		<div id="search">
+			<form method="post" action="/search/">
+				<input type="text" name="text" />
+				<input type="submit" value="Search" />
+			</form>
+		</div>
+	</div>
+	<div id="content">
+		<div id="content-top">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<div id="content-bottom"></div>
+	</div>
+	<div id="footer">
+		<div class="logo"></div>
+		<div class="text">
+			© 2008 Dojo Foundation<br />
+			All Rights Reserved
+		</div>
+	</div>
+</div>
+{% endblock %}
