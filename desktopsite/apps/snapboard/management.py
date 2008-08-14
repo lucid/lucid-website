@@ -1,20 +1,19 @@
 import os
 
-from django.dispatch import dispatcher 
 from django.db.models import signals 
 from django.conf import settings
 
 import models as snapboard_app
 
-def sync_hook(): 
+def sync_hook(**kwargs): 
     pass
 
-dispatcher.connect(sync_hook, sender=snapboard_app, signal=signals.post_syncdb) 
+signals.post_syncdb.connect(sync_hook, sender=snapboard_app) 
 
 
 
 
-def test_setup():
+def test_setup(**kwargs):
     from django.contrib.auth.models import User
     from models import Thread, Post, Category
     from random import choice
@@ -74,5 +73,5 @@ def test_setup():
             # allows setting of arbitrary ip
             post.management_save()
 
-dispatcher.connect(test_setup, sender=snapboard_app, signal=signals.post_syncdb) 
+signals.post_syncdb.connect(test_setup, sender=snapboard_app) 
 # vim: ai ts=4 sts=4 et sw=4
