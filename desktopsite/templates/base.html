@@ -24,6 +24,13 @@
 			<li><a href="/forum/">Forum</a></li>
 			<li><a href="http://trac.lucid-desktop.org/">Code</a></li>
 		</ul>
+		<div id="login">
+			{% if user.is_authenticated %}
+				<a href="/accounts/profile/">{{ user.username }}</a> - <a href="/accounts/logout/">Logout</a>
+			{% else %}
+				<a href="/accounts/login/">Login</a>
+			{% endif %}
+		</div>
 		<div id="search">
 			<form method="post" action="/search/">
 				<input type="text" name="text" />

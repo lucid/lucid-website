@@ -32,7 +32,7 @@ def isIPAddressList(field_data, all_data):
 
 
 class Category(models.Model):
-    label = models.CharField(maxlength=32)
+    label = models.CharField(max_length=32)
 
     objects = managers.CategoryManager()    # adds thread_count
 
@@ -59,7 +59,7 @@ class Moderator(models.Model):
 
 
 class Thread(models.Model):
-    subject = models.CharField(maxlength=160)
+    subject = models.CharField(max_length=160)
     category = models.ForeignKey(Category)
 
     closed = models.BooleanField(default=False)
@@ -290,7 +290,7 @@ class BannedIP(models.Model):
     class Admin:
         pass
 
-def update_ban_cache():
+def update_ban_cache(**kwargs):
     ips = []
     users = [int(u.id) for u in BannedUser.objects.all()]
 
@@ -300,10 +300,10 @@ def update_ban_cache():
     settings.SNAP_BANNED_IPS = sets.Set(ips)
     settings.SNAP_BANNED_USERS = sets.Set(users)
 
-dispatcher.connect(update_ban_cache, sender=BannedIP, signal=signals.post_save)
-dispatcher.connect(update_ban_cache, sender=BannedIP, signal=signals.post_delete)
-dispatcher.connect(update_ban_cache, sender=BannedUser, signal=signals.post_save)
-dispatcher.connect(update_ban_cache, sender=BannedUser, signal=signals.post_delete)
+signals.post_save.connect(update_ban_cache, sender=BannedIP)
+signals.post_delete.connect(update_ban_cache, sender=BannedIP)
+signals.post_save.connect(update_ban_cache, sender=BannedUser)
+signals.post_delete.connect(update_ban_cache, sender=BannedUser)
 
 
 # from django.contrib.site.models import Site

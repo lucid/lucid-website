@@ -1,6 +1,7 @@
 # Django settings for desktopsite project.
 import os
 
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -87,6 +88,7 @@ TEMPLATE_DIRS = (
     "%s/dojango/templates/" % ROOT_PATH,
     "%s/apps/blog/templates/" % ROOT_PATH,
     "%s/apps/content/templates/" % ROOT_PATH,
+    "%s/apps/accounts/templates/" % ROOT_PATH,
 )
 
 INSTALLED_APPS = (
@@ -105,7 +107,10 @@ INSTALLED_APPS = (
     'dojango',
 )
 
-
 ### SNAPBOARD ###
 SNAP_PREFIX = "/forum";
 SNAP_MEDIA_PREFIX = MEDIA_URL + '/forum'
+
+
+### DOJANGO ###
+DOJANGO_DOJO_DEBUG = False

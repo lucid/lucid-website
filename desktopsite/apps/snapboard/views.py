@@ -3,7 +3,7 @@
 from django import newforms as forms
 from django.contrib.auth import decorators
 from django.contrib.auth import login, logout
-from django.core.paginator import ObjectPaginator, InvalidPage
+from django.core.paginator import Paginator, InvalidPage
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseServerError
 from django.shortcuts import render_to_response
@@ -108,31 +108,31 @@ def paginate_context(request, model, urlbase, object_list, page, **kwargs):
     "snapboard/page_navigation.html"
     '''
     page = int(page)
-    pindex = page - 1
+    pindex = page
     page_next = None
     page_prev = None
     page_range = None
 
-    paginator = ObjectPaginator(object_list, _userdata(request, 'tpp'))
+    paginator = Paginator(object_list, _userdata(request, 'tpp'))
     try:
-        object_page = paginator.get_page(pindex)
+        object_page = paginator.page(pindex)
     except InvalidPage:
         raise InvalidPage
 
-    if paginator.has_next_page(pindex):
+    if object_page.has_next():
         page_next = page + 1
-    if paginator.has_previous_page(pindex):
+    if object_page.has_previous():
         page_prev = page - 1
-    if paginator.pages > 2:
-        page_range = range(1, paginator.pages+1)
+    if paginator.num_pages > 2:
+        page_range = range(1, paginator.num_pages+1)
 
     return {
             'page': page,
-            'page_total': paginator.pages,
+            'page_total': paginator.num_pages,
             'page_next': page_next,
             'page_prev': page_prev,
             'page_range': page_range,
-            model.__name__.lower() + '_page': object_page,
+            model.__name__.lower() + '_page': object_page.object_list,
             'page_nav_urlbase': urlbase,
         }
 

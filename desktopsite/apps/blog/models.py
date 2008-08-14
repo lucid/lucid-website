@@ -6,7 +6,7 @@ from desktopsite.apps.comment_utils.moderation import CommentModerator, moderato
 class Entry(models.Model):
     pub_date = models.DateTimeField()
     slug = models.SlugField(unique_for_date='pub_date')
-    headline = models.CharField(maxlength=200)
+    headline = models.CharField(max_length=200)
     summary = models.TextField(help_text="Use raw HTML.")
     body = models.TextField(help_text="Use raw HTML.")
     author = models.ForeignKey(User, limit_choices_to = {'is_staff__exact': True})

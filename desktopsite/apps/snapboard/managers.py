@@ -3,7 +3,7 @@
 from django import newforms as forms
 from django.contrib.auth import decorators
 from django.contrib.auth import login, logout
-from django.core.paginator import ObjectPaginator, InvalidPage
+from django.core.paginator import Paginator, InvalidPage
 from django.db import models
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404, HttpResponseServerError

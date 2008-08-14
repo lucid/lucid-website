@@ -5,7 +5,6 @@ import cStringIO
 from PIL import Image as PILImage
 from django.db import models
 from django import forms
-from django.dispatch import dispatcher
 from django.db.models import signals
 from django.conf import settings
 
@@ -33,14 +32,14 @@ class PhotoField(ImageField):
     def get_internal_type(self):
         return 'ImageField'
 
-    def _update_parent_pk(self, instance=None):
+    def _update_parent_pk(self, instance=None, **kwargs):
         self.parent_pk = instance._get_pk_val()
 
     def contribute_to_class(self, cls, name):
         super(PhotoField, self).contribute_to_class(cls, name)
         # Add get_FIELD_content_type method
         setattr(cls, 'get_%s_content_type' % self.name, lambda instance: "image/png")
-        dispatcher.connect(self._update_parent_pk, signals.post_save, sender=cls)
+        signals.post_save.connect(self._update_parent_pk, sender=cls)
 
     def get_content_type(self):
         return "image/png"

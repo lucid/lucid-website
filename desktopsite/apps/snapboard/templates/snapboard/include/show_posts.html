@@ -42,7 +42,7 @@
                 <img src="{{ SNAP_MEDIA_PREFIX }}/{{ post.avatar }}" />
             {% endif %}
             <b>
-                <a href="#snap_post{ post.id }}" onclick="toggle_post('{{ post.id }}');">
+                <a href="#snap_post{{ post.id }}" onclick="toggle_post('{{ post.id }}');">
                     <span title="POPUP" class="popup">{{ post.user }}</span>
                 </a>
             </b>
