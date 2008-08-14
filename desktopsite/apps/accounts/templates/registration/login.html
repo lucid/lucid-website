@@ -1,0 +1,28 @@
+{% extends "base_content.html" %}
+
+{% block title %} - Login{% endblock %}
+
+{% block content %}
+<div id="mainlogin">
+	<h1>Login</h1>
+	{% if form.errors %}
+	<p>Your username and password didn't match. Please try again.</p>
+	{% endif %}
+	
+	<form method="post" action=".">
+	<table>
+		<tr><td>Username:</td><td>{{ form.username }}</td></tr>
+		<tr><td>Password:</td><td>{{ form.password }}</td></tr>
+	</table>
+
+	
+	<input class="login" type="submit" value="Login" />
+	<input type="hidden" name="next" value="{{ next }}" />
+	</form>
+	<ul>
+		<li><a href="/accounts/register/">Register</a></li>
+		<li><a href="/accounts/reset/">Forgot Password</a></li>
+	</ul>
+</div>
+
+{% endblock %}
