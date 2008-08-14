@@ -6,7 +6,7 @@
 
 <h1>{{ object.headline }}</h1>
 {{ object.body }}
-<p class="date small">Posted by <strong>{{ object.author }}</strong> on {{ object.pub_date|date:"F j, Y" }}</p>
+<p class="date small">Posted by <strong>{{ object.author.get_full_name }}</strong> on {{ object.pub_date|date:"F j, Y" }}</p>
 
 {% load comments comment_utils %}
 {% get_public_free_comment_list for blog.entry object.id as comment_list %}

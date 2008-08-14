@@ -6,3 +6,8 @@
 	width: 180px;
 	margin-left: 5px;
 }
+
+#blogposts {
+	padding-top: 5px;
+	clear: both;
+}

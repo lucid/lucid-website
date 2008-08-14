@@ -3,3 +3,18 @@
 {% block extrahead %}
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
 {% endblock %}
+
+{% block main %}
+<div class="rightsidebar">
+	<h2>Archives</h2>
+	{% include "blog/archive_list.html" %}
+	<h2>Feeds</h2>
+	<ul>
+		<li><a href="/rss/weblog/">Blog Feed</a></li>
+	</ul>
+</div>
+<div class="content-rightsidebar">
+	{% block content %}
+	{% endblock %}
+</div>
+{% endblock %}

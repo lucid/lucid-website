@@ -1,0 +1,9 @@
+<ul>
+	{% load latestblogentry %}
+	{% get_blog_archive_list as dates %}
+	{% for i in dates %}
+	{% ifchanged i.month %}
+	<li><a href="/blog/{{ i|date:"Y" }}/{{ i|date:"b" }}/">{{ i|date:"F Y" }}</a></li>
+	{% endifchanged %}
+	{% endfor %}
+</ul>

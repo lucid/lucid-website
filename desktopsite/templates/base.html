@@ -7,16 +7,6 @@
 {% block extrahead %}{% endblock %}
 {% endblock %}
 
-{% comment %}
-<ul>
-	<li><a href="/">Index</a></li>
-	<li><a href="/blog/">Blog</a></li>
-	<li><a href="/forum/">Forum</a></li>
-</ul>
-{% block content %}
-{% endblock %}
-{% endcomment %}
-
 {% block dojango_content %}
 <div id="main">
 	<div id="header">
@@ -43,7 +33,7 @@
 	</div>
 	<div id="content">
 		<div id="content-top">
-			{% block content %}
+			{% block main %}
 			{% endblock %}
 		</div>
 		<div id="content-bottom"></div>

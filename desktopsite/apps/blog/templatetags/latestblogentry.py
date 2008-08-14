@@ -23,3 +23,24 @@ def do_get_latest_blog_entries(parser, token):
 
 register = template.Library()
 register.tag('get_latest_blog_entries', do_get_latest_blog_entries)
+
+class BlogArchiveNode(template.Node):
+    def __init__(self, varname):
+        self.varname = varname
+
+    def render(self, context):
+        context[self.varname] = list(Entry.objects.filter(pub_date__lte=datetime.datetime.now()).dates("pub_date", "month").distinct())
+        return ''
+
+def do_get_blog_archive_list(parser, token):
+    """
+    {% get_blog_archive_list as dates %}
+    """
+    bits = token.contents.split()
+    if len(bits) != 3:
+        raise template.TemplateSyntaxError, "'%s' tag takes two arguments" % bits[0]
+    if bits[1] != 'as':
+        raise template.TemplateSyntaxError, "First argument to '%s' tag must be 'as'" % bits[0]
+    return BlogArchiveNode(bits[2])
+
+register.tag('get_blog_archive_list', do_get_blog_archive_list)

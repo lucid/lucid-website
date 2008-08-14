@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.contrib.auth.models import User
 from desktopsite.apps.comment_utils.moderation import CommentModerator, moderator
 
 class Entry(models.Model):
@@ -8,7 +9,7 @@ class Entry(models.Model):
     headline = models.CharField(maxlength=200)
     summary = models.TextField(help_text="Use raw HTML.")
     body = models.TextField(help_text="Use raw HTML.")
-    author = models.CharField(maxlength=100)
+    author = models.ForeignKey(User, limit_choices_to = {'is_staff__exact': True})
 
     class Meta:
         db_table = 'blog_entries'
