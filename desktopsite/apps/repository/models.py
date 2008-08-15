@@ -14,7 +14,7 @@ class Package(models.Model):
             
     
 class Version(models.Model):
-    package = models.FireignKey(Package)
+    package = models.ForeignKey(Package)
     creation_date = models.DateField(auto_now=True, editable=False)
     name = models.CharField(max_length=100)
     checksum = models.CharField(max_length=100, editable=False)
