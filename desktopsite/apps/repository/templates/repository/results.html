@@ -1,0 +1,16 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ title }}{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+	{% for package in results %}
+		<li>{{ package.name }}</li>
+	{% endfor %}
+</ul>
+{% endblock %}

@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 class Package(models.Model):
     sysname = models.SlugField("System Name", unique=True)
-    name = models.CharField(maxlength=200)
+    name = models.CharField(max_length=200)
     description = models.TextField()
     url = models.URLField("Homepage")
     maintainer = models.ForeignKey(User)
-    type = models.CharField(maxlength=100, choices=("Application", "Theme", "Translation"))
+    type = models.CharField(max_length=100, choices=("Application", "Theme", "Translation"))
     def get_rating(self):
         ratings = self.rating_set.all()
         

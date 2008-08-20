@@ -89,6 +89,7 @@ TEMPLATE_DIRS = (
     "%s/apps/blog/templates/" % ROOT_PATH,
     "%s/apps/content/templates/" % ROOT_PATH,
     "%s/apps/accounts/templates/" % ROOT_PATH,
+    "%s/apps/repository/templates/" % ROOT_PATH,
 )
 
 INSTALLED_APPS = (
