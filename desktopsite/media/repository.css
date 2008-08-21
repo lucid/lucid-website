@@ -1,0 +1,11 @@
+.filter {
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+	border-bottom: 1px dotted #aaa;
+}
+
+.warn {
+	color: red;
+	text-decoration: underline;
+	font-style: italic;
+}
