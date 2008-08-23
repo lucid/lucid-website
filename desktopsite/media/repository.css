@@ -9,3 +9,33 @@
 	text-decoration: underline;
 	font-style: italic;
 }
+
+.packageList {
+	
+}
+
+.packageList .item {
+	border-bottom: 1px dotted #aaa;
+}
+
+.packageList .title {
+	font-weight: bold;
+}
+
+.packageList .version {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.packageList .released {
+	color: #444;
+}
+
+.packageList .rating {
+	float: right;
+}
+
+.packageList a {
+	color: #000;
+	
+}

@@ -4,8 +4,12 @@ from desktopsite.apps.repository.models import *
 from desktopsite.apps.repository.categories import REPOSITORY_CATEGORIES
 
 def index(request):
+    latest = Version.objects.all().order_by("creation_date")[:8]
+    top_rated = Rating.objects.top_rated(8)
     return render_to_response('repository/index.html', {
-        'categories': REPOSITORY_CATEGORIES                                                    
+        'categories': REPOSITORY_CATEGORIES,
+        'latest': latest, 
+        'top_rated': top_rated                                                  
     })
     
 def byLetter(request, letter):

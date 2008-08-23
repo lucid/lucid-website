@@ -1,0 +1,46 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ title }}{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+{% endblock %}
+
+{% block content %}
+<h1>Add a Package</h1>
+<div class="text">
+	<h2>Uploading the package</h2>
+	<p>
+		The first thing you should do is upload your package to a server. If you do not want to host the package yourself, it is recommended
+		that you use <a href="http://www.omploader.org/">Omploader</a> to host the package. Websites like Rapidshare and Mediafire
+		will not work, because they do not allow direct access to the file.
+	</p>
+	<h2>Rules</h2>
+	<p>
+		There are some simple rules for packages listed here. If a package does not follow these rules, it will be removed.
+		<ol>
+			<li>The package cannot contain malicious code.</li>
+			<li>The package should not conflict with other packages in the directory.</li>
+			<li>If the package contains an app, the app must not declare global variables.</li>
+		</ol>
+		There are also some general guidelines for packages. These are not enforced as heavily as rules, but your package could be
+		removed for one of these reasons.
+		<ol>
+			<li>If the package contains an app:
+				<ul>
+					<li>The app should not use IDs in DOM Nodes</li>
+					<li>The app should not insert DOM Nodes directly into the document</li>
+				</ul>
+			</li>
+			<li>
+				The package should remove itself completely when uninstalled, and should not leave traces of itself afterword.
+				The exception to this would be if the package left behind configuration or other information.
+			</li>
+			<li>
+				The package should include all the necessary files for it to be used (including images, swf files, javascript files, etc.).
+				Loading files from an external server should only be done when necessary.
+			</li>
+		</ol>
+	</p>
+</div>
+{% endblock %}

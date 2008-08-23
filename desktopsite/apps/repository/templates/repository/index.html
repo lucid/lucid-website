@@ -41,50 +41,21 @@
 		They provide additional themes, apps, translations, and other enhancements.
 	</p>
 	<p>
-		Although this directory is provided by the Lucid Desktop Project, <span class="warn">be cautious when installing packages</span>.
-		Packages that have been marked as 'verified' have been checked, and are known to be free of malicious code.
-		Unverified third-party packages can contain malicious code, <span class="warn">and should be approached with caution</span>.
-		Also, <span class="warn">make sure you verify the checksum</span>. Third-party packages are hosted on remote servers,
-		allowing the package creator to add malicious code to the package after it has been verified.
-		The checksum is generated when the package is first submitted, and does not change.
+		Packages here are generally safe, but approach unverified packages with caution,
+		and be sure to check the checksum of any packages you download (even if it's verified).
 	</p>
 </div>
-<h2>Getting your package listed</h2>
-<div class="text">
-	<p>
-		The first thing you should do is upload your package to a server. If you do not want to host the package yourself, it is recommended
-		that you use <a href="http://www.omploader.org/">Omploader</a> to host the package. Websites like Rapidshare and Mediafire
-		will not work, because they do not allow direct access to the file.
-	</p>
-	<p>
-		Once your package has been hosted, you can fill out <a href="/repository/newpackage/">this form</a>.
-		After submission, it will be posted on the site.
-	</p>
-	<p>
-		There are some simple rules for packages listed here. If a package does not follow these rules, it will be removed.
-		<ol>
-			<li>The package cannot contain malicious code.</li>
-			<li>The package should not conflict with other packages in the directory.</li>
-			<li>If the package contains an app, the app must not declare global variables.</li>
-		</ol>
-		There are also some general guidelines for packages. These are not enforced as heavily as rules, but your package could be
-		removed for one of these reasons.
-		<ol>
-			<li>If the package contains an app:
-				<ul>
-					<li>The app should not use IDs in DOM Nodes</li>
-					<li>The app should not insert DOM Nodes directly into the document</li>
-				</ul>
-			</li>
-			<li>
-				The package should remove itself completely when uninstalled, and should not leave traces of itself afterword.
-				The exception to this would be if the package left behind configuration or other information.
-			</li>
-			<li>
-				The package should include all the necessary files for it to be used (including images, swf files, javascript files, etc.).
-				Loading files from an external server should only be done when necessary.
-			</li>
-		</ol>
-	</p>
+
+<h2>Latest Packages</h2>
+<div class="packageList">
+	{% for version in latest %}
+		{% include "repository/packageListItem.html" %}
+	{% endfor %}
+</div>
+<h2>Top Rated Packages</h2>
+<div class="packageList">
+	{% for version in top_rated %}
+		{% include "repository/packageListItem.html" %}
+	{% endfor %}
 </div>
 {% endblock %}

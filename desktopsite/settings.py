@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     'desktopsite.apps.comment_utils',
     'desktopsite.apps.blog',
     'desktopsite.apps.content',
+    'desktopsite.apps.repository',
     'dojango',
 )
 
