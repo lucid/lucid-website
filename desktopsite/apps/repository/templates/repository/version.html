@@ -1,0 +1,20 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ package.name }} {{ version.name }}{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+{% endblock %}
+
+{% block content %}
+<h1>{{ package.name }} {{ version.name }}</h1>
+<div class="text">
+	<p>
+		{{ package.description }}
+	</p>
+</div>
+{% if not version.is_latest %}
+<span class="warn">Note:</span> This is not the latest version of this package!
+{% endif %}
+
+{% endblock %}

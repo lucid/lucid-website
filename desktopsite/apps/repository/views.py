@@ -5,7 +5,7 @@ from desktopsite.apps.repository.categories import REPOSITORY_CATEGORIES
 
 def index(request):
     latest = Version.objects.all().order_by("creation_date")[:8]
-    top_rated = Rating.objects.top_rated(8)
+    top_rated = Rating.objects.top_rated()[:8]
     return render_to_response('repository/index.html', {
         'categories': REPOSITORY_CATEGORIES,
         'latest': latest, 
@@ -29,4 +29,18 @@ def showResults(request, title, resultset):
     return render_to_response('repository/results.html', {
         'results': resultset,
         'title': (title if title else "Search Results"),
+    })
+    
+def package(request, sysname):
+    pak = get_object_or_404(Package, sysname=sysname)
+    return render_to_response('repository/package.html', {
+        'package': pak,
+    })
+
+def version(request, sysname, version):
+    pak = get_object_or_404(Package, sysname=sysname)
+    version = get_object_or_404(pak.version_set, name=version)
+    return render_to_response('repository/version.html', {
+        'package': pak,
+        'version': version,
     })

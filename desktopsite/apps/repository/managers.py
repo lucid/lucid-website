@@ -68,5 +68,24 @@ class RatingsManager(models.Manager):
         version_ids = [row[0] for row in cursor.fetchall()]
         version_dict = Version.objects.in_bulk(version_ids)
         return [version_dict[version_id] for version_id in version_ids]
+    
+    def most_rated(self, num=5):
+        """
+        Returns the top ``num`` Snippets with net positive ratings, in
+        order of their total rating score.
+       
+        """
+        from models import Version
+        query = """SELECT version_id, COUNT(score) AS rating
+        FROM %s
+        GROUP BY version_id
+        ORDER BY rating DESC""" % self.model._meta.db_table
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute(query, [])
+
+        version_ids = [row[0] for row in cursor.fetchall()]
+        version_dict = Version.objects.in_bulk(version_ids)
+        return [version_dict[version_id] for version_id in version_ids]
 
 

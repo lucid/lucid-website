@@ -16,6 +16,7 @@
 
 .packageList .item {
 	border-bottom: 1px dotted #aaa;
+	clear: both;
 }
 
 .packageList .title {
@@ -33,9 +34,28 @@
 
 .packageList .rating {
 	float: right;
+	text-align: center;
 }
 
 .packageList a {
 	color: #000;
 	
+}
+
+.flag {
+	position: relative;
+	bottom: 5px;
+	font-size: 0.7em;
+}
+
+.flag.new {
+	color: #00E000;
+}
+
+.flag.verified {
+	color: #0000E0;
+}
+
+.flag.latest {
+	color: #E00000;
 }

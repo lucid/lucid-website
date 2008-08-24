@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from desktopsite.apps.repository import managers
+from desktopsite.apps.repository.categories import *
 
 class Package(models.Model):
     sysname = models.SlugField("System Name", unique=True)
@@ -8,30 +9,35 @@ class Package(models.Model):
     description = models.TextField()
     url = models.URLField("Homepage")
     maintainer = models.ForeignKey(User)
-    type = models.CharField(max_length=100, choices=(
-                                                     ("application", "Application"),
-                                                     ("theme", "Theme"),
-                                                     ("translation", "Translation"),
-                                                    ))
+    category = models.CharField(max_length=100, choices=REPOSITORY_CATEGORIES)
     def get_absolute_url(self):
-        return "#"
+        return "/repository/packages/%s/" % self.sysname
+    def get_versions_desc(self):
+        return self.version_set.order_by("-name")
             
     
 class Version(models.Model):
     package = models.ForeignKey(Package)
-    creation_date = models.DateField(auto_now=True, editable=False)
     name = models.CharField(max_length=100)
-    checksum = models.CharField(max_length=100, editable=False)
+    changelog = models.TextField()
     package_url = models.URLField()
-    verified_safe = models.BooleanField()
+    creation_date = models.DateTimeField(auto_now=True, editable=False)
+    checksum = models.CharField(max_length=100, editable=False)
+    verified_safe = models.BooleanField(default=False)
     
     def __str__(self):
         return "%s %s" % (self.package.name, self.name)
     
     def get_absolute_url(self):
-        return "#"
+        return "/repository/packages/%s/%s/" % (self.package.sysname, self.name)
     def get_rating(self):
         return Rating.objects.score_for_version(self.pk)
+    def is_new(self):
+        import datetime
+        three_days_ago = datetime.timedelta(days=-3)
+        return (datetime.datetime.now() + three_days_ago) <= self.creation_date
+    def is_latest(self):
+        return self.package.version_set.order_by("-creation_date")[0].pk == self.pk
 
 class Rating(models.Model):
     version=models.ForeignKey(Version)

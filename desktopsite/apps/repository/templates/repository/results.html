@@ -10,7 +10,7 @@
 <h1>{{ title }}</h1>
 <ul>
 	{% for package in results %}
-		<li>{{ package.name }}</li>
+		<li><a href="{{ package.get_absolute_url }}">{{ package.name }}</a></li>
 	{% endfor %}
 </ul>
 {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ package.name }}{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+{% endblock %}
+
+{% block content %}
+<h1>{{ package.name }}</h1>
+<div class="text">
+	<p>
+		{{ package.description|linebreaks }}
+	</p>
+</div>
+
+<h2>Versions</h2>
+<ul>
+	{% for version in package.get_versions_desc %}
+		<li>
+			<a href="{{ version.get_absolute_url }}">{{ version.name }}</a> - {{ version.creation_date|date:"F j, Y" }}
+			{% if version.is_latest %}
+				<span class="flag latest">Latest</span>
+			{% endif %}
+			{% if version.verified_safe %}
+				<span class="flag verified">Verified</span>
+			{% endif %}
+			{% if version.is_new %}
+				<span class="flag new">New</span>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
