@@ -13,6 +13,8 @@ from middleware import threadlocals
 
 import managers
 
+from django.contrib import admin
+
 SNAP_PREFIX = getattr(settings, 'SNAP_PREFIX', '/snapboard')
 SNAP_MEDIA_PREFIX = getattr(settings, 'SNAP_MEDIA_PREFIX', 
         getattr(settings, 'MEDIA_URL', '') + '/media')
@@ -51,7 +53,7 @@ class Category(models.Model):
 
     class Admin:
         pass
-
+admin.site.register(Category)
 
 class Moderator(models.Model):
     category = models.ForeignKey(Category)
@@ -79,10 +81,11 @@ class Thread(models.Model):
     def get_url(self):
         return SNAP_PREFIX + '/threads/id/' + self.id + '/'
 
-    class Admin:
+    class Admin(admin.ModelAdmin):
         list_display = ('subject', 'category')
         list_filter = ('closed', 'csticky', 'gsticky', 'category')
 
+admin.site.register(Thread, Thread.Admin)
 
 class Post(models.Model):
     """
@@ -156,11 +159,12 @@ class Post(models.Model):
     def __str__(self):
         return ''.join( (str(self.user), ': ', str(self.date)) )
 
-    class Admin:
+    class Admin(admin.ModelAdmin):
         list_display = ('user', 'date', 'thread', 'ip')
         list_filter    = ('censor', 'freespeech', 'user',)
         search_fields  = ('text', 'user')
 
+admin.site.register(Post, Post.Admin)
 
 # class PostAdminOptions(models.options.AdminOptions):
 #     '''
@@ -191,12 +195,12 @@ class AbuseReport(models.Model):
     '''
     post = models.ForeignKey(Post)
     submitter = models.ForeignKey(User)
-    class Admin:
+    class Admin(admin.ModelAdmin):
         list_display = ('post', 'submitter')
 
     class Meta:
         unique_together = (('post', 'submitter'),)
-
+admin.site.register(AbuseReport, AbuseReport.Admin)
 
 class WatchList(models.Model):
     """
@@ -242,9 +246,9 @@ class SnapboardProfile(models.Model):
             help_text = "Filter your front page on these categories.")
 
     ## edit inline
-    class Admin:
+    class Admin(admin.ModelAdmin):
         list_display = ('user', 'ppp', 'tpp', 'notify_email')
-        fields = (
+        fieldsets = (
             (None, 
                 {'fields': ('avatar',)}),
             ('Profile', 
@@ -254,6 +258,7 @@ class SnapboardProfile(models.Model):
                     ('ppp', 'tpp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
         )
 
+admin.site.register(SnapboardProfile, SnapboardProfile.Admin)
 
 # TODO: perhaps this should be placed in another application
 class BannedUser(models.Model):
@@ -269,6 +274,7 @@ class BannedUser(models.Model):
     class Admin:
         pass
 
+admin.site.register(BannedUser)
 
 class BannedIP(models.Model):
     '''
@@ -289,6 +295,8 @@ class BannedIP(models.Model):
 
     class Admin:
         pass
+
+admin.site.register(BannedIP)
 
 def update_ban_cache(**kwargs):
     ips = []

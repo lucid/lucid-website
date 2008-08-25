@@ -1,6 +1,6 @@
 # vim: ai ts=4 sts=4 et sw=4
 
-from django import newforms as forms
+from django import forms
 from django.contrib.auth import decorators
 from django.contrib.auth import login, logout
 from django.core.paginator import Paginator, InvalidPage

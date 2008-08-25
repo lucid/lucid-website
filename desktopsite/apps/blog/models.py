@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from desktopsite.apps.comment_utils.moderation import CommentModerator, moderator
+from django.contrib import admin
 
 class Entry(models.Model):
     pub_date = models.DateTimeField()
@@ -30,6 +31,8 @@ class Entry(models.Model):
     def comments_enabled(self):
         delta = datetime.datetime.now() - self.pub_date
         return delta.days < 60
+
+admin.site.register(Entry)
 
 class EntryModerator(CommentModerator):
     akismet = True

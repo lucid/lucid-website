@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from desktopsite.apps.repository import managers
 from desktopsite.apps.repository.categories import *
+from django.contrib import admin
 
 class Package(models.Model):
     sysname = models.SlugField("System Name", unique=True)
@@ -14,7 +15,9 @@ class Package(models.Model):
         return "/repository/packages/%s/" % self.sysname
     def get_versions_desc(self):
         return self.version_set.order_by("-name")
-            
+
+admin.site.register(Package)
+
     
 class Version(models.Model):
     package = models.ForeignKey(Package)
@@ -38,6 +41,8 @@ class Version(models.Model):
         return (datetime.datetime.now() + three_days_ago) <= self.creation_date
     def is_latest(self):
         return self.package.version_set.order_by("-name")[0].pk == self.pk
+
+admin.site.register(Version)
 
 class Rating(models.Model):
     version=models.ForeignKey(Version)

@@ -29,8 +29,8 @@ class PhotoField(ImageField):
         self.width, self.height, self.mode, self.quality = width, height, mode, quality
         self.parent_pk = parent_pk or "UNDEFINED"
 
-    def get_internal_type(self):
-        return 'ImageField'
+    #def get_internal_type(self):
+    #    return 'ImageField'
 
     def _update_parent_pk(self, instance=None, **kwargs):
         self.parent_pk = instance._get_pk_val()

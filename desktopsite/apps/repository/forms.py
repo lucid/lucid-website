@@ -1,4 +1,4 @@
-from django import newforms as forms
+from django import forms
 from desktopsite.apps.repository.models import *
 
 class PackageForm(forms.ModelForm):
