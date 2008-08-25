@@ -37,7 +37,7 @@ class Version(models.Model):
         three_days_ago = datetime.timedelta(days=-3)
         return (datetime.datetime.now() + three_days_ago) <= self.creation_date
     def is_latest(self):
-        return self.package.version_set.order_by("-creation_date")[0].pk == self.pk
+        return self.package.version_set.order_by("-name")[0].pk == self.pk
 
 class Rating(models.Model):
     version=models.ForeignKey(Version)

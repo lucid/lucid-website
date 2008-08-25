@@ -35,6 +35,7 @@ def package(request, sysname):
     pak = get_object_or_404(Package, sysname=sysname)
     return render_to_response('repository/package.html', {
         'package': pak,
+        'latest': pak.get_versions_desc()[0],
     })
 
 def version(request, sysname, version):

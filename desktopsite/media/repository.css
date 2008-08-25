@@ -59,3 +59,25 @@
 .flag.latest {
 	color: #E00000;
 }
+
+.verified-text {
+	color: #333;
+	font-style: italic;
+}
+
+.download {
+	text-align: center;
+}
+
+.download .link a {
+	font-size: 14pt;
+}
+
+.download .checksum {
+	
+}
+
+.download .checksum .hash {
+	color: #333;
+	font-style: italic;
+}

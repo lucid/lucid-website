@@ -14,7 +14,20 @@
 	</p>
 </div>
 
-<h2>Versions</h2>
+<h2>Latest Version: <a href="{{ latest.get_absolute_url }}">{{ latest.name }}</a></h2>
+<div class="text">
+	<div class="download">
+		<div class="link"><a href="{{ latest.package_url }}">Download</a></div>
+		<div class="checksum">Checksum: <span class="hash">{{ latest.checksum }}</span></div>
+	</div>
+	{% if latest.verified_safe %}
+	<p class="verified-text">
+		This package has been verified as safe by the repository maintainers.
+	</p>
+	{% endif %}
+</div>
+
+<h2>All Versions</h2>
 <ul>
 	{% for version in package.get_versions_desc %}
 		<li>

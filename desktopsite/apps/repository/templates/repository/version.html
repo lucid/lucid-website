@@ -8,13 +8,26 @@
 
 {% block content %}
 <h1>{{ package.name }} {{ version.name }}</h1>
+<a href="{{ package.get_absolute_url }}">Back to package</a>
 <div class="text">
+	{% if not version.is_latest %}
+	<div>
+		<span class="warn">Note:</span> This is not the latest version of this package!
+	</div>
+	{% endif %}
+	<h2>Changelog</h2>
 	<p>
-		{{ package.description }}
+		{{ version.changelog|linebreaks }}
 	</p>
+	<div class="download">
+		<div class="link"><a href="{{ version.package_url }}">Download</a></div>
+		<div class="checksum">Checksum: <span class="hash">{{ version.checksum }}</span></div>
+	</div>
+	{% if version.verified_safe %}
+	<p class="verified-text">
+		This package has been verified as safe by the repository maintainers.
+	</p>
+	{% endif %}
 </div>
-{% if not version.is_latest %}
-<span class="warn">Note:</span> This is not the latest version of this package!
-{% endif %}
 
 {% endblock %}
