@@ -1,0 +1,42 @@
+#header {
+	background-image: none;
+	color: black;
+}
+
+#header * {
+	font-size: 12pt;
+	display: block;
+}
+
+#header .title {
+	font-size: 14pt;
+}
+
+#menubar {
+	display: none;
+}
+
+#content {
+	color: black;
+	margin: 0 0 0 0;
+	width: auto;
+}
+#main {
+	width: auto;
+}
+
+a {
+	text-decoration: underline;
+}
+
+#content a:link:after, #content a:visited:after {
+	content: " (" attr(href) ") ";
+	font-size: 90%;
+}
+#content a[href^="/"]:after {
+  content: " (http://www.lucid-desktop.org" attr(href) ") ";
+}
+
+#footer .text {
+	margin: 0 0 0 0;
+}

@@ -18,7 +18,7 @@ class Entry(models.Model):
         ordering = ('-pub_date',)
         get_latest_by = 'pub_date'
 
-    class Admin:
+    class Admin(admin.ModelAdmin):
         list_display = ('pub_date', 'headline', 'author')
 
     def __unicode__(self):
@@ -32,7 +32,7 @@ class Entry(models.Model):
         delta = datetime.datetime.now() - self.pub_date
         return delta.days < 60
 
-admin.site.register(Entry)
+admin.site.register(Entry, Entry.Admin)
 
 class EntryModerator(CommentModerator):
     akismet = True
