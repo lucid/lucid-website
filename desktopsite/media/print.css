@@ -29,6 +29,10 @@ a {
 	text-decoration: underline;
 }
 
+img, .noBreak {
+	page-break-inside: avoid;
+}
+
 #content a:link:after, #content a:visited:after {
 	content: " (" attr(href) ") ";
 	font-size: 90%;
