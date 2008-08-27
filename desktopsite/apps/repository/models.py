@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from desktopsite.apps.repository import managers
 from desktopsite.apps.repository.categories import *
 from django.contrib import admin
+from desktopsite.apps.repository.middleware import threadlocals
 
 class Package(models.Model):
     sysname = models.SlugField("System Name", unique=True)
@@ -35,6 +36,11 @@ class Version(models.Model):
         return "/repository/packages/%s/%s/" % (self.package.sysname, self.name)
     def get_rating(self):
         return Rating.objects.score_for_version(self.pk)
+    def get_rating_for_user(self):
+        try:
+            return Rating.objects.get(user=threadlocals.get_current_user(), version=self).score
+        except:
+            return 0
     def is_new(self):
         import datetime
         three_days_ago = datetime.timedelta(days=-3)

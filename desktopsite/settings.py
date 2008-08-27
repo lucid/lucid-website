@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'desktopsite.apps.snapboard.middleware.threadlocals.ThreadLocals',
+    'desktopsite.apps.repository.middleware.threadlocals.ThreadLocals',
 )
 
 ROOT_URLCONF = 'desktopsite.urls'

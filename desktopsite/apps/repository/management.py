@@ -43,13 +43,18 @@ def test_setup(**kwargs):
 
     # create 10 random users
 
-    users = ('john', 'sally', 'susan', 'amanda', 'bob', 'tully', 'fran')
+    users = ('john', 'sally', 'susan', 'amanda', 'bob', 'tully', 'fran'
+             'rick', 'alice', 'mary', 'steve', 'chris', 'becca', 'rob'
+             'peter', 'amy', 'bill', 'nick', 'dustin', 'alex', 'jesus')
     for u in users:
-        user = User.objects.get_or_create(username=u)
+        user, created = User.objects.get_or_create(username=u)
+        user.email = "%s@%s.com" % (u, u)
+        user.set_password(u)
+        user.save()
         # user.is_staff = True
 
     # create up to 30 posts
-    tc = range(1, 50)
+    tc = range(1, 20)
     words = chomsky.objects.split(' ')
     for i in range(0, 20):
         print 'package ', i, 'created'
@@ -78,7 +83,7 @@ def test_setup(**kwargs):
             
             for adf in range(0, choice(tc)):
                 rating = Rating(
-                              user=choice(User.objects.all()),
+                              user=User.objects.get(pk=adf+1),
                               version= v,
                               score=choice((1,2,3,4,5)),
                 )

@@ -81,3 +81,24 @@
 	color: #333;
 	font-style: italic;
 }
+
+.subtitle {
+	color: #444;
+	font-style: italic;
+}
+
+.ratingForm {
+	float: right;
+	text-align: center;
+	width: 100px;
+	margin: 0 0 5px 5px;
+}
+
+.ratingForm h3 {
+	margin-top: 5px;
+}
+
+#rating_notification {
+	font-size: 9pt;
+	color: #444;
+}

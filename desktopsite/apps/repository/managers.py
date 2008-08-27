@@ -48,6 +48,8 @@ class RatingsManager(models.Manager):
         cursor = connection.cursor()
         cursor.execute(query, [version_id])
         result = cursor.fetchall()[0]
+        if result[0] == None:
+            return { 'score': 0.0, 'num_ratings': 0 }
         return { 'score': result[0], 'num_ratings': result[1] }
    
     def top_rated(self, num=5):
@@ -57,7 +59,7 @@ class RatingsManager(models.Manager):
        
         """
         from models import Version
-        query = """SELECT version_id, AVG(score) AS rating
+        query = """SELECT version_id, AVG(score) * SUM(score) AS rating
         FROM %s
         GROUP BY version_id
         ORDER BY rating DESC""" % self.model._meta.db_table
@@ -67,7 +69,7 @@ class RatingsManager(models.Manager):
 
         version_ids = [row[0] for row in cursor.fetchall()]
         version_dict = Version.objects.in_bulk(version_ids)
-        return [version_dict[version_id] for version_id in version_ids]
+        return [version_dict[version_id] for version_id in version_ids][:num]
     
     def most_rated(self, num=5):
         """

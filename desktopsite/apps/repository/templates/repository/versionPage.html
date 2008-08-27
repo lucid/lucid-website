@@ -1,0 +1,31 @@
+<div class="subtitle">Released {{ version.creation_date|date:"F j, Y" }}</div>
+{% if not version.is_latest %}
+<div>
+	<span class="warn">Note:</span> This is not the latest version of this package!
+</div>
+{% endif %}
+<h2>Changelog</h2>
+<div class="ratingForm">
+	<h3>Rating</h3>
+	<div>
+		<noscript>{{ version.get_rating.score|floatformat:1 }}/5</noscript>
+		<span dojoType="repository.Rating" noInput="true" numStars="5" value="{{ version.get_rating.score|floatformat:0 }}"></span>
+	</div>
+	<div>{{ version.get_rating.num_ratings }} votes</div>
+	<h3>Your Rating</h3>
+	<span dojoType="repository.Rating" numStars="5" value="{{ version.get_rating_for_user }}"
+			notifyNode="rating_notification" versionId="{{ version.pk }}" canVote="{{ user.is_authenticated|yesno:"true,false" }}"></span>
+	<div id="rating_notification"></div>
+</div>
+<div class="text">
+	{{ version.changelog|linebreaks }}
+</div>
+<div class="download">
+	<div class="link"><a href="{{ version.package_url }}">Download</a></div>
+	<div class="checksum">Checksum: <span class="hash">{{ version.checksum }}</span></div>
+</div>
+{% if version.verified_safe %}
+<p class="verified-text">
+	This package has been verified as safe by the repository maintainers.
+</p>
+{% endif %}

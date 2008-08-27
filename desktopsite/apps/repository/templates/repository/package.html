@@ -4,6 +4,10 @@
 
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Rating/Rating.css" />
+<script type="text/javascript">
+  dojo.require("repository.Rating");
+</script>
 {% endblock %}
 
 {% block content %}
@@ -14,35 +18,14 @@
 	</p>
 </div>
 
-<h2>Latest Version: <a href="{{ latest.get_absolute_url }}">{{ latest.name }}</a></h2>
-<div class="text">
-	<div class="download">
-		<div class="link"><a href="{{ latest.package_url }}">Download</a></div>
-		<div class="checksum">Checksum: <span class="hash">{{ latest.checksum }}</span></div>
-	</div>
-	{% if latest.verified_safe %}
-	<p class="verified-text">
-		This package has been verified as safe by the repository maintainers.
-	</p>
-	{% endif %}
-</div>
+<h1>Latest Version: <a href="{{ version.get_absolute_url }}">{{ version.name }}</a></h1>
+{% include "repository/versionPage.html" %}
 
-<h2>All Versions</h2>
-<ul>
+<h1>All Versions</h1>
+<div class="packageList">
 	{% for version in package.get_versions_desc %}
-		<li>
-			<a href="{{ version.get_absolute_url }}">{{ version.name }}</a> - {{ version.creation_date|date:"F j, Y" }}
-			{% if version.is_latest %}
-				<span class="flag latest">Latest</span>
-			{% endif %}
-			{% if version.verified_safe %}
-				<span class="flag verified">Verified</span>
-			{% endif %}
-			{% if version.is_new %}
-				<span class="flag new">New</span>
-			{% endif %}
-		</li>
+		{% include "repository/packageListItem.html" %}
 	{% endfor %}
-</ul>
+</div>
 
 {% endblock %}

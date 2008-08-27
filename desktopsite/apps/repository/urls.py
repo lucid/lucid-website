@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     (r'^search/$', "desktopsite.apps.repository.views.search"),
     (r'^packages/(?P<sysname>[\w-]+)/$', "desktopsite.apps.repository.views.package"),
     (r'^packages/(?P<sysname>[\w-]+)/(?P<version>.+)/$', "desktopsite.apps.repository.views.version"),
+    (r'^vote/$', "desktopsite.apps.repository.views.saveRating"),
 )
