@@ -21,18 +21,6 @@ SNAP_MEDIA_PREFIX = getattr(settings, 'SNAP_MEDIA_PREFIX',
 SNAP_LOGIN_URL = SNAP_PREFIX + '/signin'
 
 
-def isIPAddressList(field_data, all_data):
-    l = str(field_data).splitlines()
-    line = 1
-    for ip in l:
-        try:
-            validators.isValidIPAddress4(ip, all_data)
-            line = line + 1
-        except validators.ValidationError:
-            raise validators.ValidationError(
-                    "Line " + str(line) + " has an invalid IP address")
-
-
 class Category(models.Model):
     label = models.CharField(max_length=32)
 
@@ -87,6 +75,10 @@ class Thread(models.Model):
 
 admin.site.register(Thread, Thread.Admin)
 
+class ThreadInline(admin.StackedInline):
+        model = Thread
+        max_num = 1
+
 class Post(models.Model):
     """
     Post objects store information about revisions.
@@ -96,8 +88,7 @@ class Post(models.Model):
     # blank=True to get admin to work when the user field is missing
     user = models.ForeignKey(User, editable=False, blank=True, default=None)
 
-    thread = models.ForeignKey(Thread,
-            core=True, edit_inline=models.STACKED, num_in_admin=1)
+    thread = models.ForeignKey(Thread)
     text = models.TextField()
     date = models.DateTimeField(editable=False,auto_now_add=True)
     ip = models.IPAddressField(blank=True)
@@ -163,7 +154,8 @@ class Post(models.Model):
         list_display = ('user', 'date', 'thread', 'ip')
         list_filter    = ('censor', 'freespeech', 'user',)
         search_fields  = ('text', 'user')
-
+        inlines = [ThreadInline]
+        
 admin.site.register(Post, Post.Admin)
 
 # class PostAdminOptions(models.options.AdminOptions):
@@ -211,6 +203,10 @@ class WatchList(models.Model):
     # no need to be in the admin
 
 
+class UserInline(admin.StackedInline):
+        model = User
+        max_num = 1
+
 class SnapboardProfile(models.Model):
     '''
     User data tied to user accounts from the auth module.
@@ -220,8 +216,7 @@ class SnapboardProfile(models.Model):
 
     After logging in, save these values in a session variable.
     '''
-    user = models.ForeignKey(User, unique=True, editable=False,
-            core=True, edit_inline=models.STACKED, max_num_in_admin=1)
+    user = models.ForeignKey(User, unique=True, editable=False)
     profile = models.TextField(blank=True)
 
     avatar = PhotoField(blank=True, upload_to='img/snapboard/avatars/',
@@ -257,6 +252,7 @@ class SnapboardProfile(models.Model):
                 {'fields': 
                     ('ppp', 'tpp', 'notify_email', 'reverse_posts', 'frontpage_filters',)}),
         )
+        inlines=[UserInline]
 
 admin.site.register(SnapboardProfile, SnapboardProfile.Admin)
 
@@ -284,7 +280,7 @@ class BannedIP(models.Model):
     accounts.
     '''
 
-    iplist = models.TextField(validator_list=[isIPAddressList])
+    iplist = models.IPAddressField()
     reason = models.TextField()
 
     def get_ips(self):

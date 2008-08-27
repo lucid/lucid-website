@@ -65,9 +65,10 @@ body {
 .rightsidebar {
 	float: right;
 	width: 160px;
+	margin-left: 10px;
 }
 .content-rightsidebar {
-	margin-right: 160px;
+	margin-right: 170px;
 }
 
 #content {

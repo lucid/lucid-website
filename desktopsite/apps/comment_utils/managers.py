@@ -5,7 +5,9 @@ inheit from.
 """
 
 
-from django.db import connection, models
+from django.db import connection
+from django.db import models
+from django.utils.datastructures import SortedDict
 from django.contrib.comments import models as comment_models
 from django.contrib.contenttypes.models import ContentType
 
@@ -32,40 +34,26 @@ class CommentedObjectManager(models.Manager):
         model (``Comment``) instead of the anonymous comment model
         (``FreeComment``).
         
-        The return value will be a list of dictionaries, each with the
-        following keys::
-        
-            object
-                An object of this model.
-        
-            comment_count
-                The number of comments on the object.
-        
         """
         qn = connection.ops.quote_name
+        
         if free:
             comment_opts = comment_models.FreeComment._meta
         else:
             comment_opts = comment_models.Comment._meta
         ctype = ContentType.objects.get_for_model(self.model)
-        query = """SELECT %s, COUNT(*) AS score
-        FROM %s
-        WHERE content_type_id = %%s
-        AND is_public = %%s
-        GROUP BY %s
-        ORDER BY score DESC""" % (qn('object_id'),
-                                  qn(comment_opts.db_table),
-                                  qn('object_id'),)
         
-        cursor = connection.cursor()
-        cursor.execute(query, [ctype.id, True])
-        object_data = [row for row in cursor.fetchall()[:num]]
+        subquery = """SELECT COUNT(*)
+        FROM %(comment_table)s
+        WHERE %(comment_table)s.%(content_type_id)s = %%s
+        AND %(comment_table)s.%(object_id)s = %(self_table)s.%(pk)s
+        AND %(comment_table)s.%(is_public)s = %%s
+        """ % { 'comment_table': qn(comment_opts.db_table),
+                'content_type_id': qn('content_type_id'),
+                'object_id': qn('object_id'),
+                'self_table': qn(self.model._meta.db_table),
+                'pk': qn(self.model._meta.pk.name),
+                'is_public': qn('is_public'),
+                }
         
-        # Use ``in_bulk`` here instead of an ``id__in`` filter, because ``id__in``
-        # would clobber the ordering.
-        object_dict = self.in_bulk([tup[0] for tup in object_data])
-        result_list = []
-        for row in object_data:
-            result_list.append({ 'object': object_dict[row[0]],
-                            'comment_count': row[1] })
-        return result_list
+        return self.extra(select=SortedDict({ 'comment_count': subquery }), select_params=(ctype.id, True,), order_by=['-comment_count'])[:num]

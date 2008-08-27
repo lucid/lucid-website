@@ -2,25 +2,23 @@
 Template tags designed to work with applications which use comment
 moderation.
 
-
-Gah, I'm breaking this temporarily unitl the comment_utils guy comes up with a fix.
 """
 
 
 from django import template
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import get_model
-from django.contrib.comments.models import Comment
+from django.contrib.comments.models import Comment, FreeComment
 from django.contrib.comments.templatetags import comments
 from django.contrib.contenttypes.models import ContentType
 
+from comment_utils.moderation import moderator
 
-class PublicCommentCountNode:
-    def __init__(self, *args, **kwargs):
-        pass
+
+class PublicCommentCountNode(comments.CommentCountNode):
     def render(self, context):
         from django.conf import settings
-        manager = self.free and Comment.objects
+        manager = self.free and FreeComment.objects or Comment.objects
         if self.context_var_name is not None:
             object_id = self.context_var_name.resolve(context)
         comment_count = manager.filter(object_id__exact=object_id,
@@ -32,9 +30,7 @@ class PublicCommentCountNode:
         return ''
 
 
-class DoPublicCommentList:
-    def __init__(self, *args, **kwargs):
-        pass
+class DoPublicCommentList(comments.DoGetCommentList):
     """
     Retrieves comments for a particular object and stores them in a
     context variable.
@@ -78,12 +74,40 @@ class DoPublicCommentList:
         
     """
     def __call__(self, parser, token):
-        raise "I'm broken!"
+        bits = token.contents.split()
+        if len(bits) not in (6, 7):
+            raise template.TemplateSyntaxError("'%s' tag takes 5 or 6 arguments" % bits[0])
+        if bits[1] != 'for':
+            raise template.TemplateSyntaxError("first argument to '%s' tag must be 'for'" % bits[0])
+        try:
+            app_name, model_name = bits[2].split('.')
+        except ValueError:
+            raise template.TemplateSyntaxError("second argument to '%s' tag must be in the form 'app_name.model_name'" % bits[0])
+        model = get_model(app_name, model_name)
+        if model is None:
+            raise template.TemplateSyntaxError("'%s' tag got invalid model '%s.%s'" % (bits[0], app_name, model_name))
+        content_type = ContentType.objects.get_for_model(model)
+        var_name, object_id = None, None
+        if bits[3].isdigit():
+            object_id = bits[3]
+            try:
+                content_type.get_object_for_this_type(pk=object_id)
+            except ObjectDoesNotExist:
+                raise template.TemplateSyntaxError("'%s' tag got reference to %s object with id %s, which doesn't exist" % (bits[0], content_type.name, object_id))
+        else:
+            var_name = bits[3]
+        if bits[4] != 'as':
+            raise template.TemplateSyntaxError("fourth argument to '%s' tag must be 'as'" % bits[0])
+        if len(bits) == 7:
+            if bits[6] != 'reversed':
+                raise template.TemplateSyntaxError("sixth argument to '%s' tag, if given, must be 'reversed'" % bits[0])
+            ordering = '-'
+        else:
+            ordering = ''
+        return comments.CommentListNode(app_name, model_name, var_name, object_id, bits[5], self.free, ordering, extra_kwargs={ 'is_public__exact': True })
 
 
-class DoPublicCommentCount:
-    def __init__(self, *args, **kwargs):
-        pass
+class DoPublicCommentCount(comments.DoCommentCount):
     """
     Retrieves the number of comments attached to a particular object
     and stores them in a context variable.
@@ -142,9 +166,27 @@ class DoPublicCommentCount:
         
         return PublicCommentCountNode(app_name, model_name, var_name, object_id, bits[5], self.free)
 
+def comments_open(value):
+    """
+    Return ``True`` if new comments are allowed for an object,
+    ``False`` otherwise.
+    
+    """
+    return moderator.comments_open(value)
+
+def comments_moderated(value):
+    """
+    Return ``True`` if new comments for an object are being
+    automatically sent into moderation, ``False`` otherwise.
+    
+    """
+    return moderator.comments_moderated(value)
+
 
 register = template.Library()
 register.tag('get_public_comment_list', DoPublicCommentList(False))
 register.tag('get_public_free_comment_list', DoPublicCommentList(True))
 register.tag('get_public_comment_count', DoPublicCommentCount(False))
 register.tag('get_public_free_comment_count', DoPublicCommentCount(True))
+register.filter(comments_open)
+register.filter(comments_moderated)
