@@ -16,17 +16,22 @@ class Package(models.Model):
         return "/repository/packages/%s/" % self.sysname
     def get_versions_desc(self):
         return self.version_set.order_by("-name")
+    def user_is_maintainer(self):
+        return threadlocals.get_current_user().pk == self.maintainer.pk
 
 admin.site.register(Package)
 
     
 class Version(models.Model):
     package = models.ForeignKey(Package)
-    name = models.CharField(max_length=100)
-    changelog = models.TextField()
-    package_url = models.URLField()
+    name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""")
+    changelog = models.TextField(help_text="""<div class="help">A list of changes since the last release</div>""")
+    package_url = models.URLField(help_text="""<div class="help">This is a direct url to the package.<br />
+                                               File sharing sites such as mediafire or rapidshare will not work.<br />
+                                               If you cannot host the package yourself,<br />
+                                               it is suggested that you use <a href="http://omploader.org/">Omploader</a>.</div>""")
     creation_date = models.DateTimeField(auto_now=True, editable=False)
-    checksum = models.CharField(max_length=100, editable=False)
+    checksum = models.CharField(max_length=100, help_text="""<div class="help">The md5sum of the package. See <a href="http://www.openoffice.org/dev_docs/using_md5sums.html">this page</a> for details on how to get this.</div>""")
     verified_safe = models.BooleanField(default=False)
     
     def __str__(self):

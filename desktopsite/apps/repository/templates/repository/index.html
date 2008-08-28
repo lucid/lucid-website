@@ -54,6 +54,13 @@
 		and be sure to check the checksum of any packages you download (even if it's verified).
 	</p>
 </div>
+{% if user.is_authenticated %}
+<div class="userPackageLinks">
+	<a href="/repository/newpackage/">Submit a Package</a>
+	|
+	<a href="/repository/mypackages/">My Packages</a>
+</div>
+{% endif %}
 
 <h2>Latest Packages</h2>
 <div class="packageList">

@@ -59,7 +59,9 @@ body {
 
 #login {
 	float: right;
-	padding: 10px 8px;
+	padding: 10px 8px 0 0;
+	width: 160px;
+	text-align: right;
 }
 
 .rightsidebar {

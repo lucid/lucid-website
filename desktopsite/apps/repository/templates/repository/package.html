@@ -17,15 +17,38 @@
 		{{ package.description|linebreaks }}
 	</p>
 </div>
-
+<table>
+	<tr>
+		<td class="field">Category:</td>
+		<td><a href="/repository/category/{{ package.category }}/">{{ package.category }}</a></td>
+	</tr>
+	<tr>
+		<td class="field">Homepage:</td>
+		<td><a rel="nofollow" href="{{ package.url }}">{{ package.url }}</a></td>
+	</tr>
+	<tr>
+		<td class="field">Maintaner:</td>
+		<td><a href="/user/{{ package.maintainer.username }}/">{{ package.maintainer }}</a></td>
+	</tr>
+</table>
+{% if version %}
 <h1>Latest Version: <a href="{{ version.get_absolute_url }}">{{ version.name }}</a></h1>
 {% include "repository/versionPage.html" %}
-
+{% endif %}
 <h1>All Versions</h1>
 <div class="packageList">
-	{% for version in package.get_versions_desc %}
-		{% include "repository/packageListItem.html" %}
-	{% endfor %}
+	{% if not package.get_versions_desc %}
+		No versions available yet
+	{% else %}
+		{% for version in package.get_versions_desc %}
+			{% include "repository/packageListItem.html" %}
+		{% endfor %}
+	{% endif %}
 </div>
+{% if package.user_is_maintainer %}
+<div>
+	<a href="{{ package.get_absolute_url }}newversion/">Create New Version</a>
+</div>
+{% endif %}
 
 {% endblock %}

@@ -239,6 +239,9 @@ class SnapboardProfile(models.Model):
     frontpage_filters = models.ManyToManyField(Category,
             null=True, blank=True,
             help_text = "Filter your front page on these categories.")
+    
+    def get_number_of_posts(self):
+        return Post.objects.filter(user=self.user).count()
 
     ## edit inline
     class Admin(admin.ModelAdmin):

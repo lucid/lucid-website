@@ -102,3 +102,29 @@
 	font-size: 9pt;
 	color: #444;
 }
+
+.submit {
+	text-align: center;
+}
+
+td.field {
+	font-weight: bold;
+	padding-right: 10px;
+}
+
+.repoForm th {
+	padding: 4px 5px 0 0;
+	vertical-align: top;
+}
+
+.repoForm .help {
+	color: #333;
+}
+
+.userPackageLinks {
+	text-align: center;
+}
+
+.changelog.text {
+	font-family: monospace;
+}

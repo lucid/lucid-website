@@ -2,8 +2,84 @@
 
 {% block title %} - {{ user.username }}'s Profile{% endblock %}
 
-{% block content %}
-<h1>{{ user.username }}'s Profile</h1>
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/accounts.css" />
+<script type="text/javascript">
+	dojo.require("dijit.layout.ContentPane");
+	dojo.require("dijit.layout.TabContainer");
+</script>
+{% endblock %}
 
+{% block content %}
+<h1>
+	{{ puser.username }}'s Profile
+	{% if is_owner %}
+	<a class="edit" href="/accounts/profile/edit/">(edit)</a>
+	{% endif %}
+</h1>
+<table class="profile">
+	{% if puser.get_full_name %}
+	<tr>
+		<td class="fieldname">Name:</td>
+		<td>{{ puser.get_full_name }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td class="fieldname">Username:</td>
+		<td>{{ puser.username }}</td>
+	</tr>
+	{% if is_owner %}
+	<tr>
+		<td class="fieldname">Email:</td>
+		<td>{{ puser.email }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td class="fieldname">Date Joined:</td>
+		<td>{{ puser.date_joined|date:"F j, Y" }}</td>
+	</tr>
+	<tr>
+		<td class="fieldname">Last Login:</td>
+		<td>{{ puser.last_login|timesince }} ago</td>
+	</tr>
+	{% if puser.is_staff %}
+	<tr>
+		<td class="fieldname">Role:</td>
+		<td>Staff</td>
+	</tr>
+	{% endif %}
+</table>
+<div dojoType="dijit.layout.TabContainer" class="profileTabs">
+	{% if forum %}
+	<div dojoType="dijit.layout.ContentPane" title="Forum">
+		<table class="profile">
+			<tr>
+				<td class="fieldname" colspan="2">Avatar:</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					{% if forum.avatar %}
+					<img src="{{ SNAP_MEDIA_PREFIX }}/{{ forum.avatar }}" />
+					{% else %}
+					<img src="/site_media/images/profile/nophoto.png" />
+					{% endif %}
+				</td>
+			</tr>
+			<tr>
+				<td class="fieldname" colspan="2">About:</td>
+			</tr>
+		</table>
+		<table class="profile">
+			<tr>
+				<td colspan="2">{{ forum.profile|linebreaks }}</td>
+			</tr>
+			<tr>
+				<td class="fieldname">Post count:</td>
+				<td>{{ forum.get_number_of_posts }}</td>
+			</tr>
+		</table>
+	</div>
+	{% endif %}
+</div>
 
 {% endblock %}

@@ -17,11 +17,11 @@
 			notifyNode="rating_notification" versionId="{{ version.pk }}" canVote="{{ user.is_authenticated|yesno:"true,false" }}"></span>
 	<div id="rating_notification"></div>
 </div>
-<div class="text">
+<div class="changelog text">
 	{{ version.changelog|linebreaks }}
 </div>
 <div class="download">
-	<div class="link"><a href="{{ version.package_url }}">Download</a></div>
+	<div class="link"><a rel="nofollow" href="{{ version.package_url }}">Download</a></div>
 	<div class="checksum">Checksum: <span class="hash">{{ version.checksum }}</span></div>
 </div>
 {% if version.verified_safe %}
