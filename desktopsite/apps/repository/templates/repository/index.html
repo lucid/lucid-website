@@ -23,7 +23,7 @@
 			{% if not forloop.first %}
 			|
 			{% endif %}
-			<a href="/repository/letter/{{ letter }}/">{{ letter }}</a>
+			<a href="{% url repository-letter letter %}">{{ letter }}</a>
 		{% endfor %}
 </div>
 <div class="filter">
@@ -32,11 +32,11 @@
 		{% if not forloop.first %}
 		|
 		{% endif %}
-		<a href="/repository/category/{{ name }}/">{{ label }}</a>
+		<a href="{% url repository-category name %}">{{ label }}</a>
 	{% endfor %}
 </div>
 <div class="filter">
-	<form action="/repository/search/" method="GET">
+	<form action="{% url repository-search %}" method="GET">
 		<b>By name:</b>
 		<input name="q" type="text" />
 		<input type="submit" value="Search" />
@@ -56,9 +56,9 @@
 </div>
 {% if user.is_authenticated %}
 <div class="userPackageLinks">
-	<a href="/repository/newpackage/">Submit a Package</a>
+	<a href="{% url repository-new-package %}">Submit a Package</a>
 	|
-	<a href="/repository/mypackages/">My Packages</a>
+	<a href="{% url repository-user-packages %}">My Packages</a>
 </div>
 {% endif %}
 

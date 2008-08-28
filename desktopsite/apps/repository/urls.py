@@ -1,15 +1,15 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^$', "desktopsite.apps.repository.views.index"),
-    (r'^letter/(?P<letter>[A-Z])/$', "desktopsite.apps.repository.views.byLetter"),
-    (r'^category/(?P<category>.+)/$', "desktopsite.apps.repository.views.byCategory"),
-    (r'^search/$', "desktopsite.apps.repository.views.search"),
-    (r'^packages/(?P<sysname>[\w-]+)/$', "desktopsite.apps.repository.views.package"),
-    (r'^packages/(?P<sysname>[\w-]+)/newversion/$', "desktopsite.apps.repository.views.newVersion"),
-    (r'^packages/(?P<sysname>[\w-]+)/(?P<version>.+)/$', "desktopsite.apps.repository.views.version"),
+    url(r'^$', "desktopsite.apps.repository.views.index", name="repository-index"),
+    url(r'^letter/(?P<letter>[A-Z])/$', "desktopsite.apps.repository.views.byLetter", name="repository-letter"),
+    url(r'^category/(?P<category>.+)/$', "desktopsite.apps.repository.views.byCategory", name="repository-category"),
+    url(r'^search/$', "desktopsite.apps.repository.views.search", name="repository-search"),
+    url(r'^packages/(?P<sysname>[\w-]+)/$', "desktopsite.apps.repository.views.package", name="repository-package"),
+    url(r'^packages/(?P<sysname>[\w-]+)/newversion/$', "desktopsite.apps.repository.views.newVersion", name="repository-new-version"),
+    url(r'^packages/(?P<sysname>[\w-]+)/(?P<version>.+)/$', "desktopsite.apps.repository.views.version", name="repository-version"),
     
-    (r'^vote/$', "desktopsite.apps.repository.views.saveRating"),
-    (r'^newpackage/$', "desktopsite.apps.repository.views.newPackage"),
-    (r'^mypackages/$', "desktopsite.apps.repository.views.userPackages"),
+    url(r'^vote/$', "desktopsite.apps.repository.views.saveRating", name="repository-vote"),
+    url(r'^newpackage/$', "desktopsite.apps.repository.views.newPackage", name="repository-new-package"),
+    url(r'^mypackages/$', "desktopsite.apps.repository.views.userPackages", name="repository-user-packages"),
 )

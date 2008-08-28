@@ -20,7 +20,7 @@
 <table>
 	<tr>
 		<td class="field">Category:</td>
-		<td><a href="/repository/category/{{ package.category }}/">{{ package.category }}</a></td>
+		<td><a href="{% url repository-category package.category %}">{{ package.category }}</a></td>
 	</tr>
 	<tr>
 		<td class="field">Homepage:</td>
@@ -28,7 +28,7 @@
 	</tr>
 	<tr>
 		<td class="field">Maintaner:</td>
-		<td><a href="/user/{{ package.maintainer.username }}/">{{ package.maintainer }}</a></td>
+		<td><a href="{% url accounts-profile package.maintainer.username %}">{{ package.maintainer }}</a></td>
 	</tr>
 </table>
 {% if version %}
@@ -47,7 +47,7 @@
 </div>
 {% if package.user_is_maintainer %}
 <div>
-	<a href="{{ package.get_absolute_url }}newversion/">Create New Version</a>
+	<a href="{% url repository-new-version package.sysname %}">Create New Version</a>
 </div>
 {% endif %}
 
