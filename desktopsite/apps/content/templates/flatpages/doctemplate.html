@@ -1,0 +1,21 @@
+{% extends "/flatpages/documentation.html" %}
+
+{# Title of my page #}
+
+{% block docContent %}
+<p>
+	The thing does something and it returns a value. Example below.
+	<code class="javascript">
+		var foo = "bar";
+		alert(foo);
+	</code>
+</p>
+<p>
+	Be careful when dealing with HTML...
+	<code class="html">
+		&lt;div&gt;
+			here is some &lt;b&gt;content&lt;/b&gt;!
+		&lt;/div&gt;
+	</code>
+</p>
+{% endblock %}
