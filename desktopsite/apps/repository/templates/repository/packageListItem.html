@@ -2,7 +2,7 @@
 	<div class="rating">
 		<div>
 			<noscript>{{ version.get_rating.score|floatformat:1 }}/5</noscript>
-			<span dojoType="repository.Rating" noInput="true" numStars="5" value="{{ version.get_rating.score|floatformat:0 }}"></span>
+			<span dojoType="lucidsite.repository.Rating" noInput="true" numStars="5" value="{{ version.get_rating.score|floatformat:0 }}"></span>
 		</div>
 		<div>{{ version.get_rating.num_ratings }} votes</div>
 	</div>

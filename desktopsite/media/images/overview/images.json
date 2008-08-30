@@ -1,0 +1,14 @@
+({
+	"items": [
+		{"imageUrl": "/site_media/images/overview/desktop.png", "title": "Desktop"},
+		{"imageUrl": "/site_media/images/overview/musicplayer.png", "title": "Music Player"},
+		{"imageUrl": "/site_media/images/overview/games.png", "title": "Games"},
+		{"imageUrl": "/site_media/images/overview/imageviewer.png", "title": "Image Viewer"},
+		{"imageUrl": "/site_media/images/overview/themes.png", "title": "Theme Support"},
+		{"imageUrl": "/site_media/images/overview/ide.png", "title": "Built-in IDE"},
+		{"imageUrl": "/site_media/images/overview/systemtools.png", "title": "System Tools"},
+		{"imageUrl": "/site_media/images/overview/adminpanel.png", "title": "Administration Panel"},
+		{"imageUrl": "/site_media/images/overview/texteditor.png", "title": "Text Editor"},
+		{"imageUrl": "/site_media/images/overview/accountinfo.png", "title": "Account Information"}
+	]
+})

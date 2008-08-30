@@ -1,7 +1,6 @@
 # Django settings for desktopsite project.
 import os
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -110,11 +109,17 @@ INSTALLED_APPS = (
     'dojango',
 )
 
-### SNAPBOARD ###
-SNAP_PREFIX = "/forum";
-SNAP_MEDIA_PREFIX = MEDIA_URL + '/forum'
-
 
 ### DOJANGO ###
 DOJANGO_DOJO_DEBUG = False
 DOJANGO_DOJO_PROFILE = "local"
+DOJANGO_DOJO_BUILD_PROFILES = {
+    'lucidsite': {
+        'profile_file': os.path.abspath(os.path.dirname(__file__)+'/dojango/lucidsite.profile.js'),
+        'options': 'profile=lucidsite action=release optimize=shrinksafe.keepLines cssOptimize=comments.keepLines'                       
+    }
+}
+
+### SNAPBOARD ###
+SNAP_PREFIX = "/forum";
+SNAP_MEDIA_PREFIX = MEDIA_URL+'/forum'

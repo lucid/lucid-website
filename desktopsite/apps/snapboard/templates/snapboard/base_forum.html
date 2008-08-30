@@ -2,30 +2,13 @@
 
 {% block title %} - Forum{% endblock %}
 {% block extrahead %}
-<link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/form.css" />    
 <link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/snapboard.css" />    
-<link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/nav.css" />    
 
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ SNAP_PREFIX }}/feeds/latest/" />
 
-{# this is required for some javascript rpc functions #}
 <script type="text/javascript">
-    <!--
     var SNAP_PREFIX = '{{ SNAP_PREFIX }}';
-    // -->
-</script>
-
-{# gotta come first #}
-<script src="{{ SNAP_MEDIA_PREFIX }}/js/yui/yahoo-min.js" type="text/javascript"></script>
-
-<script src="{{ SNAP_MEDIA_PREFIX }}/js/thread.js" type="text/javascript"></script>
-<script src="{{ SNAP_MEDIA_PREFIX }}/js/yui/connection-min.js" type="text/javascript"></script>
-<script src="{{ SNAP_MEDIA_PREFIX }}/js/yui/dom-min.js" type="text/javascript"></script>
-<script type="text/javascript">
-	dojo.addOnLoad(function() {
-		procAllTimeSince();
-		document.body.id = "yahoo-com"
-	});
+	dojo.require("lucidsite.forum")
 </script>
 {% block snap_extra_head %}{% endblock %}
 {% endblock %}
@@ -72,8 +55,6 @@
         <br />
         <div style="text-align:center; font-size: 85%;">
             <p>This community is powered by <a href="http://code.google.com/p/snapboard/">Snapboard</a></p> <br />
-            <a href="http://validator.w3.org/check/referer" title="Check the validity of this site&#8217;s XHTML">xhtml</a> &nbsp; 
-            <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS">css</a> &nbsp; 
         </div>
         <br />
     </div>

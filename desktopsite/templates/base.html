@@ -8,6 +8,12 @@
 {% block extrahead %}{% endblock %}
 {% endblock %}
 
+{# This is to make the page load faster, inline style tags will prevent it from being downloaded all at once #}
+{% block _dojango_dojo_styles %}
+	<link type="text/css" rel="stylesheet" href="{{ DOJANGO.DOJO_URL }}/resources/dojo.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="{{ DOJANGO.THEME_CSS_URL }}" media="screen" />
+{% endblock %}
+
 {% block dojango_content %}
 <div id="main">
 	<div id="header">
@@ -35,7 +41,6 @@
 		</div>
 		<ul>
 			<li><a href="{% url content-index %}">Home</a></li>
-			<li><a href="/demo/">Demo</a></li>
 			<li><a href="/download/">Download</a></li>
 			<li><a href="/documentation/">Documentation</a></li>
 			<li><a href="{% url blog-index %}">Blog</a></li>

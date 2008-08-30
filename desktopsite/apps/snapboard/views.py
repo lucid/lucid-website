@@ -204,8 +204,7 @@ def thread(request, thread_id, page=1):
 
             postobj.private = postform.cleaned_data['private']
             postobj.save()
-            print postobj.private
-            postform = PostForm()
+            return HttpResponseRedirect("#snap_post%s" % postobj.id)
     else:
         postform = PostForm()
 
@@ -251,10 +250,13 @@ def edit_post(request, original, next=None):
         post = Post(
                 user = request.user,
                 thread = orig_post.thread,
-                private = orig_post.private,
                 text = postform.cleaned_data['post'],
                 previous = orig_post,
                 )
+        post.save()
+        #save before assigning many to many
+        for i in orig_post.private.all():
+            post.private.add(i)
         post.save()
 
         orig_post.revision = post

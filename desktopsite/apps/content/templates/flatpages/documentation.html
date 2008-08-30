@@ -2,22 +2,11 @@
 
 {% block title %} - {{ flatpage.title }}{% endblock %}
 
-{% load dojango_base %}
-{% if not DOJANGO %}
-	{% set_dojango_context %}
-{% endif %}
-
 {% block extrahead %}
-<script type="text/javascript">
-	dojo.require("dojox.highlight");
-	dojo.require("dojox.highlight.languages._www");
-	dojo.require("dojox.highlight.languages.pygments._www");
-	var initCode = function(){
-		dojo.query("code").forEach(dojox.highlight.init);
-	};	
-	dojo.addOnLoad(initCode); 
-</script>
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/highlight/resources/pygments/default.css" />
+<script type="text/javascript">
+	dojo.require("lucidsite.documentation");
+</script>
 {% endblock %}
 
 {% block content %}

@@ -2,29 +2,25 @@
     {% if user.is_authenticated %}
     <!-- div style="border: 1px solid #ccc; padding: 5px; background: #efe" -->
     <p>
-    <span style="float:right;"><a href="#snap_markdown_guide" onclick="toggle('snap_markdown_guide', 'block');">Pretty-print guide</a></span>
+    <span style="float:right;"><a href="javascript:void();{# #snap_markdown_guide #}" onclick="lucidsite.forum.toggle('snap_markdown_guide', 'block');">Pretty-print guide</a></span>
     <b>Got something to say?</b>
     </p>
     {% include "snapboard/include/markdown_guide.html" %}
-    <form id="add_post_div" action="" method="POST">
-        <script type="text/javascript" src="{{ SNAP_MEDIA_PREFIX }}/js/yui/event-min.js"></script>
-        <script type="text/javascript" src="{{ SNAP_MEDIA_PREFIX }}/js/yui/autocomplete-min.js"></script>
+    <form id="add_post_div" action="" method="POST" onsubmit="lucidsite.forum.compileList('privateBoxes', 'id_private');">
         <p>{{ postform.post }} {{ postform.post.errors }}</p>
         <p id="autocomplete_p">
             <!-- span style="float:right;"><b>I need more space!</b></span -->
-            <a href="#add_post_div" onclick="toggle('autocomplete_input', 'block'); toggle('autocomplete_p', 'inline');">set private recipients (optional)</a>
+            <a href="#add_post_div" onclick="lucidsite.forum.toggle('autocomplete_input', 'block'); lucidsite.forum.toggle('autocomplete_p', 'inline');">set private recipients (optional)</a>
         </p>
         <div id="autocomplete_input" style="display:none">
             <p>{{ postform.private }}</p>
-            <div id="autocomplete_div"></div>
-            <script type="text/javascript"><!--
-                dataSource = new YAHOO.widget.DS_XHR("{{ SNAP_PREFIX }}/rpc/user_lookup/", ["ResultSet.Result","name","id"]);
-                autoComp = new YAHOO.widget.AutoComplete("id_private","autocomplete_div",dataSource);
-                autoComp.delimChar = ","; 
-                autoComp.typeAhead = true;
-                autoComp.highlightClassName = "highlight";
-                // -->
-            </script>
+			<div dojoType="dojox.data.QueryReadStore" url="{{ SNAP_PREFIX }}/rpc/user_lookup/"
+				 doClientPaging="false" jsId="userStore"></div>
+			<div id="privateBoxes">
+			<input type="text" dojoType="dijit.form.FilteringSelect" store="userStore"
+				   hasDownArrow="false" pageSize="10" />
+			</div>
+			<input type="button" value="Add another" onclick="lucidsite.forum.addAutoComplete(userStore, 'privateBoxes');" />
         </div>
         {% if postform.private.errors %}
         {{ postform.private.errors }}
@@ -32,7 +28,7 @@
 
         <p>
         <input type="submit" value="Post" />
-        <input type="button" value="Preview" onclick="preview('add_post_div')" />
+        <input type="button" value="Preview" onclick="lucidsite.forum.preview('add_post_div')" />
         </p>
     </form>
     <div style="border: 1px solid #ccc; display: none;">

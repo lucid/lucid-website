@@ -1,0 +1,65 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ flatpage.title }}{% endblock %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/overview.css" media="screen" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/image/resources/image.css" />
+<script type="text/javascript">
+	dojo.require("lucidsite.overview");
+</script>
+{% endblock %}
+
+{% block content %}
+{#<h1>{{ flatpage.title }}</h1>#}
+<div>
+	<div dojoType="dojo.data.ItemFileReadStore" url="/site_media/images/overview/images.json" jsId="galleryStore"></div>
+	<div id="gallery" dojoType="dojox.image.SlideShow" imageWidth="640" imageHeight="480"
+		 slideshowInterval="5" autoStart="true" hasNav="false">
+		<img src="/site_media/images/search-go.png" />
+		<img src="/site_media/images/header.png" />
+	</div>
+	<h2>Everything you need</h2>
+	<p>
+		Lucid comes with lots of applications. You can browse photos, listen to music, and edit documents.
+		It also comes with an RSS feed reader, some games, a calculator, and a bash-like terminal application.
+		You can install additional third-party applications, which allows you do do even more!
+	</p>
+	<h2>Extremely customizable</h2>
+	<p>
+		Lucid allows you to pick your own theme, panel layout, and more!
+		Themes and wallpaper can be customized, and additional themes can be installed.
+		You can customize your desktop even more by creating/moving panels, and adding applets to panels.
+		The intensity of effects can also be customized, which can be used to disable animations for slower browsers.
+	</p>
+	<h2>Multiple language support</h2>
+	<p>
+		Your locale is automatically detected, and text will appear in your native language.
+		Lucid will even format dates, time, and currency according to your locale.
+		If Lucid does not support your language yet, it will default to English.
+	</p>
+	<h2>Easy-to-use file management</h2>
+	<p>
+		Lucid's file manager acts like any other file manager. It supports drag-and-drop, and copy/paste.
+		You can upload files, and create folders. You can also double-click a file to open it in an application.
+	</p>
+	<h2>Powerful user management</h2>
+	<p>
+		With Lucid, you can get down to the nitty-gritty when it comes to user management.
+		It has a powerful permissions system that allow administrators to limit features 
+		such as administration, cross-site requests, and the ability to login.
+		It also has filesystem quotas, to limit how much disk space a user can use.
+		You can also organize users with groups.
+		Permissions and quotas can be set on a per-user, per-group, or global level,
+		which makes user management simple.
+	</p>
+	<h2>Easy to create applications</h2>
+	<p>
+		Lucid has everything you need to write powerful applications with ease.
+		You can use the built-in IDE to rapidly develop applications from within the desktop itself.
+		The best part is, you don't have to write a single line of server-side code!
+		Applications can be written completely in javascript using the Dojo Toolkit,
+		and can even have thier own custom widgets.
+	</p>
+</div>
+{% endblock %}

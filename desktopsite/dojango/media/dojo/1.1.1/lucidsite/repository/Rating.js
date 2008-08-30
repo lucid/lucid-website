@@ -1,7 +1,7 @@
-dojo.provide("repository.Rating");
+dojo.provide("lucidsite.repository.Rating");
 dojo.require("dojox.widget.Rating");
 
-dojo.declare("repository.Rating", dojox.widget.Rating, {
+dojo.declare("lucidsite.repository.Rating", dojox.widget.Rating, {
 	noInput: false,
 	_rendered: false,
 	canVote: false,

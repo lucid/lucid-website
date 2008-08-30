@@ -18,7 +18,7 @@ def _sanitize(text):
 def rpc_post(request):
     show_id = int(request.GET['show'])
     orig_id = int(request.GET['orig'])
-    post = Post.view_manager.get(pk=show_id)
+    post = Post.objects.get(pk=show_id)
 
 
     prev_id = ''
@@ -36,18 +36,42 @@ def rpc_post(request):
 
 
 def rpc_preview(request):
-    text = request.raw_post_data 
+    text = request.POST['text']
     return HttpResponse(simplejson.dumps({'preview': _sanitize(text)}),
             mimetype='application/javascript')
 
 
 def rpc_lookup(request, queryset, field, limit=5):
+    if request.GET['name'] == "":
+        return HttpResponse(simplejson.dumps({'items': [{'name': ""}]}), mimetype='text/json')
     obj_list = []
-    lookup = { '%s__icontains' % field: request.GET['query'],}
-    for obj in queryset.filter(**lookup)[:limit]:
-                obj_list.append({"id": obj.id, "name": getattr(obj, field)}) 
-    object = {"ResultSet": { "total": str(limit), "Result": obj_list } }
-    return HttpResponse(simplejson.dumps(object), mimetype='application/javascript')
+    field = "username"
+    start=int(request.GET['start'])
+    if request.GET.has_key('count'):
+        end = int(request.GET['count'])+start
+    else:
+        end = "Infinity"
+        
+    if (not request.GET.has_key('name')) or request.GET['name'] == "*":
+        resultset = queryset.all()
+    else:
+        name = request.GET['name']
+        lookup = { '%s__istartswith' % field: request.GET['name'][0:-1],}
+        resultset = queryset.filter(**lookup)
+        
+    if end == "Infinity":
+        resultset = resultset[start:]
+    else:
+        resultset = resultset[start:end]
+    
+    for obj in resultset:
+                obj_list.append({
+                                 "name": getattr(obj, field),
+                                }) 
+    object = {
+              "items": obj_list,
+             }
+    return HttpResponse(simplejson.dumps(object), mimetype='text/json')
 
 
 def _toggle_boolean_field(object, field):

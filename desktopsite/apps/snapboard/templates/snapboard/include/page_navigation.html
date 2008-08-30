@@ -5,7 +5,8 @@
 {% endif %}
     <!-- TODO: refactor thread_menu to menu_right -->
     {% if page_range %}
-        <span id="page_skip" class="thread_menu" style="display:none;">
+        <span id="page_skip" class="thread_menu">
+        	Skip to page
             {% for page_num in page_range %}
                 {% ifnotequal page_num page %}<a href="{{ page_nav_urlbase }}page{{ page_num }}/">{% endifnotequal %}
                     {{ page_num }}
@@ -18,9 +19,6 @@
     page {{ page }} of {{ page_total }}
     {% if page_next %} &#149; <a href="{{ page_nav_urlbase }}page{{ page_next }}/">next</a> {% endif %}
 
-    {% if page_range %}
-    &#149; <a href="#" onclick="toggle('page_skip', 'inline');">skip to page...</a>
-    {% endif %}
 </p>
 
 <!--

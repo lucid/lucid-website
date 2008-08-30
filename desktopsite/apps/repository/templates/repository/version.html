@@ -3,10 +3,10 @@
 {% block title %} - {{ package.name }} {{ version.name }}{% endblock %}
 
 {% block extrahead %}
-<link rel="stylesheet" type="text/css" media="screen" href="/site_media/repository.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/site_media/pages/repository.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Rating/Rating.css" />
 <script type="text/javascript">
-  dojo.require("repository.Rating");
+  dojo.require("lucidsite.repository");
 </script>
 {% endblock %}
 
