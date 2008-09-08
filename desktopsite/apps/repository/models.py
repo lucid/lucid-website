@@ -24,7 +24,7 @@ admin.site.register(Package)
     
 class Version(models.Model):
     package = models.ForeignKey(Package)
-    name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""")
+    name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""", unique=True)
     changelog = models.TextField(help_text="""<div class="help">A list of changes since the last release</div>""")
     package_url = models.URLField(help_text="""<div class="help">This is a direct url to the package.<br />
                                                File sharing sites such as mediafire or rapidshare will not work.<br />

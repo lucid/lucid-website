@@ -15,10 +15,3 @@ table.profile td {
 table.profile .fieldname {
 	font-weight: bold;
 }
-
-a.edit {
-	font-size: 8pt;
-	position: relative;
-	bottom: 2px;
-	text-decoration: none;
-}

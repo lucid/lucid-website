@@ -115,3 +115,44 @@ def newVersion(request, sysname):
        'title': "New Version for %s" % package.name,
        'form': form,
     }))
+    
+@login_required
+def editPackage(request, sysname):
+    package = get_object_or_404(Package, sysname=sysname)
+    if package.maintainer.pk != request.user.pk:
+        return HttpResponseRedirect(package.get_absolute_url())
+    if request.method == 'POST':
+        form = PackageForm(request.POST, instance=package)
+        if form.is_valid():
+            package = form.save(commit=False)
+            package.maintainer = request.user
+            package.save()
+            request.user.message_set.create(message='New Package Created')
+            return HttpResponseRedirect(package.get_absolute_url())
+    else:
+        form = PackageForm(instance=package)
+    return render_to_response("repository/form.html", context_instance=RequestContext(request, {
+       'title': "Editing %s" % package.name,
+       'form': form,
+    }))
+    
+@login_required
+def editVersion(request, sysname, version):
+    package = get_object_or_404(Package, sysname=sysname)
+    version = get_object_or_404(Version, name=version, package=package)
+    if package.maintainer.pk != request.user.pk:
+        return HttpResponseRedirect(package.get_absolute_url())
+    if request.method == 'POST':
+        form = VersionForm(request.POST, instance=version)
+        if form.is_valid():
+            version = form.save(commit=False)
+            version.package = package
+            version.save()
+            request.user.message_set.create(message='New Version Created')
+            return HttpResponseRedirect(version.get_absolute_url())
+    else:
+        form = VersionForm(instance=version)
+    return render_to_response("repository/form.html", context_instance=RequestContext(request, {
+       'title': "Editing %s %s" % (package.name, version.name),
+       'form': form,
+    }))

@@ -10,3 +10,11 @@ a:hover {
 	color: #6d6d6d;
 	text-decoration: none;
 }
+
+a.edit {
+	font-size: 0.6em;
+	position: relative;
+	bottom: 3px;
+	text-decoration: none;
+	margin-left: 5px;
+}

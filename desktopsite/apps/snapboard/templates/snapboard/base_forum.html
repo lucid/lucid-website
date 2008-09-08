@@ -1,6 +1,6 @@
 {% extends "base_content.html" %}
 
-{% block title %} - Forum{% endblock %}
+{% block title %} - Community{% endblock %}
 {% block extrahead %}
 <link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/snapboard.css" />    
 
@@ -8,20 +8,19 @@
 
 <script type="text/javascript">
     var SNAP_PREFIX = '{{ SNAP_PREFIX }}';
-	dojo.require("lucidsite.forum")
+	dojo.require("lucidsite.forum");
 </script>
 {% block snap_extra_head %}{% endblock %}
 {% endblock %}
 
 {% block content %}
-<div id="doc2" class="yui-t4"><!-- "doc" here for example only; use any page width -->
-
+<div id="doc2">
     <div id="hd">
-        <br />
         {% block site_title %}
-        <h1>Forum</h1>
+        <h1>Community</h1>
         {% endblock %}
-        <br />
+		{% block community_header %}
+		{% endblock %}
         <div id="navigation">
             <ul>
                 <li><a href="{{ SNAP_PREFIX }}/threads/"><span>All Discussions</span></a></li>
