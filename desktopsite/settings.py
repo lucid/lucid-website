@@ -102,7 +102,6 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.admin',
     'desktopsite.apps.snapboard',
-    'desktopsite.apps.comment_utils',
     'desktopsite.apps.blog',
     'desktopsite.apps.content',
     'desktopsite.apps.repository',
