@@ -1,7 +1,6 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from desktopsite.apps.comment_utils.moderation import CommentModerator, moderator
 from django.contrib import admin
 
 class Entry(models.Model):
@@ -26,16 +25,8 @@ class Entry(models.Model):
 
     def get_absolute_url(self):
         return "/blog/%s/%s/" % (self.pub_date.strftime("%Y/%b/%d").lower(), self.slug)
-        
-    @property
-    def comments_enabled(self):
-        delta = datetime.datetime.now() - self.pub_date
-        return delta.days < 60
+    
+    def get_comment_url(self):
+        return "/blog/%s/" % self.pk
 
 admin.site.register(Entry, Entry.Admin)
-
-class EntryModerator(CommentModerator):
-    akismet = True
-    enable_field = "comments_enabled"
-
-moderator.register(Entry, EntryModerator)
