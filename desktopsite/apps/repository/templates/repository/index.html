@@ -16,7 +16,22 @@
 {% endblock %}
 
 {% block content %}
-<h1>Package Index</h1>
+<h1>Packages<a href="javascript://" onClick="lucidsite.repository.toggle('index-help');" class="flag">?</a></h1>
+<div class="text" id="index-help">
+	<p>
+		Lucid's package repository contains additional packages that can be installed to provide a component of the desktop.
+		It contains packages provided by the Lucid Desktop Project, as well as third-party packages.
+		They provide additional themes, apps, translations, and other enhancements.
+	</p>
+	<p>
+		Packages here are generally safe, but approach unverified packages with caution,
+		and be sure to check the checksum of any packages you download (even if it's verified).
+	</p>
+	<p>
+		<a href="javascript://" onClick="lucidsite.repository.toggle('index-help');">Hide</a>
+	</p>
+</div>
+{% comment %}
 <div class="filter">
 	<b>By letter:</b>
 		{% for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"|make_list %}
@@ -26,8 +41,9 @@
 			<a href="{% url repository-letter letter %}">{{ letter }}</a>
 		{% endfor %}
 </div>
+{% endcomment %}
 <div class="filter">
-	<b>By category:</b>
+	{#<b>By category:</b>#}
 	{% for name, label in categories %}
 		{% if not forloop.first %}
 		|
@@ -42,18 +58,6 @@
 		<input type="submit" value="Search" />
 	</form>
 </div>
-<h2>About</h2>
-<div class="text">
-	<p>
-		Lucid's package repository contains additional packages that can be installed to provide a component of the desktop.
-		It contains packages provided by the Lucid Desktop Project, as well as third-party packages.
-		They provide additional themes, apps, translations, and other enhancements.
-	</p>
-	<p>
-		Packages here are generally safe, but approach unverified packages with caution,
-		and be sure to check the checksum of any packages you download (even if it's verified).
-	</p>
-</div>
 {% if user.is_authenticated %}
 <div class="userPackageLinks">
 	<a href="{% url repository-new-package %}">Submit a Package</a>
@@ -61,17 +65,20 @@
 	<a href="{% url repository-user-packages %}">My Packages</a>
 </div>
 {% endif %}
-
-<h2>Latest Packages</h2>
-<div class="packageList">
-	{% for version in latest %}
-		{% include "repository/packageListItem.html" %}
-	{% endfor %}
-</div>
-<h2>Top Rated Packages</h2>
-<div class="packageList">
-	{% for version in top_rated %}
-		{% include "repository/packageListItem.html" %}
-	{% endfor %}
+<div dojoType="dijit.layout.TabContainer" id="index-package-tabs">
+	<div dojoType="dijit.layout.ContentPane" title="Top Rated">
+		<div class="packageList">
+			{% for version in top_rated %}
+				{% include "repository/packageListItem.html" %}
+			{% endfor %}
+		</div>
+	</div>
+	<div dojoType="dijit.layout.ContentPane" title="Latest">
+		<div class="packageList">
+			{% for version in latest %}
+				{% include "repository/packageListItem.html" %}
+			{% endfor %}
+		</div>
+	</div>
 </div>
 {% endblock %}

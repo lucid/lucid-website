@@ -58,10 +58,10 @@ def test_setup(**kwargs):
     words = chomsky.objects.split(' ')
     for i in range(0, 20):
         print 'package ', i, 'created'
-        subj = words[i]+" "+words[i-4]+" "+words[i+2]
+        subj = words[i]+" "+words[i-4]+" "+words[i+2]+" "+words[i-3]
         package = Package(
                         name=subj,
-                        sysname=subj.replace(" ", "_").replace(".", "").replace("(", "").replace(")", ""),
+                        sysname=subj.replace(" ", "_").replace(".", "").replace("(", "").replace(")", "").replace("\n", ""),
                         category=choice(REPOSITORY_CATEGORIES)[0],
                         description = '\n\n'.join([chomsky.chomsky() for x in range(0, choice(range(2, 5)))]),
                         maintainer=choice(User.objects.all()),

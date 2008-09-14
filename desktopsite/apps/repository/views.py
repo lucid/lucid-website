@@ -57,7 +57,7 @@ def package(request, sysname):
 
 def version(request, sysname, version):
     pak = get_object_or_404(Package, sysname=sysname)
-    version = get_object_or_404(pak.version_set, name=version)
+    version = get_object_or_404(Version, package=pak, name=version)
     return render_to_response('repository/version.html', {
         'package': pak,
         'version': version,

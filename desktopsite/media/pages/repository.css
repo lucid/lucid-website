@@ -1,3 +1,22 @@
+#index-package-tabs {
+	height: 350px;
+}
+
+#index-package-tabs .dijitTabPane {
+	padding: 5px;
+}
+
+#index-help {
+	border: 1px solid #aaaa99;
+	background-color: #ffff99;
+	overflow: hidden;
+	display: none;
+}
+
+#index-help p {
+	margin: 10px 5px 10px 5px;
+}
+
 .filter {
 	padding-bottom: 2px;
 	margin-bottom: 2px;
@@ -46,6 +65,7 @@
 	position: relative;
 	bottom: 5px;
 	font-size: 0.7em;
+	text-decoration: none;
 }
 
 .flag.new {

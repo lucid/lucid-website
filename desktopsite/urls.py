@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     ### TEMPORARY, REMOVE IN PRODUCTION SITE ###
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '%s/media' % ROOT_PATH}),
-    (r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^admin/(.*)', admin.site.root, name="admin"),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls'), name="admin-docs"),
     (r'', include('desktopsite.apps.accounts.urls')),

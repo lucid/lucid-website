@@ -11,7 +11,12 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ package.name }}<a class="edit" href="{% url repository-edit-package package.sysname %}">(edit)</a></h1>
+<h1>
+	{{ package.name }}
+	{% if package.user_is_maintainer %}
+		<a class="edit" href="{% url repository-edit-package package.sysname %}">(edit)</a>
+	{% endif %}
+</h1>
 <div class="text">
 	<p>
 		{{ package.description|linebreaks }}

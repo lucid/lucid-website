@@ -11,7 +11,12 @@
 {% endblock %}
 
 {% block content %}
-	<h1>{{ package.name }} {{ version.name }}<a class="edit" href="{% url repository-edit-version package.sysname,version.name %}">(edit)</a></h1>
+	<h1>
+		{{ package.name }} {{ version.name }}
+		{% if package.user_is_maintainer %}
+			<a class="edit" href="{% url repository-edit-version package.sysname,version.name %}">(edit)</a>
+		{% endif %}
+	</h1>
 	{% include "repository/versionPage.html" %}
 	<a href="{{ package.get_absolute_url }}">&larr; Back to package</a>
 {% endblock %}

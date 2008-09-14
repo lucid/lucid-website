@@ -17,7 +17,7 @@ class Package(models.Model):
     def get_versions_desc(self):
         return self.version_set.order_by("-name")
     def user_is_maintainer(self):
-        return threadlocals.get_current_user().pk == self.maintainer.pk
+        return threadlocals.get_current_user().pk == self.maintainer.pk or threadlocals.get_current_user().is_staff
 
 admin.site.register(Package)
 
