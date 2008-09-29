@@ -12,6 +12,8 @@ class Package(models.Model):
     url = models.URLField("Homepage")
     maintainer = models.ForeignKey(User)
     category = models.CharField(max_length=100, choices=REPOSITORY_CATEGORIES)
+    license = models.CharField(max_length=100)
+    license_link = models.URLField("Link to license")
     def get_absolute_url(self):
         return "/repository/packages/%s/" % self.sysname
     def get_versions_desc(self):

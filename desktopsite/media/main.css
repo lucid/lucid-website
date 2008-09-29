@@ -123,3 +123,16 @@ input.login {
 	min-height: 30px;
 	float: left;
 }
+
+.message-set {
+    background-color: #eee;
+    color: #000;
+    width: 300px;
+    margin: 4px auto 2px auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.message-set div {
+    border-bottom: 1px dotted #aaa;
+}

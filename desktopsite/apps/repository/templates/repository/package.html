@@ -35,6 +35,11 @@
 		<td class="field">Maintaner:</td>
 		<td><a href="{% url accounts-profile package.maintainer.username %}">{{ package.maintainer }}</a></td>
 	</tr>
+	<tr>
+		<td class="field">License:</td>
+		<td><a href="{{ package.license_link }}" rel="nofollow">{{ package.license }}</a></td>
+	</tr>
+
 </table>
 {% if version %}
 <h2>Latest Version ({{ version.name }})</h2>

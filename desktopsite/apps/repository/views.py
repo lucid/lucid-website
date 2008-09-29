@@ -127,7 +127,7 @@ def editPackage(request, sysname):
             package = form.save(commit=False)
             package.maintainer = request.user
             package.save()
-            request.user.message_set.create(message='New Package Created')
+            request.user.message_set.create(message='Changes Saved')
             return HttpResponseRedirect(package.get_absolute_url())
     else:
         form = PackageForm(instance=package)
@@ -148,7 +148,7 @@ def editVersion(request, sysname, version):
             version = form.save(commit=False)
             version.package = package
             version.save()
-            request.user.message_set.create(message='New Version Created')
+            request.user.message_set.create(message='Changes Saved')
             return HttpResponseRedirect(version.get_absolute_url())
     else:
         form = VersionForm(instance=version)
