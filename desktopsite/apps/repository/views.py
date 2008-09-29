@@ -82,7 +82,7 @@ def saveRating(request):
 @login_required
 def newPackage(request):
     if request.method == 'POST':
-        form = PackageForm(request.POST)
+        form = PackageForm(request.POST, request.FILES)
         if form.is_valid():
             package = form.save(commit=False)
             package.maintainer = request.user
@@ -102,7 +102,7 @@ def newVersion(request, sysname):
     if package.maintainer.pk != request.user.pk:
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
-        form = VersionForm(request.POST)
+        form = VersionForm(request.POST, request.FILES)
         if form.is_valid():
             version = form.save(commit=False)
             version.package = package
@@ -122,7 +122,7 @@ def editPackage(request, sysname):
     if package.maintainer.pk != request.user.pk:
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
-        form = PackageForm(request.POST, instance=package)
+        form = PackageForm(request.POST, request.FILES, instance=package)
         if form.is_valid():
             package = form.save(commit=False)
             package.maintainer = request.user
@@ -143,7 +143,7 @@ def editVersion(request, sysname, version):
     if package.maintainer.pk != request.user.pk:
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
-        form = VersionForm(request.POST, instance=version)
+        form = VersionForm(request.POST, request.FILES, instance=version)
         if form.is_valid():
             version = form.save(commit=False)
             version.package = package

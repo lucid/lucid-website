@@ -6,6 +6,10 @@
 		</div>
 		<div>{{ version.get_rating.num_ratings }} votes</div>
 	</div>
+    {% if version.package.screenshot %}
+        {% load thumbnail %}
+        <img class="screenshot" src="{% thumbnail package.screenshot 60x30 %}" />
+    {% endif %}
 	<div class="title">
 		<a href="{{ version.get_absolute_url }}">{{ version.package.name }} <span class="version">{{ version.name }}</span></a>
 		{% if version.is_new %}

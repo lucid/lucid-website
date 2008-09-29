@@ -9,6 +9,7 @@ class Package(models.Model):
     sysname = models.SlugField("System Name", unique=True)
     name = models.CharField(max_length=200)
     description = models.TextField()
+    screenshot = models.ImageField(upload_to="repository/screenshots/", blank=True, null=True)
     url = models.URLField("Homepage")
     maintainer = models.ForeignKey(User)
     category = models.CharField(max_length=100, choices=REPOSITORY_CATEGORIES)

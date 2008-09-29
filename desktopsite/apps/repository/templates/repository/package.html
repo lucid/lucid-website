@@ -18,11 +18,17 @@
 	{% endif %}
 </h1>
 <div class="text">
+    {% if package.screenshot %}
+        {% load thumbnail %}
+        <a href="/site_media/{{ package.screenshot }}">
+            <img class="screenshot" src="{% thumbnail package.screenshot 300x150 %}" />
+        </a>
+    {% endif%}
 	<p>
 		{{ package.description|linebreaks }}
 	</p>
 </div>
-<table>
+<table class="package-stats">
 	<tr>
 		<td class="field">Category:</td>
 		<td><a href="{% url repository-category package.category %}">{{ package.category }}</a></td>
@@ -82,6 +88,6 @@
 </div>
 <h3>Add a Comment</h3>
 <div>
-    {% render_comment_form for version %}
+    {% render_comment_form for package %}
 </div>
 {% endblock %}

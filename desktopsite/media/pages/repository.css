@@ -148,3 +148,13 @@ td.field {
 .changelog.text {
 	font-family: monospace;
 }
+
+img.screenshot {
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.package-stats {
+    clear: both;
+}

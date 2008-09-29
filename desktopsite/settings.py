@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'desktopsite.apps.content',
     'desktopsite.apps.repository',
     'dojango',
+    'sorl.thumbnail',
 )
 
 
@@ -122,3 +123,6 @@ DOJANGO_DOJO_BUILD_PROFILES = {
 ### SNAPBOARD ###
 SNAP_PREFIX = "/forum";
 SNAP_MEDIA_PREFIX = MEDIA_URL+'/forum'
+
+### SORL THUMBNAILS ###
+THUMBNAIL_SUBDIR = "thumbnails"
