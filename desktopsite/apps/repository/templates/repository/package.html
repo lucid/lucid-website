@@ -37,23 +37,46 @@
 	</tr>
 </table>
 {% if version %}
-<h1>Latest Version: <a href="{{ version.get_absolute_url }}">{{ version.name }}</a></h1>
-{% include "repository/versionPage.html" %}
-{% endif %}
-<h1>All Versions</h1>
-<div class="packageList">
-	{% if not package.get_versions_desc %}
-		No versions available yet
-	{% else %}
-		{% for version in package.get_versions_desc %}
-			{% include "repository/packageListItem.html" %}
-		{% endfor %}
-	{% endif %}
-</div>
-{% if package.user_is_maintainer %}
+<h2>Latest Version ({{ version.name }})</h2>
 <div>
-	<a href="{% url repository-new-version package.sysname %}">Create New Version</a>
+    {% include "repository/versionPage.html" %}
 </div>
 {% endif %}
-
+<div dojoType="dijit.TitlePane" open="false" title="All Versions">
+    <div class="packageList">
+	    {% if not package.get_versions_desc %}
+		    No versions available yet
+	    {% else %}
+		    {% for version in package.get_versions_desc %}
+		        {% include "repository/packageListItem.html" %}
+	        {% endfor %}
+        {% endif %}
+    </div>
+    {% if package.user_is_maintainer %}
+    <div>
+        <a href="{% url repository-new-version package.sysname %}">Create New Version</a>
+    </div>
+    {% endif %}
+</div>
+{% load comments %}
+<h2>Comments</h2>
+<div>
+   {% get_comment_list for package as comment_list %}
+   {% for comment in comment_list %}
+    <div class="comment" id="c{{ comment.id }}">
+        <h3>
+            {% if comment.user_url %}
+                <a href="{{ comment.user_url }}" rel="nofollow">
+            {% endif %}
+                {{ comment.user_name|escape }}{% if comment.user_url %}</a>{% endif %}
+            <span class="small quiet">{{ comment.submit_date|date:"F j, Y" }} at {{ comment.submit_date|date:"P" }}</span>
+        </h3>
+        {{ comment.comment|escape|urlizetrunc:"40"|linebreaks }}
+    </div>
+    {% endfor %}
+</div>
+<h3>Add a Comment</h3>
+<div>
+    {% render_comment_form for version %}
+</div>
 {% endblock %}

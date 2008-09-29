@@ -14,4 +14,25 @@
 <div>
 {% block docContent %}{{ flatpage.content }}{% endblock %}
 </div>
+{% load comments %}
+<h2>Comments</h2>
+<div>
+   {% get_comment_list for flatpage as comment_list %}
+   {% for comment in comment_list %}
+    <div class="comment" id="c{{ comment.id }}">
+        <h3>
+            {% if comment.user_url %}
+                <a href="{{ comment.user_url }}" rel="nofollow">
+            {% endif %}
+                {{ comment.user_name|escape }}{% if comment.user_url %}</a>{% endif %}
+            <span class="small quiet">{{ comment.submit_date|date:"F j, Y" }} at {{ comment.submit_date|date:"P" }}</span>
+        </h3>
+        {{ comment.comment|escape|urlizetrunc:"40"|linebreaks }}
+    </div>
+    {% endfor %}
+</div>
+<h3>Add a Comment</h3>
+<div>
+    {% render_comment_form for version %}
+</div>
 {% endblock %}

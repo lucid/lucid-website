@@ -2,6 +2,7 @@ dojo.provide("lucidsite.repository._base");
 dojo.require("lucidsite.repository.Rating");
 dojo.require("dijit.layout.TabContainer");
 dojo.require("dijit.layout.ContentPane");
+dojo.require("dijit.TitlePane");
 dojo.require("dojox.fx");
 
 dojo.mixin(lucidsite.repository, {

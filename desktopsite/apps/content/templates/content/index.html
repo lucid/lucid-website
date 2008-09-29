@@ -29,10 +29,11 @@
 </div>
 <div id="blogposts">
 	<h2>Recent Blog Posts</h2>
-	{% load comments comment_utils latestblogentry %}
+	{% load comments latestblogentry %}
 	{% get_latest_blog_entries 4 as latest_entries %}
 	
 	{% for latest_entry in latest_entries %}
+        {% get_comment_count for latest_entry as comment_count %}.
 	    <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
 	    <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
 	    {{ latest_entry.summary }}
