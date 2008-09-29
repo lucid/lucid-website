@@ -15,6 +15,14 @@
 {% endblock %}
 
 {% block dojango_content %}
+{% if messages %}
+<div class="message-set">
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div id="main">
 	<div id="header">
 		<div class="title">The Lucid Desktop Project</div>
