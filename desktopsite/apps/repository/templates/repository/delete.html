@@ -1,0 +1,25 @@
+{% extends "base_content.html" %}
+
+{% block title %} - Package Index{% endblock %}
+
+{% load dojango_base %}
+{% if not DOJANGO %}
+	{% set_dojango_context %}
+{% endif %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/repository.css" media="screen" />
+<script type="text/javascript">
+  dojo.require("lucidsite.repository");
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="center-block">
+    <div>Are you sure you want to delete {{ object }}?</div>
+    <form action="." method="POST">
+        <input type="submit" name="No" value="No" />
+        <input type="submit" name="Yes" value="Yes" />
+    </form>
+</div>
+{% endblock %}
