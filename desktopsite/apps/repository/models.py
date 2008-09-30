@@ -19,6 +19,11 @@ class Package(models.Model):
         return "/repository/packages/%s/" % self.sysname
     def get_versions_desc(self):
         return self.version_set.order_by("-name")
+    def get_latest(self):
+        try:
+            return self.get_versions_desc()[0]
+        except IndexError:
+            return None
     def user_is_maintainer(self):
         return threadlocals.get_current_user().pk == self.maintainer.pk or threadlocals.get_current_user().is_staff
     def __str__(self):

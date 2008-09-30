@@ -4,9 +4,10 @@
 
 {% block extrahead %}
 <link type="text/css" rel="stylesheet" href="/site_media/pages/accounts.css" media="screen" />
+<link type="text/css" rel="stylesheet" href="/site_media/pages/repository.css" media="screen" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
 <script type="text/javascript">
-	dojo.require("dijit.layout.ContentPane");
-	dojo.require("dijit.layout.TabContainer");
+    dojo.require("lucidsite.repository");
 </script>
 {% endblock %}
 
@@ -50,7 +51,6 @@
 	{% endif %}
 </table>
 <div dojoType="dijit.layout.TabContainer" class="profileTabs">
-	{% if forum %}
 	<div dojoType="dijit.layout.ContentPane" title="Forum">
 		<table class="profile">
 			<tr>
@@ -79,7 +79,13 @@
 			</tr>
 		</table>
 	</div>
-	{% endif %}
+    {% if puser.package_set.all %}
+    <div dojoType="dijit.layout.ContentPane" title="Packages" class="packageList">
+        {% for package in puser.package_set.all %}
+            {% include "repository/packageListItem.html" %}
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

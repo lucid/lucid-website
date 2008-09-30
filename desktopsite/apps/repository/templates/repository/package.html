@@ -64,7 +64,7 @@
 		    No versions available yet
 	    {% else %}
 		    {% for version in package.get_versions_desc %}
-		        {% include "repository/packageListItem.html" %}
+		        {% include "repository/versionListItem.html" %}
 	        {% endfor %}
         {% endif %}
     </div>

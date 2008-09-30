@@ -91,14 +91,14 @@
 	<div dojoType="dijit.layout.ContentPane" title="Top Rated">
 		<div class="packageList">
 			{% for version in top_rated %}
-				{% include "repository/packageListItem.html" %}
+				{% include "repository/versionListItem.html" %}
 			{% endfor %}
 		</div>
 	</div>
 	<div dojoType="dijit.layout.ContentPane" title="Latest">
 		<div class="packageList">
 			{% for version in latest %}
-				{% include "repository/packageListItem.html" %}
+				{% include "repository/versionListItem.html" %}
 			{% endfor %}
 		</div>
 	</div>
