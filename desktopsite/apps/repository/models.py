@@ -14,7 +14,7 @@ class Package(models.Model):
     maintainer = models.ForeignKey(User)
     category = models.CharField(max_length=100, choices=REPOSITORY_CATEGORIES)
     license = models.CharField(max_length=100)
-    license_link = models.URLField("Link to license")
+    license_link = models.URLField("Link to license", help_text="If you are unsure of which license to pick,<br />it is recommended you use the <a href=\"http://www.opensource.org/licenses/afl-3.0.php\">Academic Free License</a>.")
     def get_absolute_url(self):
         return "/repository/packages/%s/" % self.sysname
     def get_versions_desc(self):
@@ -28,14 +28,16 @@ admin.site.register(Package)
     
 class Version(models.Model):
     package = models.ForeignKey(Package)
-    name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""", unique=True)
+    name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""")
     changelog = models.TextField(help_text="""<div class="help">A list of changes since the last release</div>""")
-    package_url = models.URLField(help_text="""<div class="help">This is a direct url to the package.<br />
-                                               File sharing sites such as mediafire or rapidshare will not work.<br />
-                                               If you cannot host the package yourself,<br />
-                                               it is suggested that you use <a href="http://omploader.org/">Omploader</a>.</div>""")
+    #package_url = models.URLField(help_text="""<div class="help">This is a direct url to the package.<br />
+    #                                           File sharing sites such as mediafire or rapidshare will not work.<br />
+    #                                           If you cannot host the package yourself,<br />
+    #                                           it is suggested that you use <a href="http://omploader.org/">Omploader</a>.</div>""")
+    package_file = models.FileField(upload_to="repository/packages/")
     creation_date = models.DateTimeField(auto_now=True, editable=False)
-    checksum = models.CharField(max_length=100, help_text="""<div class="help">The md5sum of the package. See <a href="http://www.openoffice.org/dev_docs/using_md5sums.html">this page</a> for details on how to get this.</div>""")
+    #checksum = models.CharField(max_length=100, help_text="""<div class="help">The md5sum of the package. See <a href="http://www.openoffice.org/dev_docs/using_md5sums.html">this page</a> for details on how to get this.</div>""")
+    checksum = models.CharField(max_length=100, editable=False)
     verified_safe = models.BooleanField(default=False)
     
     def __str__(self):
@@ -56,6 +58,22 @@ class Version(models.Model):
         return (datetime.datetime.now() + three_days_ago) <= self.creation_date
     def is_latest(self):
         return self.package.version_set.order_by("-name")[0].pk == self.pk
+    def calc_md5sum(self):
+        from django.core.files.storage import default_storage
+        from django.core.files.base import ContentFile
+        import hashlib
+        m = hashlib.md5()
+        f = default_storage.open(self.package_file.path)
+        f.open(mode="r")
+        while 1:
+            buf = f.read(4096)
+            if buf == "":
+                break;
+            m.update(buf)
+        f.close()
+        self.checksum = m.hexdigest()
+        self.save()
+        
 
 admin.site.register(Version)
 

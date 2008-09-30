@@ -75,7 +75,7 @@ def test_setup(**kwargs):
               name="%s.%s.%s" % (choice(range(1, 5)), choice(range(1, 50)), choice(range(1, 170))),
               package=package,
               changelog=text,
-              package_url="http://www.foo.com/bar.lucid.zip",
+              #package_url="http://www.foo.com/bar.lucid.zip",
               checksum= "".join([choice("abcdef0123456789") for x in range(1, 50)]),
               verified_safe=choice((True, False)),
             )

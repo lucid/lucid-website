@@ -5,6 +5,7 @@
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" media="screen" href="/site_media/pages/repository.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/image/resources/image.css" />
 <script type="text/javascript">
   dojo.require("lucidsite.repository");
 </script>
@@ -20,7 +21,7 @@
 <div class="text">
     {% if package.screenshot %}
         {% load thumbnail %}
-        <a href="/site_media/{{ package.screenshot }}">
+        <a href="/site_media/{{ package.screenshot }}" dojoType="dojox.image.Lightbox" title="Larger Screenshot of {{ package.name }}">
             <img class="screenshot" src="{% thumbnail package.screenshot 300x150 %}" />
         </a>
     {% endif%}
@@ -53,7 +54,7 @@
     {% include "repository/versionPage.html" %}
 </div>
 {% endif %}
-<div dojoType="dijit.TitlePane" open="false" title="All Versions">
+<div dojoType="dijit.TitlePane" class="all-versions" open="false" title="All Versions">
     <div class="packageList">
 	    {% if not package.get_versions_desc %}
 		    No versions available yet

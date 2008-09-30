@@ -162,9 +162,17 @@ img.screenshot {
 #featured-rotator {
     height: 250px;
     width: 500px;
-    margin: 0px auto 0px auto;
+    margin: 0px auto 8px auto;
+}
+
+#featured-rotator .dijitContentPane {
+    padding: 8px;
 }
 
 .learn-more-link {
     text-align: right;
+}
+
+.all-versions.dijitTitlePane {
+    clear: both;
 }

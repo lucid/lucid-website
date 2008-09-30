@@ -4,6 +4,7 @@ dojo.require("dijit.layout.TabContainer");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit.TitlePane");
 dojo.require("dojox.layout.RotatorContainer");
+dojo.require("dojox.image.Lightbox");
 dojo.require("dojox.fx");
 
 dojo.mixin(lucidsite.repository, {
