@@ -9,7 +9,8 @@
 
 {% block extrahead %}
 <link type="text/css" rel="stylesheet" href="/site_media/pages/repository.css" media="screen" />
-<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Rating/Rating.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/layout/resources/RotatorContainer.css" />
 <script type="text/javascript">
   dojo.require("lucidsite.repository");
 </script>
@@ -65,6 +66,27 @@
 	<a href="{% url repository-user-packages %}">My Packages</a>
 </div>
 {% endif %}
+<h2>Featured Packages</h2>
+<div dojoType="dojox.layout.RotatorContainer" id="featured-rotator" showTabs="true" cycles="4" suspendOnHover="true" autoStart="true">
+{% for version in featured %}
+    <div dojoType="dijit.layout.ContentPane" title="{{ forloop.counter }}">
+        <h2>{{ version.package.name }} ({{ version.name }})</h2>
+        {% if version.package.screenshot %}
+            {% load thumbnail %}
+            <a href="{{ version.package.get_absolute_url }}">
+                <img class="screenshot" src="{% thumbnail version.package.screenshot 200x200 %}" />
+            </a>
+        {% endif %}
+        <div>
+            {{ version.package.description|truncatewords:65 }}
+        </div>
+        <div class="learn-more-link">
+            <a href="{{ version.package.get_absolute_url }}">Learn More&rarr;</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
 <div dojoType="dijit.layout.TabContainer" id="index-package-tabs">
 	<div dojoType="dijit.layout.ContentPane" title="Top Rated">
 		<div class="packageList">

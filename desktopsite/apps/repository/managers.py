@@ -71,6 +71,24 @@ class RatingsManager(models.Manager):
         version_dict = Version.objects.in_bulk(version_ids)
         return [version_dict[version_id] for version_id in version_ids][:num]
     
+    def featured(self, num=5):
+        """
+        Returns ``num`` packages that are verified, sorted by recency, then rating.
+        """
+        from models import Version
+        
+        query = """SELECT version_id, AVG(score) * SUM(score) AS rating
+        FROM %s
+        GROUP BY version_id
+        ORDER BY rating DESC""" % self.model._meta.db_table
+        from django.db import connection
+        cursor = connection.cursor()
+        cursor.execute(query, [])
+
+        version_ids = [row[0] for row in cursor.fetchall()]
+        version_dict = Version.objects.filter(id__in=version_ids,verified_safe=1).order_by("-creation_date")
+        return version_dict[:num]
+
     def most_rated(self, num=5):
         """
         Returns the top ``num`` Snippets with net positive ratings, in

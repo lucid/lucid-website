@@ -158,3 +158,13 @@ img.screenshot {
 .package-stats {
     clear: both;
 }
+
+#featured-rotator {
+    height: 250px;
+    width: 500px;
+    margin: 0px auto 0px auto;
+}
+
+.learn-more-link {
+    text-align: right;
+}

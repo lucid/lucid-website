@@ -9,10 +9,12 @@ from django.template import RequestContext
 def index(request):
     latest = Version.objects.all().order_by("-creation_date")[:8]
     top_rated = Rating.objects.top_rated(8)
+    featured = Rating.objects.featured(5)
     return render_to_response('repository/index.html', {
         'categories': REPOSITORY_CATEGORIES,
         'latest': latest, 
-        'top_rated': top_rated                                                  
+        'top_rated': top_rated,
+        'featured': featured,
     }, context_instance=RequestContext(request))
     
 def byLetter(request, letter):

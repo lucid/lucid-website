@@ -21,7 +21,8 @@ class Package(models.Model):
         return self.version_set.order_by("-name")
     def user_is_maintainer(self):
         return threadlocals.get_current_user().pk == self.maintainer.pk or threadlocals.get_current_user().is_staff
-
+    def __str__(self):
+        return self.name
 admin.site.register(Package)
 
     

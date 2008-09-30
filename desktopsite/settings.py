@@ -113,6 +113,7 @@ INSTALLED_APPS = (
 ### DOJANGO ###
 DOJANGO_DOJO_DEBUG = False
 DOJANGO_DOJO_PROFILE = "local"
+DOJANGO_DOJO_VERSION = "1.2.0rc2"
 DOJANGO_DOJO_BUILD_PROFILES = {
     'lucidsite': {
         'profile_file': os.path.abspath(os.path.dirname(__file__)+'/dojango/lucidsite.profile.js'),
