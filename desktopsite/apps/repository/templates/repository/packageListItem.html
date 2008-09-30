@@ -8,7 +8,7 @@
 	</div>
     {% if version.package.screenshot %}
         {% load thumbnail %}
-        <img class="screenshot" src="{% thumbnail package.screenshot 60x30 %}" />
+        <img class="screenshot" src="{% thumbnail version.package.screenshot 60x30 %}" />
     {% endif %}
 	<div class="title">
 		<a href="{{ version.get_absolute_url }}">{{ version.package.name }} <span class="version">{{ version.name }}</span></a>

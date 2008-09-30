@@ -176,3 +176,13 @@ img.screenshot {
 .all-versions.dijitTitlePane {
     clear: both;
 }
+
+.management-links {
+    float: right;
+}
+
+.center-block {
+    text-align: center;
+    font-weight: bold;
+    margin: 100px auto 0px auto;
+}

@@ -11,11 +11,16 @@
 {% endblock %}
 
 {% block content %}
+{% if package.user_is_maintainer %}
+    <div class="management-links">
+		<a href="{% url repository-edit-version package.sysname,version.name %}">Edit</a>
+        |
+        <a href="{% url repository-delete-version package.sysname,version.name %}">Delete</a>
+    </div>
+{% endif %}
+
 	<h1>
 		{{ package.name }} {{ version.name }}
-		{% if package.user_is_maintainer %}
-			<a class="edit" href="{% url repository-edit-version package.sysname,version.name %}">(edit)</a>
-		{% endif %}
 	</h1>
 	{% include "repository/versionPage.html" %}
 	<a href="{{ package.get_absolute_url }}">&larr; Back to package</a>

@@ -102,7 +102,7 @@ def newPackage(request):
 @login_required
 def newVersion(request, sysname):
     package = get_object_or_404(Package, sysname=sysname)
-    if package.maintainer.pk != request.user.pk:
+    if not package.user_is_maintainer():
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
         form = VersionForm(request.POST, request.FILES)
@@ -131,7 +131,7 @@ def newVersion(request, sysname):
 @login_required
 def editPackage(request, sysname):
     package = get_object_or_404(Package, sysname=sysname)
-    if package.maintainer.pk != request.user.pk:
+    if not package.user_is_maintainer():
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
         form = PackageForm(request.POST, request.FILES, instance=package)
@@ -152,10 +152,10 @@ def editPackage(request, sysname):
 def editVersion(request, sysname, version):
     package = get_object_or_404(Package, sysname=sysname)
     version = get_object_or_404(Version, name=version, package=package)
-    if package.maintainer.pk != request.user.pk:
+    if not package.user_is_maintainer():
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
-        form = VersionForm(request.POST, request.FILES, instance=version)
+        form = EditVersionForm(request.POST, request.FILES, instance=version)
         if form.is_valid():
             version = form.save(commit=False)
             version.package = package
@@ -163,8 +163,38 @@ def editVersion(request, sysname, version):
             request.user.message_set.create(message='Changes Saved')
             return HttpResponseRedirect(version.get_absolute_url())
     else:
-        form = VersionForm(instance=version)
+        form = EditVersionForm(instance=version)
     return render_to_response("repository/form.html", context_instance=RequestContext(request, {
        'title': "Editing %s %s" % (package.name, version.name),
        'form': form,
     }))
+
+@login_required
+def deleteVersion(request, sysname, version):
+    package = get_object_or_404(Package, sysname=sysname)
+    version = get_object_or_404(Version, name=version, package=package)
+    if not package.user_is_maintainer():
+        return HttpResponseRedirect(package.get_absolute_url())
+    return doDeleteView(request, version, package.get_absolute_url())
+    
+@login_required
+def deletePackage(request, sysname):
+    package = get_object_or_404(Package, sysname=sysname)
+    if not package.user_is_maintainer():
+        return HttpResponseRedirect(package.get_absolute_url())
+    return doDeleteView(request, package, "/repository/")
+
+
+def doDeleteView(request, object, finishUrl):
+    if request.method == 'POST':
+       if request.POST.has_key("Yes"):
+           request.user.message_set.create(message='%s Deleted.' % object)
+           object.delete()
+           return HttpResponseRedirect(finishUrl)
+       else:
+           return HttpResponseRedirect(object.get_absolute_url())
+    else:
+        return render_to_response("repository/delete.html", context_instance=RequestContext(request, {
+            'object': object,
+        }))
+

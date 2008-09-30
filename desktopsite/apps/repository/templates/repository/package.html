@@ -12,11 +12,15 @@
 {% endblock %}
 
 {% block content %}
+{% if package.user_is_maintainer %}
+    <div class="management-links">
+		<a href="{% url repository-edit-package package.sysname %}">Edit</a>
+        |
+        <a href="{% url repository-delete-package package.sysname %}">Delete</a>
+    </div>
+{% endif %}
 <h1>
 	{{ package.name }}
-	{% if package.user_is_maintainer %}
-		<a class="edit" href="{% url repository-edit-package package.sysname %}">(edit)</a>
-	{% endif %}
 </h1>
 <div class="text">
     {% if package.screenshot %}

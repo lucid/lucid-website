@@ -10,3 +10,8 @@ class VersionForm(forms.ModelForm):
     class Meta:
         model=Version
         exclude=['package', 'verified_safe']
+
+class EditVersionForm(forms.ModelForm):
+    class Meta:
+        model=Version
+        exclude=['package', 'verified_safe', 'package_file']
