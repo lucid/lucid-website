@@ -5,6 +5,7 @@
 {% block dojango_header_extra %}
 <link rel="stylesheet" type="text/css" href="/site_media/main.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/site_media/print.css" media="print" />
+
 {% block extrahead %}{% endblock %}
 {% endblock %}
 
@@ -39,6 +40,8 @@
 				 - <a href="{% url accounts-logout %}">Logout</a>
 			{% else %}
 				<a href="{% url accounts-login %}">Login</a>
+                |
+                <a href="{% url registration_register %}">Register</a>
 			{% endif %}
 		</div>
 		<div id="search">
