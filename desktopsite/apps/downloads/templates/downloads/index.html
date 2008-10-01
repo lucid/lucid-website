@@ -1,0 +1,69 @@
+{% extends "base_content.html" %}
+
+{% block title %} - Package Index{% endblock %}
+
+{% load dojango_base %}
+{% if not DOJANGO %}
+	{% set_dojango_context %}
+{% endif %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/downloads.css" media="screen" />
+<script type="text/javascript">
+dojo.require("lucidsite.download");
+</script>
+{% endblock %}
+
+{% block content %}
+<h1>Downloads</h1>
+{% if release %}
+<h2>Latest Release - <a href="{{ release.get_absolute_url }}">{{ release.name }}</a></h2>
+<div class="subtitle">Released {{ release.date|date:"F j, Y" }}</div>
+<ul>
+    <li><a href="{{ release.get_absolute_url }}#release-notes">Release Notes</a></li>
+    <li><a href="{{ release.get_absolute_url }}#change-log">Change Log</a></li>
+</ul>
+<h3>Files</h3>
+{% include "downloads/file_table.html" %}
+{% else %}
+<h2>Latest Stable Release</h2>
+No release yet
+{% endif %}
+
+<h2>Other Releases</h2>
+<div dojoType="dijit.layout.TabContainer" id="other-releases-tabs">
+    <div dojoType="dijit.layout.ContentPane" title="Stable">
+        {% if other_stable %}
+        <ul>
+            {% for release in other_stable %}
+                <li>
+                    <a href="{{ release.get_absolute_url }}">
+                        {{ release.name }}
+                        ({{ release.date|date:"F j, Y" }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            No other stable releases
+        {% endif %}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" title="Unstable" {% if not other_stable %}selected="true"{% endif %}>
+        {% if other_unstable %}
+        <ul>
+            {% for release in other_unstable %}
+                <li>
+                    <a href="{{ release.get_absolute_url }}">
+                        {{ release.name }}
+                        ({{ release.date|date:"F j, Y" }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            No other unstable releases
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

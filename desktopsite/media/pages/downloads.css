@@ -1,0 +1,42 @@
+.subtitle {
+    font-style: italic;
+    color: #444;
+}
+
+.release-notes {
+    
+}
+
+.change-log {
+    font-style: monospace;
+}
+
+table.files {
+    width: 100%;
+}
+
+table.files thead th {
+    font-weight: bold;
+    background-color: #eee;
+    border-bottom: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    padding: 5px;
+}
+table.files th.name {
+    border-left: 1px solid #bbb;
+}
+
+table.files td {
+    background-color: #fff;
+    border-bottom: 1px dotted #666;
+    border-right: 1px dotted #666;
+    padding: 5px;
+}
+table.files td.name {
+    border-left: 1px dotted #666;
+}
+
+#other-releases-tabs {
+    height: 500px;
+}

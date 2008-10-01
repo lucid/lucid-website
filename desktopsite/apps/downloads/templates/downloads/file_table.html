@@ -1,0 +1,22 @@
+<div>
+    <table class="files" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="name">File</th>
+                <th>Hits</th>
+                <th>Checksum</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for file in release.file_set.all %}
+            <tr>
+                <td class="name"><a href="{{ file.get_download_url }}">{{ file.name }}</a></td>
+                <td>{{ file.download_count }}</td>
+                <td>{{ file.checksum }}</td>
+                <td>{{ file.size|filesizeformat }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

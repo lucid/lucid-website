@@ -47,6 +47,10 @@ MEDIA_ROOT = '%s/media/' % ROOT_PATH
 # Example: "http://media.lawrence.com"
 MEDIA_URL = '/site_media/'
 
+DOWNLOADS_ROOT = '%s/downloads/' % MEDIA_ROOT
+
+DOWNLOADS_URL = '%sdownloads/' % MEDIA_URL
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -90,6 +94,7 @@ TEMPLATE_DIRS = (
     "%s/apps/content/templates/" % ROOT_PATH,
     "%s/apps/accounts/templates/" % ROOT_PATH,
     "%s/apps/repository/templates/" % ROOT_PATH,
+    "%s/apps/downloads/templates/" % ROOT_PATH,
 )
 
 INSTALLED_APPS = (
@@ -105,6 +110,7 @@ INSTALLED_APPS = (
     'desktopsite.apps.blog',
     'desktopsite.apps.content',
     'desktopsite.apps.repository',
+    'desktopsite.apps.downloads',
     'dojango',
     'sorl.thumbnail',
 )

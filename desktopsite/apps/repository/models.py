@@ -30,7 +30,9 @@ class Package(models.Model):
         return self.name
 admin.site.register(Package)
 
-    
+   
+from desktopsite.apps.downloads.models import Release
+
 class Version(models.Model):
     package = models.ForeignKey(Package)
     name = models.CharField(max_length=100, help_text="""<div class="help">Example: 1.2.16-beta2</div>""")
@@ -44,6 +46,7 @@ class Version(models.Model):
     #checksum = models.CharField(max_length=100, help_text="""<div class="help">The md5sum of the package. See <a href="http://www.openoffice.org/dev_docs/using_md5sums.html">this page</a> for details on how to get this.</div>""")
     checksum = models.CharField(max_length=100, editable=False)
     verified_safe = models.BooleanField(default=False)
+    compatibility = models.ManyToManyField(Release, limit_choices_to={'published__exact':True})
     
     def __str__(self):
         return "%s %s" % (self.package.name, self.name)

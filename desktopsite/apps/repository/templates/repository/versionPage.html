@@ -23,6 +23,14 @@
 <div class="download">
 	<div class="link"><a rel="nofollow" href="{{ version.package_url }}">Download</a></div>
 	<div class="checksum">Checksum: <span class="hash">{{ version.checksum }}</span></div>
+    <div>
+        <b>Compatibility:</b>
+        <ul>
+            {% for rel in version.comptaibility %}
+                <li><a href="{{ rel.get_absolute_url }}">{{ rel.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% if version.verified_safe %}
 <p class="verified-text">

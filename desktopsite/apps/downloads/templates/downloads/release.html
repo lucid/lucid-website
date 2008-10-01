@@ -1,0 +1,30 @@
+{% extends "base_content.html" %}
+
+{% block title %} - Package Index{% endblock %}
+
+{% load dojango_base %}
+{% if not DOJANGO %}
+	{% set_dojango_context %}
+{% endif %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/downloads.css" media="screen" />
+{% endblock %}
+
+{% block content %}
+<h1>{{ release.name }}</h1>
+<div class="subtitle">Released {{ release.date|date:"F j, Y" }}</div>
+
+<h2>Download</h2>
+{% include "downloads/file_table.html" %}
+
+<h2 id="release-notes">Release Notes</h2>
+<div class="release-notes">
+{{ release.release_notes|linebreaks|urlize }}
+</div>
+
+<h2 id="change-log">Change Log</h2>
+<div class="change-log">
+{{ release.change_log|linebreaks|urlize }}
+</div>
+{% endblock %}

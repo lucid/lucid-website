@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     (r'^forum/', include('desktopsite.apps.snapboard.urls')),
     (r'^blog/', include('desktopsite.apps.blog.urls')),
     (r'^repository/', include('desktopsite.apps.repository.urls')),
+    (r'^download/', include('desktopsite.apps.downloads.urls')),
     (r'^dojango/', include('dojango.urls')),
     (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     ### TEMPORARY, REMOVE IN PRODUCTION SITE ###
