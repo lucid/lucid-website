@@ -1,0 +1,7 @@
+Your confirmation link to activate your account on Lucid's website is below.
+
+http://www.lucid-desktop.org/accounts/activate/{{ activation_key }}/
+    
+This link will expire in {{ expiration_days }} days.
+    
+If you have received this email by accident, please ignore it.

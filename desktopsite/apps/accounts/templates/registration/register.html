@@ -1,0 +1,23 @@
+{% extends "base_content.html" %}
+
+{% block title %} - User Registration{% endblock %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/accounts.css" media="screen" />
+{% endblock %}
+
+{% block content %}
+<h1>User Registration</h1>
+<form action="." method="POST">
+<p>
+</p>
+<table>
+    {{ form.as_table }}
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Create account" />
+        </td>
+    </tr>
+</table>
+</form>
+{% endblock %}

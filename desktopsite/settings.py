@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'desktopsite.apps.content',
     'desktopsite.apps.repository',
     'desktopsite.apps.downloads',
+    'desktopsite.apps.accounts',
     'dojango',
     'sorl.thumbnail',
 )
@@ -134,3 +135,6 @@ SNAP_MEDIA_PREFIX = MEDIA_URL+'/forum'
 
 ### SORL THUMBNAILS ###
 THUMBNAIL_SUBDIR = "thumbnails"
+
+### REGISTRATION ###
+ACCOUNT_ACTIVATION_DAYS = 2

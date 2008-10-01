@@ -1,4 +1,7 @@
 from django.conf.urls.defaults import *
+from django.views.generic.simple import direct_to_template
+
+from views import activate, register
 
 urlpatterns = patterns('',
     url(r'^accounts/profile/$', 'desktopsite.apps.accounts.views.current_user_profile', name="accounts-current-user-profile"),
@@ -12,4 +15,8 @@ urlpatterns = patterns('',
     url(r'^accounts/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', name="accounts-logout"),
     url(r'^user/(?P<username>[\w-]+)/$', 'desktopsite.apps.accounts.views.profile', name="accounts-profile"),
+
+    url(r'^accounts/activate/(?P<activation_key>\w+)/$', activate, name='registration_activate'),
+    url(r'^accounts/register/$', register, {'template_name': 'registration/register.html'}, name='registration_register'),
+    url(r'^accounts/register_done/$', direct_to_template, {'template': 'registration/register_done.html'}, name='registration_complete'),
 )
