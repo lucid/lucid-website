@@ -69,6 +69,8 @@ win.show();
         items: []
     }
 });
+dojo.connect(contactStore, "onNew", function() { contactStore.save(); });
+dojo.connect(contactStore, "onDelete", function() { contactStore.save(); });
 dojo.connect(contactStore, "onSet", function() { contactStore.save(); });</code></pre>
 <p>
     If you're experienced with Dojo, you'll notice that <code class="javascript">api.Registry</code> is a <code class="javascript">dojo.data</code> store. This store is unique, because it can store all of it's information on the server. The name of the store is a unique name, specific to your app. Two stores should never have the same name, so make sure you're descriptive when choosing the name of the store. We provide the store with our system name (contained in <code class="javascript">this.sysname</code>), so that one app won't override the contents of another app's store. You'll also notice that the store is saved every time it's data changes. You'll see the store in action later in the tutorial.
