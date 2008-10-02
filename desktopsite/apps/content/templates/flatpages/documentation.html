@@ -3,10 +3,26 @@
 {% block title %} - {{ flatpage.title }}{% endblock %}
 
 {% block extrahead %}
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/highlight/resources/highlight.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/highlight/resources/pygments/default.css" />
 <script type="text/javascript">
 	dojo.require("lucidsite.documentation");
 </script>
+<style type="text/css">
+    pre code {
+        display: block;
+    }
+    code {
+        display: inline;
+        overflow-x: show;
+        overflow-y: auto;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -33,6 +49,6 @@
 </div>
 <h3>Add a Comment</h3>
 <div>
-    {% render_comment_form for version %}
+    {% render_comment_form for flatpage %}
 </div>
 {% endblock %}
