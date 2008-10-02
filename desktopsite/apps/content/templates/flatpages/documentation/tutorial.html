@@ -173,7 +173,7 @@ removeContact: function(e){
     
     Here's the full application's code:
 </p>
-<pre><code class="javascript">dojo.provide("desktop.apps.Contacts");
+<pre><code class="javascript">dojo.provide("desktop.apps.MyContacts");
 dojo.require("dijit.Toolbar");
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.grid.cells.dijit");
@@ -181,7 +181,7 @@ dojo.require("dijit.form.TextBox");
 dojo.require("dijit.form.Button");
 api.addDojoCss("dojox/grid/resources/Grid.css");
 
-dojo.declare("desktop.apps.Contacts", desktop.apps._App, {
+dojo.declare("desktop.apps.MyContacts", desktop.apps._App, {
 	init: function(args) {
 		this.windows = [];
 		var win = new api.Window({
