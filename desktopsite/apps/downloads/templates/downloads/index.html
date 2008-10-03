@@ -1,6 +1,6 @@
 {% extends "base_content.html" %}
 
-{% block title %} - Package Index{% endblock %}
+{% block title %} - Download{% endblock %}
 
 {% load dojango_base %}
 {% if not DOJANGO %}
@@ -15,7 +15,7 @@ dojo.require("lucidsite.download");
 {% endblock %}
 
 {% block content %}
-<h1>Downloads</h1>
+<h1>Download</h1>
 {% if release %}
 <h2>Latest Release - <a href="{{ release.get_absolute_url }}">{{ release.name }}</a></h2>
 <div class="subtitle">Released {{ release.date|date:"F j, Y" }}</div>
