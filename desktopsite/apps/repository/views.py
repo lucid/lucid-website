@@ -106,21 +106,16 @@ def newVersion(request, sysname):
         return HttpResponseRedirect(package.get_absolute_url())
     if request.method == 'POST':
         form = VersionForm(request.POST, request.FILES)
+        form._requested_package = package
         is_valid = form.is_valid()
-        version_exists=True
-        try:
-            Version.objects.get(name=form.cleaned_data["name"], package=package)
-        except Version.DoesNotExist:
-            version_exists=False
-        if is_valid and not version_exists:
-            version = form.save(commit=False)
+
+        if is_valid:
+            version = form.save() #commit=False ommitted purposefully!
             version.package = package
-            version.save()
             version.calc_md5sum()
             request.user.message_set.create(message='New Version Created')
             return HttpResponseRedirect(version.get_absolute_url())
-        elif version_exists:
-            form.errors["name"] = ["Version with that name already exists"]
+
     else:
         form = VersionForm()
     return render_to_response("repository/form.html", context_instance=RequestContext(request, {
