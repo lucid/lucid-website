@@ -12,9 +12,9 @@ class PackageForm(forms.ModelForm):
 class VersionForm(forms.ModelForm):
     class Meta:
         model=Version
-        exclude=['name', 'package', 'verified_safe', 'compatibility']
+        exclude=['name', 'package', 'verified_safe', 'compatible']
     def clean_package_file(self):
-        self._compatibility_objs = []
+        self._compatible_objs = []
         file = self.cleaned_data["package_file"]
         #validate the package, pull some info
         try:
@@ -36,17 +36,17 @@ class VersionForm(forms.ModelForm):
                             raise forms.ValidationError("Uploaded package's sysname does not match the current package's sysname")
                 else:
                     raise forms.ValidationError("Package's meta.json missing a 'type' property")
-                if data.has_key("compatibility"):
-                    compat = data["compatibility"]
+                if data.has_key("compatible"):
+                    compat = data["compatible"]
                     for version in compat:
                         try:
                             release = Release.objects.get(name=version)
-                            self._compatibility_objs.append(release)
+                            self._compatible_objs.append(release)
                         except(Release.DoesNotExist):
-                            raise forms.ValidationError("Version %s specified in compatibility property does not exist" % version)
+                            raise forms.ValidationError("Version %s specified in compatible property does not exist" % version)
                             
                 else:
-                    raise forms.ValidationError("Package's meta.json missing a 'compatibility' property")
+                    raise forms.ValidationError("Package's meta.json missing a 'compatible' property")
                 if data.has_key("version"):
                     self.cleaned_data["name"] = data['version']
                     self.clean_name()
@@ -65,7 +65,7 @@ class VersionForm(forms.ModelForm):
         except Version.DoesNotExist:
             return self.cleaned_data["name"]
     def clean(self):
-        self.cleaned_data["compatibility"] = self._compatibility_objs
+        self.cleaned_data["compatibility"] = self._compatible_objs
         return self.cleaned_data
 
 class EditVersionForm(VersionForm):
