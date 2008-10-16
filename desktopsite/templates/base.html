@@ -1,10 +1,15 @@
 {% extends "dojango/base.html" %}
 
-{% block dojango_page_title %}Lucid Desktop{% block title-seperator %}{% endblock %}{% block title %}{% endblock %}{% endblock %}
+{% block dojango_page_title %}Lucid Desktop{% block title-seperator %}{% endblock %}{% block title %} - Free open source web desktop or webOS{% endblock %}{% endblock %}
 
 {% block dojango_header_extra %}
 <link rel="stylesheet" type="text/css" href="/site_media/main.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/site_media/print.css" media="print" />
+
+{# meta tags #}
+<meta name="description" content="Lucid is a free, open source web desktop, or webOS that gives you a portable, online workspace that you can use to store files, play media, and manage your office documents." />
+<meta name="keywords" content="webOS,desktop,office,web desktop,open source,open,free,software,web,dojo,javascript,programming" />
+{# end meta tags #}
 
 <script type="text/javascript">
     dojo.require("lucidsite.lucidsite");
