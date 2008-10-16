@@ -129,6 +129,9 @@ DOJANGO_DOJO_BUILD_PROFILES = {
     }
 }
 
+### BLOG ###
+AKISMET_API_KEY = "" #fill this in when setting up
+
 ### SNAPBOARD ###
 SNAP_PREFIX = "/forum";
 SNAP_MEDIA_PREFIX = MEDIA_URL+'/forum'

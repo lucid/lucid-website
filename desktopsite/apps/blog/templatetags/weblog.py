@@ -1,6 +1,6 @@
 import datetime
 from django import template
-from django_website.apps.blog.models import Entry
+from desktopsite.apps.blog.models import Entry
 
 register = template.Library()
 
