@@ -50,6 +50,6 @@ def file(request, release_name, file_name):
     release = get_object_or_404(Release, name=release_name, published=True)
     file = get_object_or_404(File, name=file_name, release=release)
     #there's a better way of doing this, but this way is easier...
-    file.download_count = file.download_count+1
-    file.save()
+    #file.download_count = file.download_count+1
+    #file.save()
     return HttpResponseRedirect(file.get_file_url())
