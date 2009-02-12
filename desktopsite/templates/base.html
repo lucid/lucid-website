@@ -27,7 +27,12 @@
 {% if messages %}
 <div class="message-set">
     {% for message in messages %}
-        <div>{{ message }}</div>
+        <div id="message-{{ forloop.counter }}">
+            <div class="message">
+                <div class="close" onclick="lucidsite.closeMsg('message-{{ forloop.counter }}');"></div>
+                <div>{{ message }}</div>
+            </div>
+        </div>
     {% endfor %}
 </div>
 {% endif %}

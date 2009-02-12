@@ -125,14 +125,30 @@ input.login {
 }
 
 .message-set {
-    background-color: #eee;
-    color: #000;
-    width: 300px;
-    margin: 4px auto 2px auto;
-    padding: 5px;
-    text-align: center;
 }
 
 .message-set div {
-    border-bottom: 1px dotted #aaa;
+    background-image: url('images/layout/msg-background.png');
+    color: #eee;
+    width: 100%;
+    height: 32px;
+    text-align: center;
+}
+
+.message-set div div.message {
+    line-height: 35px;
+}
+
+.message-set div div.close {
+    background-image: url('images/layout/close.png');
+    width: 12px;
+    height: 13px;
+    cursor: pointer;
+    float: right;
+    margin-top: 11px;
+    margin-right: 8px;
+}
+
+.message-set div div.close:hover {
+    background-image: url('images/layout/close-hover.png');
 }

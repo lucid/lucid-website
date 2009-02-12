@@ -37,7 +37,7 @@ SITE_ROOT = "http://www.lucid-project.org/"
 # to load the internationalization machinery.
 USE_I18N = True
 
-ROOT_PATH = "/home/HFLW/Projects/lucid/website/trunk/desktopsite"
+ROOT_PATH = "/home/HFLW/Projects/lucid-website/desktopsite/"
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
