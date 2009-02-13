@@ -39,10 +39,22 @@
 
 <div id="main">
 	<div id="header">
-		<div class="title">The Lucid Desktop Project</div>
-		<div>The open web desktop</div>
-		<div>www.lucid-desktop.org</div>
-	</div>
+        <div class="side left"></div>
+        <div class="side right"></div>
+        <div id="menu">
+            <div class="side left"></div>
+            <div class="side right"></div>
+            <ul>
+			    <li><a href="{% url content-index %}">Home</a></li>
+    			<li><a href="/download/">Download</a></li>
+	    		<li><a href="/documentation/">Documentation</a></li>
+		    	<li><a href="{% url blog-index %}">Blog</a></li>
+			    <li><a href="{% url forum-index %}">Community</a></li>
+    			<li><a href="{% url repository-index %}">Packages</a></li>
+	    		<li><a href="http://trac.lucid-desktop.org/">Code</a></li>
+		    </ul>
+        </div>
+    </div>
 	<div id="menubar">
 		<div id="login">
 			{% if user.is_authenticated %}
@@ -63,15 +75,7 @@
 				<input type="submit" value="Search" />
 			</form>
 		</div>
-		<ul>
-			<li><a href="{% url content-index %}">Home</a></li>
-			<li><a href="/download/">Download</a></li>
-			<li><a href="/documentation/">Documentation</a></li>
-			<li><a href="{% url blog-index %}">Blog</a></li>
-			<li><a href="{% url forum-index %}">Community</a></li>
-			<li><a href="{% url repository-index %}">Packages</a></li>
-			<li><a href="http://trac.lucid-desktop.org/">Code</a></li>
-		</ul>
+
 	</div>
 	<div id="content">
 		<div id="content-top">

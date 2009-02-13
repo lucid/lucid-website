@@ -2,126 +2,7 @@
 
 body {
 	text-align: center;
-	background: #000;
-}
-
-#main {
-	width: 750px;
-	margin: 0px auto 0px auto;
-}
-
-#header {
-	background: url('images/header.png') no-repeat;
-	height: 150px;
-}
-
-#header * {
-	display: none;
-}
-
-#menubar {
-	background: url('images/menubar.png') repeat-x;
-	height: 37px;
-	text-align: left;
-	color: white;
-	font-weight: bold;
-	font-size: 9pt;
-}
-
-#menubar ul {
-	list-style-type: none;
-	padding: 0px;
-	text-transform: uppercase;
-}
-
-.menu-item, #menubar ul li {
-	float: left;
-	background-repeat: no-repeat;
-	height: 37px;
-	margin-left: 12px;
-	padding-top: 10px;
-	text-shadow: 0 0 5px #333;
-}
-
-#menubar * a {
-	color: white;
-	text-decoration: none;
-}
-#menubar * a:hover {
-	color: #eee;
-}
-
-#search {
-	float: right;
-	padding: 6px 4px;
-	display: none;
-}
-
-#login {
-	float: right;
-	padding: 10px 8px 0 0;
-	width: 160px;
-	text-align: right;
-}
-
-.rightsidebar {
-	float: right;
-	width: 160px;
-	margin-left: 10px;
-}
-.content-rightsidebar {
-	margin-right: 170px;
-}
-
-#content {
-	background: url('images/content-background.png') repeat-y;
-	text-align: left;
-	margin: 10px auto 0px auto;
-	width: 727px;
-}
-
-#content-top {
-	background: url('images/content-top.png') no-repeat;
-	min-height: 745px;
-	padding: 10px;
-}
-
-#content-bottom {
-	background: url('images/content-bottom.png') no-repeat;
-	height: 12px;
-}
-
-#mainlogin {
-	margin: 0px auto 0px auto;
-	width: 212px;
-}
-
-#mainlogin form {
-	margin-top: 5px;
-}
-
-input.login {
-	float: right;
-}
-
-#footer {
-	min-height: 80px;
-}
-
-#footer .logo {
-	background: url('images/footer-logo.png') no-repeat;
-	width: 80px;
-	height: 80px;
-	float: left;
-}
-
-#footer .text {
-	color: #ccc;
-	border-left: 1px solid #ccc;
-	margin: 22px 22px 22px 5px;
-	padding-left: 10px;
-	min-height: 30px;
-	float: left;
+	background: #dfdfdf;
 }
 
 .message-set {
@@ -151,4 +32,78 @@ input.login {
 
 .message-set div div.close:hover {
     background-image: url('images/layout/close-hover.png');
+}
+
+#main {
+    background: #fff;
+    width: 90%;
+    text-align: left;
+    margin: 0 5% 0 5%;
+}
+
+#header {
+    background: url('images/layout/header-center.png') repeat-x;
+    height: 140px;
+    position: relative;
+}
+
+#header .side {
+    height: inherit;
+    width: 8px;
+}
+#header .side.left {
+    background: url('images/layout/header-left.png') no-repeat;
+    float: left;
+}
+
+#header .side.right {
+    background: url('images/layout/header-right.png') no-repeat;
+    float: right;
+}
+
+#menu {
+    background: url('images/layout/menu-center.png') repeat-x;
+    height: 39px;
+    position: absolute;
+    bottom: 0px;
+    right: 40px;
+    width: 470px;
+}
+
+#menu .side {
+    width: 13px;
+    height: inherit;
+}
+
+#menu .side.left {
+    background: url('images/layout/menu-left.png') no-repeat;
+    float: left;
+    margin-left: -13px;
+}
+
+#menu .side.right {
+    background: url('images/layout/menu-right.png') no-repeat;
+    float: right;
+    margin-right: -13px;
+}
+
+#menu * a {
+    color: #ccc;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#menu * a:hover {
+    color: #fff;
+}
+
+#menu ul {
+    margin: 12px -10px 0 -10px;
+    padding: 0 0 0 13px;
+    list-style: none;
+}
+
+#menu * li {
+    float: left;
+    padding-right: 10px;
 }
