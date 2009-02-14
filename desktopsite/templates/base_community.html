@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<div class="content withsidebar">
+    <div class="sidebar">
+        <h2>IRC</h2>
+        <ul>
+            <li><a href="irc://chat.freenode.net/lucid">chat.freenode.net #lucid</a></li>
+            <li><a href="http://www.mibbit.com/?server=irc.freenode.net&nick=&channel=%23lucid">Web-based IRC client</a></li>
+        </ul>
+        <h2>Social Networking</h2>
+        <ul>
+            <li><a href="http://twitter.com/LucidDesktop">Twitter</a></li>
+            <li><a href="http://identi.ca/LucidDesktop">Identi.ca</a></li>
+            <li><a href="http://vimeo.com/user1072130">Vimeo</a></li>
+            <li><a href="http://www.youtube.com/user/LucidDesktop">YouTube</a></li>
+
+        </ul>
+    </div>
+    <div class="center">
+    	{% block content %}
+        {% endblock %}
+    </div>
+    <div class="content-bottom"></div>
+</div>
+{% endblock %}

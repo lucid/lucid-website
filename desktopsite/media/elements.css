@@ -30,6 +30,10 @@ a.edit {
     float: right;
 }
 
+.nofloat .rssbutton {
+    float: none;
+}
+
 .rssbutton div {
     float: left;
 }

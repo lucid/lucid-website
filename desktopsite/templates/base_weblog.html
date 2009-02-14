@@ -13,9 +13,9 @@
 	    <h2>Archives</h2>
     	{% include "blog/archive_list.html" %}
 	    <h2>Feeds</h2>
-    	<ul>
-	    	<li><a href="/rss/weblog/">Blog Feed</a></li>
-    	</ul>
+        <a href="/rss/weblog/" class="nofloat">
+            {% include "rssbutton.html" %}
+        </a>
     </div>
     <div class="center">
     	{% block content %}
