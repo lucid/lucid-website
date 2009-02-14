@@ -3,11 +3,12 @@ body {
 }
 
 a, h1, h2, h3, h4, h5, h6 {
-	color: #237fce;
+    margin-top: 5px;
+	color: #0e56b9;
 }
 
 a:hover {
-	color: #6d6d6d;
+	color: #0e56b9;
 	text-decoration: none;
 }
 
@@ -17,4 +18,10 @@ a.edit {
 	bottom: 3px;
 	text-decoration: none;
 	margin-left: 5px;
+}
+
+#intro h1 {
+    font-size: 28pt;
+    margin-top: 0px;
+    padding-top: 10px;
 }

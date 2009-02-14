@@ -180,6 +180,54 @@ body {
     margin: 5px -5px 0 -5px;
 }
 
+#intro {
+    position: relative;
+    margin: -10px 15px 5px 15px;
+    padding-bottom: 10px;
+    background: #e5e5e5;
+    min-height: 10px;
+}
+
+#intro .side {
+    width: 8px;
+    height: 9px;
+    position: absolute;
+    bottom: 0px;
+}
+
+#intro .side.left {
+    left: 0px;
+    background: url('images/layout/intro-left.png') no-repeat;
+}
+
+#intro .side.right {
+    right: 0px;
+    background: url('images/layout/intro-right.png') no-repeat;
+}
+
+.rssbutton {
+    float: right;
+}
+
+.rssbutton div {
+    float: left;
+}
+
+.rssbutton .text {
+    line-height: 26px;
+    margin-right: 5px;
+}
+
+.rssicon {
+    background: url('images/layout/rss-icon.png');
+    width: 27px;
+    height: 27px;
+}
+
+a .rssicon {
+    text-decoration: none;
+}
+
 #footer {
     color: #888;
     text-align: center;

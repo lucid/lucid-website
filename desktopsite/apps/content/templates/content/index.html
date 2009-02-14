@@ -7,7 +7,19 @@
 
 {% block main %}
 <div class="content">
-    <div id="download">
+    <div id="intro">
+        <h1>Open Source Web Desktop</h1>
+        <p>
+           <b>Lucid</b> is a <b>free, open source web based desktop</b>, <b>web desktop</b>, or <b>webOS</b> that gives you a portable, online workspace that you can use to store files, play media, and manage your office documents. The goal of the project is to provide an application platform that integrates seamlessly with the web, existing desktop technologies, and mobile devices.
+        </p>
+        <div class="side right"></div>
+        <div class="side left"></div>
+    </div>
+    <div class="content-bottom"></div>
+</div>
+
+{% comment %}
+<div id="download">
 	    <h2>Download</h2>
     	<a href="/download/">Lucid 1.0</a>
 	    <ul>
@@ -28,11 +40,13 @@
     	</p>
 	    <a href="/overview/">Learn More</a> | <a href="/demo/">Try it out</a>
     </div>
-    <div class="content-bottom"></div>
-</div>
+{% endcomment %}
 
 <div class="content-separate">
     <div id="blogposts">
+        <a href="/rss/weblog/">
+            {% include "rssbutton.html" %}
+        </a>
 	    <h2>Recent Blog Posts</h2>
     	{% load comments latestblogentry %}
 	    {% get_latest_blog_entries 4 as latest_entries %}
