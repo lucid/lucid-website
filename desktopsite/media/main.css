@@ -205,29 +205,6 @@ body {
     background: url('images/layout/intro-right.png') no-repeat;
 }
 
-.rssbutton {
-    float: right;
-}
-
-.rssbutton div {
-    float: left;
-}
-
-.rssbutton .text {
-    line-height: 26px;
-    margin-right: 5px;
-}
-
-.rssicon {
-    background: url('images/layout/rss-icon.png');
-    width: 27px;
-    height: 27px;
-}
-
-a .rssicon {
-    text-decoration: none;
-}
-
 #footer {
     color: #888;
     text-align: center;
