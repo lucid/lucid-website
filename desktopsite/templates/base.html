@@ -41,6 +41,31 @@
 	<div id="header">
         <div class="side left"></div>
         <div class="side right"></div>
+        <a href="/" title="Lucid Logo">
+            <div id="logo">logo</div>
+        </a>
+        
+        <div id="login">
+			{% if user.is_authenticated %}
+				<a href="{% url accounts-current-user-profile %}">{{ user.username }}</a>
+				{% if user.is_staff %}
+				<a href="{% url admin "" %}" title="Administration Panel">(admin)</a>
+				{% endif %}
+				 - <a href="{% url accounts-logout %}">Logout</a>
+			{% else %}
+				<a href="{% url accounts-login %}">Login</a>
+                |
+                <a href="{% url registration_register %}">Register</a>
+			{% endif %}
+		</div>
+        
+        <div id="search">
+			<form method="post" action="/search/">
+				<input class="submit" type="submit" value="Search" />
+				<input class="textbox" type="text" name="text" onfocus="lucidsite.sbox(this);" onblur="lucidsite.sbox(this);" />
+			</form>
+		</div>
+
         <div id="menu">
             <div class="side left"></div>
             <div class="side right"></div>
@@ -55,41 +80,14 @@
 		    </ul>
         </div>
     </div>
-	<div id="menubar">
-		<div id="login">
-			{% if user.is_authenticated %}
-				<a href="{% url accounts-current-user-profile %}">{{ user.username }}</a>
-				{% if user.is_staff %}
-				<a href="{% url admin "" %}" title="Administration Panel">(admin)</a>
-				{% endif %}
-				 - <a href="{% url accounts-logout %}">Logout</a>
-			{% else %}
-				<a href="{% url accounts-login %}">Login</a>
-                |
-                <a href="{% url registration_register %}">Register</a>
-			{% endif %}
-		</div>
-		<div id="search">
-			<form method="post" action="/search/">
-				<input type="text" name="text" />
-				<input type="submit" value="Search" />
-			</form>
-		</div>
-
-	</div>
-	<div id="content">
-		<div id="content-top">
-			{% block main %}
-			{% endblock %}
-		</div>
-		<div id="content-bottom"></div>
-	</div>
-	<div id="footer">
-		<div class="logo"></div>
-		<div class="text">
-			© 2006-{% now "Y" %} Dojo Foundation<br />
-			All Rights Reserved
-		</div>
-	</div>
+	{% block main %}
+	{% endblock %}
+    	<div id="footer" class="content-separate">
+		    <div class="text">
+			    © 2006-{% now "Y" %} Dojo Foundation<br />
+	    		All Rights Reserved
+    		</div>
+    	</div>
+    </div>
 </div>
 {% endblock %}

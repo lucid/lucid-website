@@ -17,6 +17,16 @@ lucidsite = {
                 }).play();
             }
         }).play();
+    },
+    sbox: function(node){
+        node = dojo.byId(node);
+        var str = "Search";
+        if(node.value == ""){
+            node.value = str;
+        }
+        else if(node.value == str){
+            node.value = "";
+        }
     }
 };
 
@@ -24,4 +34,7 @@ dojo.addOnLoad(function() {
     var tracker = new dojox.analytics.Urchin({ 
 		acct:"UA-5887536-1"
 	});
+    dojo.query("#search .textbox").forEach(function(node){
+        lucidsite.sbox(node);
+    });
 });

@@ -1,44 +1,51 @@
-{% extends "base_content.html" %}
+{% extends "base.html" %}
 
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="/site_media/pages/index.css" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
 {% endblock %}
 
-{% block content %}
-<div id="download">
-	<h2>Download</h2>
-	<a href="/download/">Lucid 1.0</a>
-	<ul>
-		<li><a href="/download/#release-notes">Release Notes</a></li>
-		<li><a href="/download/#license">License</a></li>
-	</ul>
-	<h2>Documentation</h2>
-	<ul>
-		<li><a href="/documentation/#users">For Users</a></li>
-		<li><a href="/documentation/#developers">For Developers</a></li>
-	</ul>
+{% block main %}
+<div class="content">
+    <div id="download">
+	    <h2>Download</h2>
+    	<a href="/download/">Lucid 1.0</a>
+	    <ul>
+		    <li><a href="/download/#release-notes">Release Notes</a></li>
+    		<li><a href="/download/#license">License</a></li>
+	    </ul>
+    	<h2>Documentation</h2>
+	    <ul>
+		    <li><a href="/documentation/#users">For Users</a></li>
+    		<li><a href="/documentation/#developers">For Developers</a></li>
+	    </ul>
+    </div>
+    <div id="intro">
+	    <h1>What's Lucid?</h1>
+    	<p>
+	    	Lucid is a powerful web desktop built using the Dojo Toolkit.
+		    It focuses on core functionality, and a good experience for application developers.
+    	</p>
+	    <a href="/overview/">Learn More</a> | <a href="/demo/">Try it out</a>
+    </div>
+    <div class="content-bottom"></div>
 </div>
-<div id="intro">
-	<h1>What's Lucid?</h1>
-	<p>
-		Lucid is a powerful web desktop built using the Dojo Toolkit.
-		It focuses on core functionality, and a good experience for application developers.
-	</p>
-	<a href="/overview/">Learn More</a> | <a href="/demo/">Try it out</a>
-</div>
-<div id="blogposts">
-	<h2>Recent Blog Posts</h2>
-	{% load comments latestblogentry %}
-	{% get_latest_blog_entries 4 as latest_entries %}
+
+<div class="content-separate">
+    <div id="blogposts">
+	    <h2>Recent Blog Posts</h2>
+    	{% load comments latestblogentry %}
+	    {% get_latest_blog_entries 4 as latest_entries %}
+    	
+	    {% for latest_entry in latest_entries %}
+            {% get_comment_count for latest_entry as comment_count %}.
+	        <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
+	        <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
+    	    {{ latest_entry.summary }}
+	        <p class="more"><a href="{{ latest_entry.get_absolute_url }}">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
+    	{% endfor %}
 	
-	{% for latest_entry in latest_entries %}
-        {% get_comment_count for latest_entry as comment_count %}.
-	    <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
-	    <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
-	    {{ latest_entry.summary }}
-	    <p class="more"><a href="{{ latest_entry.get_absolute_url }}">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
-	{% endfor %}
-	
+    </div>
+    <div class="content-bottom"></div>
 </div>
 {% endblock %}

@@ -35,7 +35,6 @@ body {
 }
 
 #main {
-    background: #fff;
     width: 90%;
     text-align: left;
     margin: 0 5% 0 5%;
@@ -59,6 +58,61 @@ body {
 #header .side.right {
     background: url('images/layout/header-right.png') no-repeat;
     float: right;
+}
+
+#logo {
+    float: left;
+    border: 1px dotted #ddd;
+    color: #ddd;
+    width: 300px;
+    height: 100px;
+}
+
+#login {
+    float: right;
+    margin: 5px 10px 0 0;
+    color: #ddd;
+}
+
+#login a {
+    color: #ddd;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#login a:hover {
+    color: #fff;
+}
+
+#search {
+    display: none; /* search doesn't work yet */
+    float: right;
+    background: url('images/layout/search.png');
+    width: 275px;
+    height: 32px;
+    position: absolute;
+    top: 45px;
+    right: 30px;
+}
+
+#search .textbox {
+    border: 0px;
+    margin: 9px 0 0 45px;
+    height: 20px;
+    width: 190px;
+    background: none;
+    color: #555;
+}
+
+#search .submit {
+    float: right;
+    margin: 4px 6px 0 0;
+    border: 0px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity = 0);
 }
 
 #menu {
@@ -106,4 +160,27 @@ body {
 #menu * li {
     float: left;
     padding-right: 10px;
+}
+
+.content-separate {
+    background: #fff;
+    border-top: 1px solid #d6d6d6;
+    margin-top: 20px;
+    padding: 5px 5px 0 5px;
+}
+
+.content {
+    padding: 10px 5px 0 5px;
+    background: #fff;
+}
+
+.content-bottom {
+    height: 3px;
+    background: url('images/layout/content-bottom.png') repeat-x;
+    margin: 5px -5px 0 -5px;
+}
+
+#footer {
+    color: #888;
+    text-align: center;
 }
