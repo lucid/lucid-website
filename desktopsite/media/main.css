@@ -61,11 +61,10 @@ body {
 }
 
 #logo {
+    background: url('images/layout/logo.png') no-repeat;
     float: left;
-    border: 1px dotted #ddd;
-    color: #ddd;
-    width: 300px;
-    height: 100px;
+    width: 275px;
+    height: 140px;
 }
 
 #login {

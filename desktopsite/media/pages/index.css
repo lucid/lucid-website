@@ -1,13 +1,18 @@
-#intro {
-}
-
-#download {
-	float: right;
-	width: 180px;
-	margin-left: 5px;
-}
-
 #blogposts {
 	padding-top: 5px;
 	clear: both;
+}
+
+.slideshow {
+    float: left;
+    margin-top: 15px;
+    margin-left: 6px;
+}
+
+.intro-content {
+    margin-left: 500px;
+}
+
+.slideShowTitle {
+    display: none;
 }
