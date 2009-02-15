@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.comments.signals import comment_was_posted
 from django.utils.encoding import smart_str
+from desktopsite import settings
 
 class Entry(models.Model):
     pub_date = models.DateTimeField()
