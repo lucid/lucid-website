@@ -7,6 +7,7 @@ from desktopsite.apps.snapboard.models import SnapboardProfile
 from desktopsite.apps.accounts.forms import *
 from django.contrib.auth.forms import *
 from django.core.urlresolvers import reverse
+from desktopsite import settings
 
 def activate(request, activation_key,
              template_name='registration/activate.html',
