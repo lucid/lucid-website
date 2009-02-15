@@ -54,8 +54,9 @@ a .rssicon {
 }
 
 .button-row {
-    min-height: 78px;
-    text-align: center;
+    height: 78px;
+    width: 422px;
+    margin: auto;
 }
 
 .button-row div {
