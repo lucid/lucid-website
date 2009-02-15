@@ -44,6 +44,7 @@ body {
     background: url('images/layout/header-center.png') repeat-x;
     height: 140px;
     position: relative;
+    margin: 0 8px;
 }
 
 #header .side {
@@ -53,11 +54,13 @@ body {
 #header .side.left {
     background: url('images/layout/header-left.png') no-repeat;
     float: left;
+    margin-left: -8px;
 }
 
 #header .side.right {
     background: url('images/layout/header-right.png') no-repeat;
     float: right;
+    margin-right: -8px;
 }
 
 #logo {
