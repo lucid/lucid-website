@@ -63,6 +63,11 @@ a .rssicon {
     float: left;
 }
 
+.link-row {
+    width: 422px;
+    margin: auto;
+}
+
 .download-button {
     background: url('images/layout/download-button.png') no-repeat;
     width: 200px;
