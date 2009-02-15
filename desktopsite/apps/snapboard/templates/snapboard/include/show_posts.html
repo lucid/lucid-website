@@ -44,7 +44,7 @@
 
             {% if post.avatar %}
 				<a href="{% url accounts-profile post.user.username %}">
-                    <img src="{{ SNAP_MEDIA_PREFIX }}/{{ post.avatar }}" />
+                    <img src="/site_media/{{ post.avatar }}" />
                 </a>
             {% endif %}
             <b>
