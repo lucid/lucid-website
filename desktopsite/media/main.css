@@ -50,6 +50,7 @@ body {
 #header .side {
     height: inherit;
     width: 8px;
+    height: 140px;
 }
 #header .side.left {
     background: url('images/layout/header-left.png') no-repeat;
