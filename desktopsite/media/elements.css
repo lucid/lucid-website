@@ -21,7 +21,7 @@ a.edit {
 }
 
 #intro h1 {
-    font-size: 28pt;
+    font-size: 25pt;
     margin-top: 0px;
     padding-top: 10px;
 }
@@ -54,7 +54,8 @@ a .rssicon {
 }
 
 .button-row {
-    min-height: 99px;
+    min-height: 78px;
+    text-align: center;
 }
 
 .button-row div {
@@ -63,29 +64,30 @@ a .rssicon {
 
 .download-button {
     background: url('images/layout/download-button.png') no-repeat;
-    width: 253px;
-    height: 99px;
+    width: 200px;
+    height: 78px;
     position: relative;
 }
 
 .download-button div {
     position: absolute;
-    top: 58px;
-    left: 45px;
-    color: #fff;
+    top: 45px;
+    left: 36px;
+    color: #efefef;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .demo-button {
     background: url('images/layout/demo-button.png') no-repeat;
-    width: 253px;
-    height: 99px;
+    width: 200px;
+    height: 78px;
 }
 
 .separator {
     background: url('images/layout/separator.png') no-repeat;
-    height: 96px;
+    height: 75px;
     width: 2px;
     margin: 3px 10px;
 }

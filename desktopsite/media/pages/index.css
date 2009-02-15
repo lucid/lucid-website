@@ -5,11 +5,12 @@
 
 .slideshow {
     float: left;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .intro-content {
-    margin-left: 348px;
+    margin-left: 400px;
+    padding-left: 8px;
 }
 
 .slideShowTitle {
