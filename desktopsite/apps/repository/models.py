@@ -10,7 +10,7 @@ class Package(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     screenshot = models.ImageField(upload_to="repository/screenshots/", blank=True, null=True)
-    url = models.URLField("Homepage")
+    url = models.URLField("Homepage", blank=True, null=True)
     maintainer = models.ForeignKey(User)
     category = models.CharField(max_length=100, choices=REPOSITORY_CATEGORIES)
     license = models.CharField(max_length=100)
