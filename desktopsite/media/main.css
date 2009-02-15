@@ -79,7 +79,7 @@ body {
 
 #login a {
     color: #ddd;
-    font-weight: bold;
+    font-weight: 800;
     text-decoration: none;
 }
 
@@ -148,7 +148,7 @@ body {
 
 #menu * a {
     color: #ccc;
-    font-weight: bold;
+    font-weight: 800;
     text-decoration: none;
 }
 
