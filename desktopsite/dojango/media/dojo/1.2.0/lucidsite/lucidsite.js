@@ -1,5 +1,6 @@
 dojo.provide("lucidsite.lucidsite");
 dojo.require("dojox.analytics.Urchin");
+dojo.require("dijit._base");
 
 lucidsite = {
     closeMsg: function(node){

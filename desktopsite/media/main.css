@@ -125,6 +125,7 @@ body {
 
 #menu .side {
     width: 13px;
+    height: 39px;
     height: inherit;
 }
 
@@ -158,7 +159,7 @@ body {
 
 #menu * li {
     float: left;
-    padding-right: 10px;
+    padding-right: 9px;
 }
 
 .content-separate {
@@ -185,6 +186,11 @@ body {
     padding: 0 10px 10px 10px;
     background: #e5e5e5;
     min-height: 10px;
+}
+
+.dj_ie #intro {
+    margin-top: 0px;
+    top: -10px;
 }
 
 #intro .side {
@@ -215,6 +221,10 @@ body {
     width: 200px;
     height: auto;
     padding-left: 15px;
+}
+
+.dj_ie .sidebar {
+    position: relative;
 }
 
 #footer {
