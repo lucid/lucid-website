@@ -79,7 +79,7 @@ body {
 
 #login a {
     color: #ddd;
-    font-weight: 800;
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -148,8 +148,20 @@ body {
 
 #menu * a {
     color: #ccc;
-    font-weight: 800;
+    font-weight: 700;
     text-decoration: none;
+}
+
+.dj_safari #menu * a {
+    font-weight: 550;
+    font-size: 11px;
+    padding-right: 3px;
+    margin-top: 4px;
+}
+
+.dj_safari #menu * li:last-child {
+    padding-right: 0px;
+    margin-left: -1px;
 }
 
 #menu * a:hover {
