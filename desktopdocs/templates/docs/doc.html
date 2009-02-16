@@ -1,0 +1,150 @@
+{% extends "base_docs.html" %}
+
+{% block title %}{{ doc.title }} | Django Documentation{% endblock %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <style type="text/css" media="screen">
+    #docs-search {
+      color: #000;
+      float: right;
+    }
+    #docs-search form {
+      font-size: 92%;
+      margin: 0;
+      padding: 1em 1em 0;
+      white-space: nowrap;
+    }
+    form.search ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    form.search li {
+      display: inline;
+      padding-right: 1em;
+    }
+    form.search .query {
+      width: 18em;
+    }
+    div#old-docs-warning {
+      background-color:#FFFFAA;
+      font-size:1.2em;
+      line-height:1.3em;
+      border: 2px solid #d00;
+      padding: .5em;
+      margin-top: 1em;
+    }
+    div#old-docs-warning h3, div#old-docs.warning p {
+      margin-top: 0;
+      padding: 0.2em 0;
+      color: black;
+    }
+  </style>
+  <link rel="stylesheet" href="http://media.djangoproject.com/css/pygments.css" type="text/css" />
+{% endblock %}
+
+{% block billboard %}
+  <h2><a href="{{ home }}">Django documentation</a></h2>
+{% endblock %}
+
+{% block content %}
+
+{% block body %}
+  {% if redirect_from %}
+    <div id="old-docs-warning">
+      <h3>Welcome to the new documentation.</h3>
+      <p>
+        We've recently reorganized the documentation, and you requested an
+        out-of-date page. We've tried to redirect you to the right place, but we
+        might have gotten it wrong. If you can't find what you're looking for
+        here, you might try <a href="{{ home }}/search/">searching for it</a>.
+      </p>
+    </div>
+  {% endif %}
+  {{ doc.body|safe }}
+{% endblock %}
+
+<div id="content-secondary">
+  <h2 id="comments">Questions/Feedback</h2>
+  <p>Having trouble? We'd like to help!</p>
+  <ul>
+    <li>
+      Try the <a href="/en/dev/faq/">FAQ</a> — it's got answers to many common
+      questions.
+    </li>
+    <li>
+      Search for information in the <a
+      href="http://groups.google.com/group/django-users/">archives of the
+      django-users mailing list</a>, or <a
+      href="http://groups.google.com/group/django-users/">post a question</a>.
+    </li>
+    <li>
+      Ask a question in the <a href="irc://irc.freenode.net/">#django IRC
+      channel</a>, or search the <a href="http://oebfare.com/logger/django/">IRC
+      logs</a> to see if its been asked before.
+    </li>
+    <li>
+      If you notice errors with this documentation, please <a
+      href="http://code.djangoproject.com/simpleticket?component=Documentation">
+      open a ticket</a> and let us know! Please only use the ticket tracker for
+      criticisms and improvements on the docs. For tech support, use the
+      resources above.
+    </li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block content-related %}
+  {% block toc-wrapper %}
+    <h2>Contents</h2>
+    {% block toc %}
+      {{ doc.toc|safe }}
+    {% endblock %}
+  {% endblock %}
+  
+  {% block search %}
+    <h2>Search</h2>
+    {% load docs %}
+    {% search_form %}
+  {% endblock %}
+  
+  {% block browse-wrapper %}
+    <h2>Browse</h2>
+    <ul>
+      {% block browse %}
+        {% if doc.prev %}
+          <li>Prev: <a href="{{ doc.prev.link }}">{{ doc.prev.title }}</a></li>
+        {% endif %}
+        {% if doc.next %}
+          <li>Next: <a href="{{ doc.next.link }}">{{ doc.next.title }}</a></li>
+        {% endif %}
+        <li><a href="{{ home }}contents/">Table of contents</a></li>
+        {% for doc, title, accesskey, shorttitle in env.rellinks %}
+          <li><a href="{{ home }}{{ doc }}/">{{ title }}</a></li>
+        {% endfor %}
+      {% endblock %}
+    </ul>
+  {% endblock %}
+  
+  {% block breadcrumbs-wrapper %}
+    <h2>You are here:</h2>
+    <ul>
+      {% block breadcrumbs %}
+        <li>
+          <a href="{{ home }}">{{ env.docstitle }}</a>
+          {% for p in doc.parents %}
+            <ul><li><a href="{{ p.link }}">{{ p.title|safe }}</a>
+          {% endfor %}
+          <ul><li>{% block current-page-title %}{{ doc.title|safe }}{% endblock %}</li></ul>
+          {% for p in doc.parents %}</li></ul>{% endfor %}
+        </li>
+      {% endblock %}
+    </ul>
+  {% endblock %}
+  
+  {% block last-update-wrapper %}
+    <h3>Last update:</h3>
+    <div>{{ update_date|date:"F j, Y, P" }} (<a href="http://www.timeanddate.com/worldclock/city.html?n=64">CDT</a>)</div>
+  {% endblock %}
+{% endblock %}
