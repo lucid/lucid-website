@@ -9,7 +9,8 @@ a, h1, h2, h3, h4, h5, h6 {
 
 dl {
     margin-bottom: 15px;
-    clear: both;
+    /*clear: both;*/
+    clear: left;
 }
 
 dd p {

@@ -183,18 +183,18 @@ body {
     background: #fff;
     border-top: 1px solid #d6d6d6;
     margin-top: 20px;
-    padding: 5px 5px 0 5px;
+    padding: 5px 10px 0 10px;
 }
 
 .content {
-    padding: 10px 5px 0 5px;
+    padding: 10px 10px 0 10px;
     background: #fff;
 }
 
 .content-bottom {
     height: 3px;
     background: url('images/layout/content-bottom.png') repeat-x;
-    margin: 5px -5px 0 -5px;
+    margin: 5px -10px 0 -10px;
     clear: both;
 }
 
@@ -231,7 +231,7 @@ body {
 .content.withsidebar .center {
     background: url('images/layout/sidebar-separator.png') repeat-y top right #fff;
     margin: -20px 215px -5px 0;
-    padding: 20px 10px 20px 0;
+    padding: 20px 20px 20px 0;
     min-height: 350px;
 }
 
