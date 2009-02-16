@@ -195,6 +195,7 @@ body {
     height: 3px;
     background: url('images/layout/content-bottom.png') repeat-x;
     margin: 5px -5px 0 -5px;
+    clear: both;
 }
 
 #intro {
@@ -231,6 +232,7 @@ body {
     background: url('images/layout/sidebar-separator.png') repeat-y top right #fff;
     margin: -20px 215px -5px 0;
     padding: 20px 10px 20px 0;
+    min-height: 250px;
 }
 
 .sidebar {
