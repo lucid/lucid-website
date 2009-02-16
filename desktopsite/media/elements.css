@@ -7,6 +7,15 @@ a, h1, h2, h3, h4, h5, h6 {
 	color: #0e56b9;
 }
 
+h2 a.headerlink {
+    display: none;
+    text-decoration: none;
+}
+
+h2:hover a.headerlink {
+    display: inline;
+}
+
 dl {
     margin-bottom: 15px;
     /*clear: both;*/
