@@ -27,72 +27,16 @@
     form.search .query {
       width: 18em;
     }
-    div#old-docs-warning {
-      background-color:#FFFFAA;
-      font-size:1.2em;
-      line-height:1.3em;
-      border: 2px solid #d00;
-      padding: .5em;
-      margin-top: 1em;
-    }
-    div#old-docs-warning h3, div#old-docs.warning p {
-      margin-top: 0;
-      padding: 0.2em 0;
-      color: black;
-    }
   </style>
-  <link rel="stylesheet" href="http://media.djangoproject.com/css/pygments.css" type="text/css" />
-{% endblock %}
-
-{% block billboard %}
-  <h2><a href="{{ home }}">Django documentation</a></h2>
+  <link rel="stylesheet" href="/site_media/pygments.css" type="text/css" />
 {% endblock %}
 
 {% block content %}
 
 {% block body %}
-  {% if redirect_from %}
-    <div id="old-docs-warning">
-      <h3>Welcome to the new documentation.</h3>
-      <p>
-        We've recently reorganized the documentation, and you requested an
-        out-of-date page. We've tried to redirect you to the right place, but we
-        might have gotten it wrong. If you can't find what you're looking for
-        here, you might try <a href="{{ home }}/search/">searching for it</a>.
-      </p>
-    </div>
-  {% endif %}
   {{ doc.body|safe }}
 {% endblock %}
 
-<div id="content-secondary">
-  <h2 id="comments">Questions/Feedback</h2>
-  <p>Having trouble? We'd like to help!</p>
-  <ul>
-    <li>
-      Try the <a href="/en/dev/faq/">FAQ</a> — it's got answers to many common
-      questions.
-    </li>
-    <li>
-      Search for information in the <a
-      href="http://groups.google.com/group/django-users/">archives of the
-      django-users mailing list</a>, or <a
-      href="http://groups.google.com/group/django-users/">post a question</a>.
-    </li>
-    <li>
-      Ask a question in the <a href="irc://irc.freenode.net/">#django IRC
-      channel</a>, or search the <a href="http://oebfare.com/logger/django/">IRC
-      logs</a> to see if its been asked before.
-    </li>
-    <li>
-      If you notice errors with this documentation, please <a
-      href="http://code.djangoproject.com/simpleticket?component=Documentation">
-      open a ticket</a> and let us know! Please only use the ticket tracker for
-      criticisms and improvements on the docs. For tech support, use the
-      resources above.
-    </li>
-  </ul>
-</div>
 {% endblock %}
 
 {% block content-related %}
