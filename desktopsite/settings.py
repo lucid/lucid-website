@@ -95,6 +95,7 @@ TEMPLATE_DIRS = (
     "%s/apps/accounts/templates/" % ROOT_PATH,
     "%s/apps/repository/templates/" % ROOT_PATH,
     "%s/apps/downloads/templates/" % ROOT_PATH,
+    "%s/apps/desktopdocs/templates/" % ROOT_PATH,
 )
 
 INSTALLED_APPS = (
@@ -112,6 +113,7 @@ INSTALLED_APPS = (
     'desktopsite.apps.repository',
     'desktopsite.apps.downloads',
     'desktopsite.apps.accounts',
+    'desktopsite.apps.desktopdocs',
     'dojango',
     'sorl.thumbnail',
 )
@@ -141,3 +143,6 @@ THUMBNAIL_SUBDIR = "thumbnails"
 
 ### REGISTRATION ###
 ACCOUNT_ACTIVATION_DAYS = 2
+
+### DOCUMENTATION ###
+DOCS_PICKLE_ROOT = "/var/www/desktop/desktopdev/documentation/_build/pickle/"

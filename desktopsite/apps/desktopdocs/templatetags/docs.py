@@ -1,6 +1,6 @@
 from django.template import Library
 
-from desktopdocs.forms import SearchForm
+from desktopsite.apps.desktopdocs.forms import SearchForm
 
 
 register = Library()
