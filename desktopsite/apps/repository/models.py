@@ -28,8 +28,14 @@ class Package(models.Model):
         return threadlocals.get_current_user().pk == self.maintainer.pk or threadlocals.get_current_user().is_staff
     def __str__(self):
         return self.name
-admin.site.register(Package)
 
+class PackageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'sysname', 'category', 'maintainer', 'license')
+    list_filter = ('category',)
+    search_fields = ('name', 'sysname')
+    ordering = ('name', 'sysname')
+
+admin.site.register(Package, PackageAdmin)
    
 from desktopsite.apps.downloads.models import Release
 
@@ -82,9 +88,15 @@ class Version(models.Model):
         f.close()
         self.checksum = m.hexdigest()
         self.save()
-        
+       
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('package', 'name')
+    list_filter = ('verified_safe',)
+    search_fields = ('name', 'package__name', 'package__sysname')
+    ordering = ('package', 'name')
 
-admin.site.register(Version)
+
+admin.site.register(Version, VersionAdmin)
 
 class Rating(models.Model):
     version=models.ForeignKey(Version)
