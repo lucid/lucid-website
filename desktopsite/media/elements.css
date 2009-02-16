@@ -7,6 +7,56 @@ a, h1, h2, h3, h4, h5, h6 {
 	color: #0e56b9;
 }
 
+dl {
+    margin-bottom: 15px;
+    clear: both;
+}
+
+dd p {
+    margin-top: 0px;
+}
+
+dd ul, dd table {
+    margin-bottom: 10px;
+}
+
+dd {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+pre {
+    padding: 5px;
+    background-color: #efc;
+    color: #333;
+    border: 1px solid #ac9;
+    border-left: none;
+    border-right: none;
+    overflow: auto;
+}
+
+tt {
+    background-color: #ecf0f3;
+    padding: 0 1px 0 1px;
+    font-size: 0.95em;
+}
+
+tt.descname {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+tt.descclassname {
+    background-color: transparent;
+}
+
+tt.xref, a tt {
+    background-color: transparent;
+    font-weight: bold;
+}
+
 a:hover {
 	color: #0e56b9;
 	text-decoration: none;
