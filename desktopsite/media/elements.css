@@ -7,12 +7,22 @@ a, h1, h2, h3, h4, h5, h6 {
 	color: #0e56b9;
 }
 
-h2 a.headerlink {
+h1 a.headerlink,
+h2 a.headerlink,
+h3 a.headerlink
+h4 a.headerlink,
+h5 a.headerlink,
+h6 a.headerlink {
     display: none;
     text-decoration: none;
 }
 
-h2:hover a.headerlink {
+h1:hover a.headerlink,
+h2:hover a.headerlink,
+h3:hover a.headerlink,
+h4:hover a.headerlink,
+h5:hover a.headerlink,
+h6:hover a.headerlink {
     display: inline;
 }
 
