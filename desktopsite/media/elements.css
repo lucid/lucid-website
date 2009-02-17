@@ -141,6 +141,10 @@ a .rssicon {
     font-size: 8pt;
 }
 
+.link-row ul {
+    padding-left: 25px;
+}
+
 .download-button {
     background: url('images/layout/download-button.png') no-repeat;
     width: 200px;
