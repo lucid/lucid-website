@@ -135,9 +135,10 @@ a .rssicon {
 }
 
 .link-row {
-    width: 422px;
+    width: 400px;
     margin-left: auto;
     margin-right: auto;
+    font-size: 8pt;
 }
 
 .download-button {
