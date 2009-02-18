@@ -1,0 +1,22 @@
+.thumbnail {
+    float: left;
+    width: 240px;
+    height: 180px;
+    margin-bottom: 5px;
+}
+
+.wallpaper-item {
+    clear: both;
+    border-top: 1px dotted #ddd;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.wallpaper-item.first {
+    border: 0px;
+    margin-top: 0px;
+}
+
+.wallpaper-item div {
+    margin-left: 240px;
+}

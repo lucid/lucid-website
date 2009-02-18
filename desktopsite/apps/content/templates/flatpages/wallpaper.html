@@ -1,0 +1,48 @@
+{% extends "base_content.html" %}
+
+{% block title %} - {{ flatpage.title }}{% endblock %}
+
+{% block extrahead %}
+<link type="text/css" rel="stylesheet" href="/site_media/pages/wallpaper.css" media="screen" />
+{% endblock %}
+
+{% load thumbnail %}
+
+{% block content %}
+<h1>{{ flatpage.title }}</h1>
+<div>
+    <div class="wallpaper-item first">
+        <img class="thumbnail" src="{% thumbnail "images/wallpaper/lucid-wallpaper1.jpg" 240x180 %}" />
+        <div>
+            <ul>
+                <li><a href="#">800x600</a></li>
+                <li><a href="#">1024x786</a></li>
+                <li><a href="#">1152x864</a></li>
+                <li><a href="/site_media/images/wallpaper/lucid-wallpaper1.jpg">1280x1024</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wallpaper-item">
+        <img class="thumbnail" src="{% thumbnail "images/wallpaper/lucid-wallpaper2.jpg" 240x180 %}" />
+        <div>
+            <ul>
+                <li><a href="#">800x600</a></li>
+                <li><a href="#">1024x786</a></li>
+                <li><a href="#">1152x864</a></li>
+                <li><a href="/site_media/images/wallpaper/lucid-wallpaper2.jpg">1280x1024</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="wallpaper-item">
+        <img class="thumbnail" src="{% thumbnail "images/wallpaper/lucid-wallpaper3.jpg" 240x180 %}" />
+        <div>
+            <ul>
+                <li><a href="#">800x600</a></li>
+                <li><a href="#">1024x786</a></li>
+                <li><a href="#">1152x864</a></li>
+                <li><a href="/site_media/images/wallpaper/lucid-wallpaper3.jpg">1280x1024</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
