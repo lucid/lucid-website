@@ -35,7 +35,4 @@ dojo.addOnLoad(function() {
     var tracker = new dojox.analytics.Urchin({ 
 		acct:"UA-5887536-1"
 	});
-    dojo.query("#search .textbox").forEach(function(node){
-        lucidsite.sbox(node);
-    });
 });
