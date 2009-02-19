@@ -97,6 +97,11 @@ body {
     right: 30px;
 }
 
+#search-form {
+    border: 0px;
+    padding: 0px;
+}
+
 #search .textbox {
     border: 0px;
     margin: 9px 0 0 45px;
