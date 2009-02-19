@@ -94,6 +94,10 @@ table.docutils td, table.docutils th {
     border-bottom: 1px solid #aaa;
 }
 
+table.docutils th {
+    font-weight: bold;
+}
+
 table.field-list td, table.field-list th {
         border: 0 !important;
 }
