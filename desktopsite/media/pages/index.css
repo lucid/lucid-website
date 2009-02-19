@@ -40,7 +40,7 @@
 }
 
 .download-button {
-    background: url('images/layout/download-button.png') no-repeat;
+    background: url('../images/layout/download-button.png') no-repeat;
     width: 200px;
     height: 78px;
     position: relative;
@@ -57,13 +57,13 @@
 }
 
 .demo-button {
-    background: url('images/layout/demo-button.png') no-repeat;
+    background: url('../images/layout/demo-button.png') no-repeat;
     width: 200px;
     height: 78px;
 }
 
 .separator {
-    background: url('images/layout/separator.png') no-repeat;
+    background: url('../images/layout/separator.png') no-repeat;
     height: 75px;
     width: 2px;
     margin: 3px 10px;
