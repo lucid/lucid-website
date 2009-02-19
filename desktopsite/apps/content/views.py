@@ -7,7 +7,7 @@ def index(request):
     return render_to_response('content/index.html', {}, context_instance=RequestContext(request))
 
 def search(request):
-    if request.GET['q']:
+    if request.GET.has_key("q"):
         query = request.GET['q']
     else:
         query = ""
