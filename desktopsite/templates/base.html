@@ -60,9 +60,12 @@
 		</div>
         
         <div id="search">
-			<form method="post" action="/search/">
-				<input class="submit" type="submit" value="Search" />
-				<input class="textbox" type="text" name="text" onfocus="lucidsite.sbox(this);" onblur="lucidsite.sbox(this);" />
+			<form method="GET" action="/search/" id="search-form">
+                <input type="hidden" name="cx" value="007839513483054390891:mezlpuhzyn0" />
+                <input type="hidden" name="cof" value="FORID:9" />
+                <input type="hidden" name="ie" value="UTF-8" />
+				<input class="submit" type="submit" name="sa" value="Search" />
+				<input class="textbox" type="text" name="q" value="Search" onfocus="lucidsite.sbox(this);" onblur="lucidsite.sbox(this);" />
 			</form>
 		</div>
 
