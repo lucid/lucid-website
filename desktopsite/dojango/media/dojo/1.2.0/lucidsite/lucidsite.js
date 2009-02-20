@@ -19,13 +19,13 @@ lucidsite = {
             }
         }).play();
     },
-    sbox: function(node){
+    sbox: function(node, e){
         node = dojo.byId(node);
         var str = "Search";
-        if(node.value == ""){
+        if(node.value == "" && e == "blur"){
             node.value = str;
         }
-        else if(node.value == str){
+        else if(node.value == str && e == "focus"){
             node.value = "";
         }
     }
