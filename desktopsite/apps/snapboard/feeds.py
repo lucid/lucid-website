@@ -7,7 +7,7 @@ SITE = Site.objects.get_current()
 
 class LatestPosts(Feed):
     title = str(SITE) + ' Latest Discussions'
-    link = "/snapboard/"
+    link = "/forum/"
     description = "The latest contributions to discussions."
 
     title_template = "snapboard/feeds/latest_title.html"
@@ -15,7 +15,7 @@ class LatestPosts(Feed):
 
     def items(self):
         # we should only return the non-private messages
-        return Post.objects.filter(private__exact='').order_by('-date')[:10]
+        return Post.objects.filter(private__exact=None).order_by('-odate')[:20]
 
 
 # vim: ai ts=4 sts=4 et sw=4

@@ -140,7 +140,7 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return ''.join(('/threads/id/', str(self.thread.id), '/#post', str(self.id)))
+        return ''.join(('/forum/threads/id/', str(self.thread.id), '/#post', str(self.id)))
 
     def get_edit_form(self):
         from forms import PostForm
