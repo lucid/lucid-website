@@ -132,7 +132,7 @@ def editPackage(request, sysname):
         form = PackageForm(request.POST, request.FILES, instance=package)
         if form.is_valid():
             package = form.save(commit=False)
-            package.maintainer = request.user
+            #package.maintainer = request.user
             package.save()
             request.user.message_set.create(message='Changes Saved')
             return HttpResponseRedirect(package.get_absolute_url())
