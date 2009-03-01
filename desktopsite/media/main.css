@@ -140,16 +140,22 @@ body {
     margin: 0px;
 }
 
+
 #menu ul li { 
     background: url('images/layout/menu-center.png') repeat-x;
     float: left;
     height: 39px;
     padding-right: 8px;
     padding-top: 14px;
+    position: relative;
 }
 
 #menu ul li.last {
     padding-right: 0px;
+}
+
+.dj_ie #menu ul li {
+    padding-top: 9px;
 }
 
 #menu * a {
@@ -165,6 +171,10 @@ body {
     height: 100%;
 }
 
+.dj_ie #menu * a {
+    padding-top: 5px;
+}
+
 #menu * a:hover {
     color: #fff;
 }
@@ -174,28 +184,60 @@ body {
     list-style-image: url('images/layout/icons/home.png');
 }
 
+.dj_ie #menu ul li.home a {
+    background: url('images/layout/icons/home.png') no-repeat left center;
+}
+
 #menu ul li.download {
     list-style-image: url('images/layout/icons/download.png');
 }
+
+.dj_ie #menu ul li.download a {
+    background: url('images/layout/icons/download.png') no-repeat left center;
+}
+
 
 #menu ul li.documentation {
     list-style-image: url('images/layout/icons/documentation.png');
 }
 
+.dj_ie #menu ul li.documentation a {
+    background: url('images/layout/icons/documentation.png') no-repeat left center;
+}
+
+
 #menu ul li.blog {
     list-style-image: url('images/layout/icons/blog.png');
 }
+
+.dj_ie #menu ul li.blog a {
+    background: url('images/layout/icons/blog.png') no-repeat left center;
+}
+
 
 #menu ul li.community {
     list-style-image: url('images/layout/icons/community.png');
 }
 
+.dj_ie #menu ul li.community a {
+    background: url('images/layout/icons/community.png') no-repeat left center;
+}
+
+
 #menu ul li.packages {
     list-style-image: url('images/layout/icons/packages.png');
 }
 
+.dj_ie #menu ul li.packages a {
+    background: url('images/layout/icons/packages.png') no-repeat left center;
+}
+
 #menu ul li.code {
     list-style-image: url('images/layout/icons/code.png');
+}
+
+.dj_ie #menu ul li.code a {
+    background: url('images/layout/icons/code.png') no-repeat left center;
 }
 /* end icons */
 
