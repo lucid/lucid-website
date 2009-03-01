@@ -133,7 +133,8 @@ body {
 
 #menu ul {
     background: url('images/layout/menu-right.png') top right no-repeat;
-    list-style: none;
+    list-style-type: none;
+    list-style-position: inside;
     padding: 0 13px 0 0;
     height: 39px;
     margin: 0px;
@@ -143,8 +144,8 @@ body {
     background: url('images/layout/menu-center.png') repeat-x;
     float: left;
     height: 39px;
-    line-height: 39px;
     padding-right: 8px;
+    padding-top: 14px;
 }
 
 #menu ul li.last {
@@ -155,11 +156,48 @@ body {
     color: #ccc;
     font-weight: 700;
     text-decoration: none;
+    margin: 0;
+    position: relative;
+    top: -9px;
+    line-height: 32px;
+    display: block;
+    padding-left: 19px;
+    height: 100%;
 }
 
 #menu * a:hover {
     color: #fff;
 }
+
+/* menu icons */
+#menu ul li.home {
+    list-style-image: url('images/layout/icons/home.png');
+}
+
+#menu ul li.download {
+    list-style-image: url('images/layout/icons/download.png');
+}
+
+#menu ul li.documentation {
+    list-style-image: url('images/layout/icons/documentation.png');
+}
+
+#menu ul li.blog {
+    list-style-image: url('images/layout/icons/blog.png');
+}
+
+#menu ul li.community {
+    list-style-image: url('images/layout/icons/community.png');
+}
+
+#menu ul li.packages {
+    list-style-image: url('images/layout/icons/packages.png');
+}
+
+#menu ul li.code {
+    list-style-image: url('images/layout/icons/code.png');
+}
+/* end icons */
 
 .content-separate {
     background: #fff;
