@@ -123,31 +123,32 @@ body {
 }
 
 #menu {
-    background: url('images/layout/menu-center.png') repeat-x;
+    background: url('images/layout/menu-left.png') no-repeat;
     height: 39px;
     position: absolute;
     bottom: 0px;
     right: 40px;
-    width: 470px;
-    font-size: 12px;
+    padding-left: 13px;
 }
 
-#menu .side {
-    width: 13px;
+#menu ul {
+    background: url('images/layout/menu-right.png') top right no-repeat;
+    list-style: none;
+    padding: 0 13px 0 0;
     height: 39px;
-    height: inherit;
+    margin: 0px;
 }
 
-#menu .side.left {
-    background: url('images/layout/menu-left.png') no-repeat;
+#menu ul li { 
+    background: url('images/layout/menu-center.png') repeat-x;
     float: left;
-    margin-left: -13px;
+    height: 39px;
+    line-height: 39px;
+    padding-right: 8px;
 }
 
-#menu .side.right {
-    background: url('images/layout/menu-right.png') no-repeat;
-    float: right;
-    margin-right: -13px;
+#menu ul li.last {
+    padding-right: 0px;
 }
 
 #menu * a {
@@ -156,31 +157,8 @@ body {
     text-decoration: none;
 }
 
-.dj_safari #menu * a {
-    font-weight: 550;
-    font-size: 11px;
-    padding-right: 3px;
-    margin-top: 4px;
-}
-
-.dj_safari #menu * li:last-child {
-    padding-right: 0px;
-    margin-left: -1px;
-}
-
 #menu * a:hover {
     color: #fff;
-}
-
-#menu ul {
-    margin: 12px -10px 0 -10px;
-    padding: 0 0 0 13px;
-    list-style: none;
-}
-
-#menu * li {
-    float: left;
-    padding-right: 9px;
 }
 
 .content-separate {
