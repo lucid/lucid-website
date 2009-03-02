@@ -145,7 +145,6 @@ body {
     background: url('images/layout/menu-center.png') repeat-x;
     float: left;
     height: 39px;
-    padding-right: 8px;
     padding-top: 14px;
 }
 
@@ -164,15 +163,17 @@ body {
 
 #menu * a {
     color: #ccc;
-    font-weight: 700;
     text-decoration: none;
     margin: 0;
     position: relative;
-    top: -9px;
+    top: -10px;
     line-height: 32px;
     display: block;
-    padding-left: 19px;
-    height: 100%;
+    padding: 1px 1em 0 1em;
+    height: 35px;
+    text-align: center;
+    /*font-weight: 700;*/
+    font-size: 1em;
 }
 
 .dj_ie #menu * a {
@@ -195,7 +196,7 @@ body {
     color: #fff;
 }
 
-/* menu icons */
+/* menu icons *
 #menu ul li.home {
     list-style-image: url('images/layout/icons/home.png');
 }
