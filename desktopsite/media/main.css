@@ -149,13 +149,9 @@ body {
     padding-top: 14px;
 }
 
-#menu ul li.last {
-    padding-right: 0px;
-}
-
 .dj_ie #menu ul li,
 .dj_opera #menu ul li {
-    padding-top: 9px;
+    padding-top: 13px;
 }
 
 .dj_safari #menu ul li {
@@ -177,13 +173,17 @@ body {
     font-size: 1em;
 }
 
+#menu ul li.last a {
+    padding-right: 0px;
+}
+
 .dj_ie #menu * a {
-    padding-top: 5px;
+    padding-top: 2px;
 }
 
 .dj_opera #menu * a {
     padding-left: 5px;
-    padding-top: 5px;
+    padding-top: 3px;
 }
 
 .dj_safari #menu * a {
