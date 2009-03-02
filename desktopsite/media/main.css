@@ -2,7 +2,8 @@
 
 body {
 	text-align: center;
-	background: #dfdfdf;
+	/*background: #dfdfdf;*/
+    background: #dfdfdf url('images/layout/background.png') repeat-x;
 }
 
 .message-set {
@@ -169,7 +170,7 @@ body {
     top: -10px;
     line-height: 32px;
     display: block;
-    padding: 1px 1em 0 1em;
+    padding: 1px 1em 0 1.5em;
     height: 35px;
     text-align: center;
     /*font-weight: 700;*/
@@ -196,7 +197,7 @@ body {
     color: #fff;
 }
 
-/* menu icons *
+/* menu icons */
 #menu ul li.home {
     list-style-image: url('images/layout/icons/home.png');
 }
@@ -269,28 +270,21 @@ body {
     background: #fff;
     border-top: 1px solid #d6d6d6;
     margin-top: 20px;
-    padding: 5px 10px 0 10px;
+    padding: 5px 1.5em 0 1.5em;
 }
 
 .content {
-    padding: 10px 10px 0 10px;
+    padding: 10px 1.5em 0 1.5em;
     background: #fff;
 }
 
 .content-bottom {
     height: 3px;
     background: url('images/layout/content-bottom.png') repeat-x;
-    margin: 5px -10px 0 -10px;
+    margin: 5px -1.5em 0 -1.5em;
     clear: both;
 }
 
-#intro {
-    position: relative;
-    margin: -10px 15px 5px 15px;
-    padding: 0 10px 10px 10px;
-    background: #e5e5e5;
-    min-height: 10px;
-}
 
 .dj_ie #intro {
     margin-top: 0px;
