@@ -34,15 +34,10 @@ dojo.require("lucidsite.index");
                 </div>
                 <ul class="link-row">
                     <li>
-                        <a href="/documentation/">Documentation</a>
-                        <ul>
-                            <li>
-                                <a href="/documentation/en/dev/user/install/instructions/">Installation Instructions</a>
-                            </li>
-                            <li>
-                                <a href="/documentation/en/dev/user/troubleshoot/">Troubleshooting</a>
-                            </li>
-                        </ul>
+                        <a href="/documentation/en/dev/user/install/instructions/">Installation Instructions</a>
+                    </li>
+                    <li>
+                        <a href="/documentation/en/dev/user/troubleshoot/">Troubleshooting</a>
                     </li>
                 </ul>
             </div>
@@ -52,13 +47,36 @@ dojo.require("lucidsite.index");
     </div>
     <div dojoType="dijit.layout.TabContainer" class="intro-tabs">
         <div dojoType="dijit.layout.ContentPane" title="Portable">
-            Stuff about portable
+            <div class="centered">
+                <div class="block">
+                    <img src="/site_media/images/intro/browser.png" />
+                    <p>Runs in any standards-compliant web browser</p>
+                </div>
+                <div class="block">
+                    <img src="/site_media/images/intro/mobile.png" />
+                    <p>Access your files from your mobile phone</p>
+                </div>
+                <div class="block">
+                    <img src="/site_media/images/intro/settings.png" />
+                    <p>Take your theme, settings, and apps with you</p>
+                </div>
+            </div>
         </div>
         <div dojoType="dijit.layout.ContentPane" title="Customizable">
-            Stuff about customizable
+            <div class="padding">
+                <img class="graphic" src="/site_media/images/intro/package.png" />
+                <p>
+                    Lucid supports 3rd party apps and themes. You can take a look at our <a href="{% url repository-index %}">package repository</a> to get addons for Lucid. You can take a look at the <a href="/documentation/en/dev/dev/">developer documentation</a> to learn how to make your own apps and themes for Lucid.
+                </p>
+            </div>
         </div>
         <div dojoType="dijit.layout.ContentPane" title="Open Source">
-            Stuff about open source
+            <div class="padding">
+                <img class="graphic" src="/site_media/images/intro/opensource.png" />
+                <p>
+                    Lucid is open source software distributed under the <a href="http://www.opensource.org/licenses/academic.php">Academic Free License</a>. The license is very liberal, and allows anyone to modify and redistribute the software any way they want, even comercially. Additionally, we use a Contributor License Agreement (or CLA) to ensure that there are no licensing problems.
+                </p>
+            </div>
         </div>
     </div>
     <div class="content-bottom"></div>

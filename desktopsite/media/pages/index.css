@@ -13,12 +13,13 @@
 
 .slideshow {
     float: left;
-    margin-top: 30px;
+    margin-top: 1em;
 }
 
 .intro-content {
     margin-left: 400px;
     padding-left: 1.5em;
+    padding-top: 3px;
 }
 
 .slideShowTitle {
@@ -38,8 +39,8 @@
 
 .link-row {
     width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0.5em auto 0;
+    padding-left: 70px;
     font-size: 8pt;
 }
 
@@ -78,11 +79,46 @@
 }
 
 #intro h1 {
-    font-size: 25pt;
+    font-size: 2.5em;
     margin-top: 0px;
     padding-top: 10px;
 }
 
+#intro .intro-content p {
+    margin: 1.5em 0;
+}
+
 .intro-tabs {
-    height: 160px;
+    height: 175px;
+}
+
+.intro-tabs .block {
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    float: left;
+}
+
+.intro-tabs .block img {
+    margin: 0 auto;
+}
+
+.intro-tabs .block p {
+    margin: 0 auto;
+    width: 180px;
+    text-align: center;
+}
+
+.intro-tabs .graphic {
+    float: left;
+    margin-right: 1.5em;
+}
+
+.intro-tabs .padding {
+    padding: 9px;
+}
+
+.intro-tabs .centered {
+    margin: 0 auto;
+    width: 600px;
 }
