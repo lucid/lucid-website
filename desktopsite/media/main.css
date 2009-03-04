@@ -3,7 +3,7 @@
 body {
 	text-align: center;
 	/*background: #dfdfdf;*/
-    background: #dfdfdf url('images/layout/background.png') repeat-x;
+    background: #d3dce6 url('images/layout/background.png') repeat-x;
 }
 
 .message-set {
@@ -283,6 +283,8 @@ body {
     background: url('images/layout/content-bottom.png') repeat-x;
     margin: 5px -1.5em 0 -1.5em;
     clear: both;
+    position: relative;
+    top: 3px;
 }
 
 
