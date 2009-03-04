@@ -3,6 +3,9 @@
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="/site_media/pages/index.css" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
+<script type="text/javascript">
+dojo.require("lucidsite.index");
+</script>
 {% endblock %}
 
 {% block main %}
@@ -46,6 +49,17 @@
         </div>
         <div class="side right"></div>
         <div class="side left"></div>
+    </div>
+    <div dojoType="dijit.layout.TabContainer" class="intro-tabs">
+        <div dojoType="dijit.layout.ContentPane" title="Portable">
+            Stuff about portable
+        </div>
+        <div dojoType="dijit.layout.ContentPane" title="Customizable">
+            Stuff about customizable
+        </div>
+        <div dojoType="dijit.layout.ContentPane" title="Open Source">
+            Stuff about open source
+        </div>
     </div>
     <div class="content-bottom"></div>
 </div>
