@@ -3,6 +3,8 @@
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="/site_media/pages/index.css" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
+<link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/av/widget/resources/Player.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Dialog/Dialog.css" media="screen" />
 <script type="text/javascript">
 dojo.require("lucidsite.index");
 </script>
@@ -12,7 +14,11 @@ dojo.require("lucidsite.index");
 <div class="content">
     <div id="intro">
         <div class="slideshow">
-            <object width="400" height="225"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=2615498&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=2615498&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00adef&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="225"></embed></object>
+            <a href="#" onClick="dijit.byId('intro-video-dialog').show();">
+                <div class="screenshot">
+                    <div>Click to play video</div>
+                </div>
+            </a>
         </div>
         <div class="intro-content">
             <h1>Open Source Web Desktop</h1>
@@ -101,5 +107,16 @@ dojo.require("lucidsite.index");
 	
     </div>
     <div class="content-bottom"></div>
+</div>
+<div id="intro-video-dialog" dojoType="dojox.widget.Dialog" title="Video" dimensions="[900,640]">
+    <div dojoType="dojox.av.widget.Player" playerWidth="100%" id="intro-video-player" style="margin-top: 15px;">
+        <div controlType="video" initialVolume=".5"
+			mediaUrl="site_media/video/intro.flv" autoPlay="false" isDebug="false" dojoType="dojox.av.FLVideo"></div>
+        <div controlType="play" dojoType="dojox.av.widget.PlayButton"></div>
+        <div controlType="volume" dojoType="dojox.av.widget.VolumeButton"></div>
+        <div controlType="progress" dojoType="dojox.av.widget.ProgressSlider"></div>
+        <div controlType="status" dojoType="dojox.av.widget.Status"></div>
+    </div>
+    <a href="/site_media/video/intro.mp4">Download High-quality version</a>
 </div>
 {% endblock %}

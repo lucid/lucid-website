@@ -16,6 +16,24 @@
     margin-top: 1em;
 }
 
+.slideshow .screenshot {
+    background: url('../video/intro.png') no-repeat;
+    width: 400px;
+    height: 225px;
+}
+
+.slideshow .screenshot div {
+    background: #000;
+    color: #fff;
+    margin: 0 auto;
+    width: 120px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    top: 100px;
+    text-align: center;
+}
+
 .intro-content {
     margin-left: 400px;
     padding-left: 1.5em;
@@ -121,4 +139,8 @@
 .intro-tabs .centered {
     margin: 0 auto;
     width: 600px;
+}
+
+#intro-video-dialog a {
+    font-size: 1.5em;
 }
