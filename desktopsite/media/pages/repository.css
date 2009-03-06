@@ -85,19 +85,19 @@
 	font-style: italic;
 }
 
-.download {
+div.download {
 	text-align: center;
 }
 
-.download .link a {
+div.download .link a {
 	font-size: 14pt;
 }
 
-.download .checksum {
+div.download .checksum {
 	
 }
 
-.download .checksum .hash {
+div.download .checksum .hash {
 	color: #333;
 	font-style: italic;
 }
