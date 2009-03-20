@@ -141,6 +141,17 @@
     width: 600px;
 }
 
-#intro-video-dialog a {
+#intro .video a {
     font-size: 1.5em;
+}
+
+#intro .video {
+    height: 0px;
+    visibility: hidden;
+    text-align: center;
+}
+
+#intro .video.shown {
+    height: 600px;
+    visibility: visible;
 }

@@ -14,7 +14,7 @@ dojo.require("lucidsite.index");
 <div class="content">
     <div id="intro">
         <div class="slideshow">
-            <a href="#" onClick="dijit.byId('intro-video-dialog').show();">
+            <a href="javascript://" onClick="lucidsite.showVideo();">
                 <div class="screenshot">
                     <div>Click to play video</div>
                 </div>
@@ -47,6 +47,17 @@ dojo.require("lucidsite.index");
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="video">
+            <div dojoType="dojox.av.widget.Player" playerWidth="100%" id="intro-video-player" style="margin-top: 15px;">
+                <div controlType="video" initialVolume=".5"
+            		mediaUrl="site_media/video/intro.flv" autoPlay="false" isDebug="false" dojoType="dojox.av.FLVideo"></div>
+                <div controlType="play" dojoType="dojox.av.widget.PlayButton"></div>
+                <div controlType="volume" dojoType="dojox.av.widget.VolumeButton"></div>
+                <div controlType="progress" dojoType="dojox.av.widget.ProgressSlider"></div>
+                <div controlType="status" dojoType="dojox.av.widget.Status"></div>
+            </div>
+            <a href="/site_media/video/intro.mp4">Download High-quality version</a> | <a href="javascript://" onClick="lucidsite.hideVideo();">Close Video</a>
         </div>
         <div class="side right"></div>
         <div class="side left"></div>
@@ -107,16 +118,5 @@ dojo.require("lucidsite.index");
 	
     </div>
     <div class="content-bottom"></div>
-</div>
-<div id="intro-video-dialog" dojoType="dojox.widget.Dialog" title="Video" dimensions="[900,640]">
-    <a href="/site_media/video/intro.mp4">Download High-quality version</a>
-</div>
-<div dojoType="dojox.av.widget.Player" playerWidth="100%" id="intro-video-player" style="margin-top: 15px;">
-    <div controlType="video" initialVolume=".5"
-		mediaUrl="site_media/video/intro.flv" autoPlay="false" isDebug="false" dojoType="dojox.av.FLVideo"></div>
-    <div controlType="play" dojoType="dojox.av.widget.PlayButton"></div>
-    <div controlType="volume" dojoType="dojox.av.widget.VolumeButton"></div>
-    <div controlType="progress" dojoType="dojox.av.widget.ProgressSlider"></div>
-    <div controlType="status" dojoType="dojox.av.widget.Status"></div>
 </div>
 {% endblock %}
