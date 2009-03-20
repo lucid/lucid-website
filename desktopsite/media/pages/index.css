@@ -155,3 +155,7 @@
     height: 600px;
     visibility: visible;
 }
+
+#intro .PlayerScreen {
+    background: #000;
+}
