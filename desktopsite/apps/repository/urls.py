@@ -1,4 +1,12 @@
 from django.conf.urls.defaults import *
+from desktopsite.apps.repository.feeds import *
+
+feeds = {
+    'latest': LatestPackages,
+    'top-rated': TopRated,
+    'featured': Featured,
+    'package': PackageFeed,
+}
 
 urlpatterns = patterns('',
     url(r'^$', "desktopsite.apps.repository.views.index", name="repository-index"),
@@ -16,4 +24,6 @@ urlpatterns = patterns('',
     url(r'^vote/$', "desktopsite.apps.repository.views.saveRating", name="repository-vote"),
     url(r'^newpackage/$', "desktopsite.apps.repository.views.newPackage", name="repository-new-package"),
     url(r'^mypackages/$', "desktopsite.apps.repository.views.userPackages", name="repository-user-packages"),
+    # feeds
+    url(r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
 )

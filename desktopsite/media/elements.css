@@ -222,6 +222,10 @@ a .rssicon {
     text-decoration: none;
 }
 
+a.clear .rssbutton {
+    clear: right;
+}
+
 .rssbullet {
     clear: left;
 }

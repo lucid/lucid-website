@@ -179,6 +179,7 @@ img.screenshot {
 
 .management-links {
     float: right;
+    margin-bottom: 0.8em;
 }
 
 .center-block {

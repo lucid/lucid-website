@@ -8,6 +8,9 @@
 {% endif %}
 
 {% block extrahead %}
+<link rel="alternate" type="application/rss+xml" title="Latest Packages" href="/repository/feeds/latest/" />
+<link rel="alternate" type="application/rss+xml" title="Top Rated Packages" href="/repository/feeds/top-rated/" />
+<link rel="alternate" type="application/rss+xml" title="Featured Packages" href="/repository/feeds/featured/" />
 <link type="text/css" rel="stylesheet" href="/site_media/pages/repository.css" media="screen" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/layout/resources/RotatorContainer.css" />
@@ -37,6 +40,27 @@
        		    <input name="q" type="text" />
        	    	<input type="submit" value="Search" />
            	</form>
+        <h2>Feeds</h2>
+        <ul>
+            <li class="rssbullet">
+                Latest Packages
+                <a href="/repository/feeds/latest/" class="nofloat">
+                    {% include "rssbutton.html" %}
+                </a>
+            </li>
+            <li class="rssbullet">
+                Top Rated Packages
+                <a href="/repository/feeds/top-rated/" class="nofloat">
+                    {% include "rssbutton.html" %}
+                </a>
+            </li>
+            <li class="rssbullet">
+                Featured Packages
+                <a href="/repository/feeds/featured/" class="nofloat">
+                    {% include "rssbutton.html" %}
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="center">
                 <h1>Packages<a href="javascript://" onClick="lucidsite.repository.toggle('index-help');" class="flag">?</a></h1>

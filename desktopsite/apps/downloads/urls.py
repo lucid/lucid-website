@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from desktopsite.apps.downloads.feeds import *
 
 feeds = {
-    'latest': Latest,
+    'latest': LatestDownloads,
     'latest-stable': LatestStable,
     'latest-unstable': LatestUnstable,
 }

@@ -5,7 +5,7 @@ from desktopsite.apps.downloads.models import *
 
 SITE = Site.objects.get_current()
 
-class Latest(Feed):
+class LatestDownloads(Feed):
     title = str(SITE) + ' Latest Releases'
     link = "/download/"
     description = "Latest releases of Lucid"
@@ -16,15 +16,18 @@ class Latest(Feed):
     def items(self):
         return Release.objects.filter(published__exact=True).order_by('-date')[:20]
 
+    def item_pubdate(self, obj):
+        return obj.published
 
-class LatestStable(Latest):
+
+class LatestStable(LatestDownloads):
     title = str(SITE) + ' Latest Stable Releases'
     description = "Latest stable releases of Lucid"
 
     def items(self):
         return Release.objects.filter(published__exact=True, stable__exact=True).order_by('-date')[:20]
 
-class LatestUnstable(Latest):
+class LatestUnstable(LatestDownloads):
     title = str(SITE) + ' Latest Unstable Releases'
     description = "Latest unstable releases of Lucid"
 

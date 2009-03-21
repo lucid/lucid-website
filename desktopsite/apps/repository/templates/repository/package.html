@@ -3,6 +3,7 @@
 {% block title %} - {{ package.name }}{% endblock %}
 
 {% block extrahead %}
+<link rel="alternate" type="application/rss+xml" title="{{package.name}} Releases" href="/repository/feeds/package/{{ package.sysname }}/" />
 <link rel="stylesheet" type="text/css" media="screen" href="/site_media/pages/repository.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/image/resources/image.css" />
@@ -19,6 +20,9 @@
         <a href="{% url repository-delete-package package.sysname %}">Delete</a>
     </div>
 {% endif %}
+<a href="/repository/feeds/package/{{ package.sysname }}/" class="clear">
+    {% include "rssbutton.html" %}
+</a>
 <h1>
 	{{ package.name }}
 </h1>
