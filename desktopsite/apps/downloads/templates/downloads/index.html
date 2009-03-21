@@ -8,6 +8,10 @@
 {% endif %}
 
 {% block extrahead %}
+<link rel="alternate" type="application/rss+xml" title="Latest Stable Releases" href="/download/feeds/latest-stable/" />
+<link rel="alternate" type="application/rss+xml" title="Latest Unstable Releases" href="/download/feeds/latest-unstable/" />
+<link rel="alternate" type="application/rss+xml" title="Latest Stable and Unstable Releases" href="/download/feeds/latest/" />
+
 <link type="text/css" rel="stylesheet" href="/site_media/pages/downloads.css" media="screen" />
 <script type="text/javascript">
 dojo.require("lucidsite.download");
@@ -16,6 +20,9 @@ dojo.require("lucidsite.download");
 
 {% block content %}
 <h1>Download</h1>
+<a href="/download/feeds/latest-stable/">
+    {% include "rssbutton.html" %}
+</a>
 {% if release %}
 <h2>Latest Release - <a href="{{ release.get_absolute_url }}">{{ release.name }}</a></h2>
 <div class="subtitle">Released {{ release.date|date:"F j, Y" }}</div>
@@ -33,6 +40,9 @@ No release yet
 <h2>Other Releases</h2>
 <div dojoType="dijit.layout.TabContainer" id="other-releases-tabs">
     <div dojoType="dijit.layout.ContentPane" title="Stable">
+        <a href="/download/feeds/latest-stable/">
+            {% include "rssbutton.html" %}
+        </a>
         {% if other_stable %}
         <ul>
             {% for release in other_stable %}
@@ -49,6 +59,9 @@ No release yet
         {% endif %}
     </div>
     <div dojoType="dijit.layout.ContentPane" title="Unstable" {% if not other_stable %}selected="true"{% endif %}>
+        <a href="/download/feeds/latest-unstable/">
+            {% include "rssbutton.html" %}
+        </a>
         {% if other_unstable %}
         <ul>
             {% for release in other_unstable %}
