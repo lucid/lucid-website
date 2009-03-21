@@ -149,11 +149,11 @@
     height: 0px;
     visibility: hidden;
     text-align: center;
-    padding-top: 1em;
+    padding-top: 0.8em;
 }
 
 #intro .video.shown {
-    height: 600px;
+    height: 620px;
     visibility: visible;
 }
 
