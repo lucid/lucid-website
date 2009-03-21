@@ -7,7 +7,7 @@ class Release(models.Model):
     name=models.CharField(max_length=100, unique=True)
     release_notes=models.TextField()
     change_log=models.TextField()
-    date=models.DateField(auto_now=True)
+    date=models.DateTimeField(auto_now=True)
     published=models.BooleanField(default=True)
     stable=models.BooleanField(default=True, help_text="If this is not a production-ready version, uncheck this box.")
     def __str__(self):
