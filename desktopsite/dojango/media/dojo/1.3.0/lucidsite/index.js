@@ -14,7 +14,7 @@ lucidsite.showVideo = function(){
     var nl = dojo.query("#intro .video").addClass("shown");
     setTimeout(dojo.hitch(dijit.byId("intro-video-player").children[0], "onClick"), 1500);
     dojox.fx.smoothScroll({
-        node: "intro-video-player",
+        node: "intro-video",
         win: window,
         easing: dojox.fx.easing.bounceOut,
         duration: 800

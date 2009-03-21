@@ -149,6 +149,7 @@
     height: 0px;
     visibility: hidden;
     text-align: center;
+    padding-top: 1em;
 }
 
 #intro .video.shown {
