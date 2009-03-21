@@ -17,7 +17,7 @@ class LatestDownloads(Feed):
         return Release.objects.filter(published__exact=True).order_by('-date')[:20]
 
     def item_pubdate(self, obj):
-        return obj.published
+        return obj.date
 
 
 class LatestStable(LatestDownloads):
