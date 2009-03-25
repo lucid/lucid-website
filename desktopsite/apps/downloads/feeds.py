@@ -10,15 +10,15 @@ class LatestDownloads(Feed):
     link = "/download/"
     description = "Latest releases of Lucid"
 
-    title_template = "snapboard/feeds/latest_title.html"
-    description_template = "snapboard/feeds/latest_description.html"
+    title_template = "downloads/feeds/title.html"
+    description_template = "downloads/feeds/description.html"
 
     def items(self):
         return Release.objects.filter(published__exact=True).order_by('-date')[:20]
 
     def item_pubdate(self, obj):
         return obj.date
-
+        
 
 class LatestStable(LatestDownloads):
     title = str(SITE) + ' Latest Stable Releases'
