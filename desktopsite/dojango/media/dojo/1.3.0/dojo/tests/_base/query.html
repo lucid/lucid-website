@@ -41,14 +41,18 @@
 						"doh.is(4, (dojo.query('div#t h3')).length);",
 						"doh.is(0, (dojo.query('span#t')).length);",
 						"doh.is(0, (dojo.query('.bogus')).length);",
+						"doh.is(0, (dojo.query('.bogus', dojo.byId('container'))).length);",
+						"doh.is(0, (dojo.query('#bogus')).length);",
+						"doh.is(0, (dojo.query('#bogus', dojo.byId('container'))).length);",
 						"doh.is(1, (dojo.query('#t div > h3')).length);",
 						"doh.is(2, (dojo.query('.foo')).length);",
 						"doh.is(1, (dojo.query('.foo.bar')).length);",
 						"doh.is(2, (dojo.query('.baz')).length);",
 						"doh.is(3, (dojo.query('#t > h3')).length);",
 
-
 						"doh.is(2, (dojo.query('#baz,#foo,#t')).length);",
+
+						"doh.is(1, dojo.query('.fooBar').length);",
 
 						// syntactic equivalents
 						"doh.is(12, (dojo.query('#t > *')).length);",
@@ -236,7 +240,7 @@
 			</div>
 			<h3>h3</h3>
 			<h3 class="baz" title="thud">h3</h3>
-			<span class="foobar baz foo"></span>
+			<span class="fooBar baz foo"></span>
 			<span foo="bar"></span>
 			<span foo="baz bar thud"></span>
 			<!-- FIXME: should foo="bar-baz-thud" match? [foo$=thud] ??? -->

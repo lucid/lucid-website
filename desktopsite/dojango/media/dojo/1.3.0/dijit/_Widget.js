@@ -421,7 +421,7 @@ dojo.declare("dijit._Widget", null, {
 		//		as parameters to the widget, since those are the default anyway,
 		//		and setting tabIndex="" is different than not setting tabIndex at all.
 		//
-		//		It processes the attributes in the attribute map first, ant then
+		//		It processes the attributes in the attribute map first, and then
 		//		it goes through and processes the attributes for the _setXXXAttr
 		//		functions that have been specified
 		// tags:
@@ -534,7 +534,9 @@ dojo.declare("dijit._Widget", null, {
 		}
 
 		if(this.domNode){
-			if(!preserveDom){
+			if(preserveDom){
+				dojo.removeAttr(this.domNode, "widgetId");
+			}else{
 				dojo.destroy(this.domNode);
 			}
 			delete this.domNode;
@@ -558,7 +560,7 @@ dojo.declare("dijit._Widget", null, {
 		//		widgets.
 
 		// get all direct descendants and destroy them recursively
-		dojo.forEach(this.getDescendants(true), function(widget){ 
+		dojo.forEach(this.getChildren(), function(widget){ 
 			if(widget.destroyRecursive){
 				widget.destroyRecursive(preserveDom);
 			}
@@ -618,11 +620,14 @@ dojo.declare("dijit._Widget", null, {
 		// summary:
 		//		Called when someone connects to one of my handlers.
 		//		"Turn on" that handler if it isn't active yet.
+		//
+		//		This is also called for every single initialization parameter
+		//		so need to do nothing for parameters like "id".
 		// tags:
 		//		private
 		if(event in this._deferredConnects){
 			var mapNode = this[this._deferredConnects[event]||'domNode'];
-			this.connect(mapNode, event.toLowerCase(), this[event]);
+			this.connect(mapNode, event.toLowerCase(), event);
 			delete this._deferredConnects[event];
 		}
 	},
@@ -817,56 +822,28 @@ dojo.declare("dijit._Widget", null, {
 		return '[Widget ' + this.declaredClass + ', ' + (this.id || 'NO ID') + ']'; // String
 	},
 
-	getDescendants: function(/*Boolean*/ directOnly, /*DomNode[]?*/ outAry){
+	getDescendants: function(){
+		// summary:
+		//		Returns all the widgets that contained by this, i.e., all widgets underneath this.containerNode.
+		//		This method should generally be avoided as it returns widgets declared in templates, which are
+		//		supposed to be internal/hidden, but it's left here for back-compat reasons.
+
+		if(this.containerNode){
+			var list = dojo.query('[widgetId]', this.containerNode);
+			return list.map(dijit.byNode);		// Array
+		}else{
+			return [];
+		}
+	},
+
+	getChildren: function(){
 		// summary:
 		//		Returns all the widgets contained by this, i.e., all widgets underneath this.containerNode.
-		// description:
-		//		For example w/this markup:
-		//
-		//		|	<div dojoType=myWidget>
-		//		|		<b> hello world </b>
-		//		|		<div>
-		//		|			<span dojoType=subwidget>
-		//		|				<span dojoType=subwidget2>how's it going?</span>
-		//		|			</span>
-		//		|		</div>
-		//		|	</div>
-		//
-		//		myWidget.getDescendants() will return subwidget and subwidget2.
-		//
-		//		This method is designed to *not* return widgets that are
-		//		part of a widget's template, but rather to just return widgets that are defined in the
-		//		original markup as descendants of this widget.
-		// directOnly:
-		//		If directOnly is true then won't find nested widgets (subwidget2 in above example)
-		// outAry:
-		//		If specified, put results in here
-		outAry = outAry || [];
+		//		Does not return nested widgets, nor widgets that are part of this widget's template.
 		if(this.containerNode){
-			this._getDescendantsHelper(directOnly, outAry, this.containerNode);
-		}
-		return outAry;
-	},
-	_getDescendantsHelper: function(/*Boolean*/ directOnly, /* DomNode[] */ outAry, /*DomNode*/ root){
-		// summary:
-		//		Search subtree under root, putting found widgets in outAry
-		// directOnly:
-		//		If false, return widgets nested inside other widgets
-		// tags:
-		//		private
-		var list = dojo.isIE ? root.children : root.childNodes, i = 0, node;
-		while(node = list[i++]){
-			if(node.nodeType != 1){ continue; }
-			var widgetId = node.getAttribute("widgetId");
-			if(widgetId){
-				var widget = dijit.byId(widgetId);
-				outAry.push(widget);
-				if(!directOnly){
-					widget.getDescendants(directOnly, outAry);
-				}
-			}else{
-				this._getDescendantsHelper(directOnly, outAry, node);
-			}
+			return dijit.findWidgets(this.containerNode);
+		}else{
+			return [];
 		}
 	},
 
@@ -900,14 +877,14 @@ dojo.declare("dijit._Widget", null, {
 		//		protected
 
 		var d = dojo;
-		var dco = d.hitch(d, "connect", obj);
+		var dc = dojo.connect;
 		var handles =[];
 		if(event == "ondijitclick"){
 			// add key based click activation for unsupported nodes.
 			if(!this.nodesWithKeyClick[obj.nodeName]){
 				var m = d.hitch(this, method);
 				handles.push(
-					dco("onkeydown", this, function(e){
+					dc(obj, "onkeydown", this, function(e){
 						if(!d.isFF && e.keyCode == d.keys.ENTER &&
 							!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey){
 							return m(e);
@@ -917,14 +894,14 @@ dojo.declare("dijit._Widget", null, {
 							d.stopEvent(e);
 						}
 			 		}),
-					dco("onkeyup", this, function(e){
+					dc(obj, "onkeyup", this, function(e){
 						if(e.keyCode == d.keys.SPACE && 
 							!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey){ return m(e); }
 					})
 				);
 			 	if(d.isFF){
 					handles.push(
-						dco("onkeypress", this, function(e){
+						dc(obj, "onkeypress", this, function(e){
 							if(e.keyCode == d.keys.ENTER &&
 								!e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey){ return m(e); }
 						})
@@ -933,7 +910,7 @@ dojo.declare("dijit._Widget", null, {
 			}
 			event = "onclick";
 		}
-		handles.push(dco(event, this, method));
+		handles.push(dc(obj, event, this, method));
 
 		// return handles for FormElement and ComboBox
 		this._connects.push(handles);

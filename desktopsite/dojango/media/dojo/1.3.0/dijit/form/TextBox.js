@@ -40,9 +40,12 @@ dojo.declare(
 			// summary:
 			//		Hook so attr('value') works as we like.
 			// description:
-			//		For TextBox this simply returns the value of the <input>,
-			//		but the parse() call is so subclasses can change this
-			//		behavior w/out overriding this method.
+			//		For `dijit.form.TextBox` this basically returns the value of the <input>.
+			//
+			//		For `dijit.form.MappedTextBox` subclasses, which have both
+			//		a "displayed value" and a separate "submit value",
+			//		This treats the "displayed value" as the master value, computing the
+			//		submit value from it via this.parse().
 			return this.parse(this.attr('displayedValue'), this.constraints);
 		},
 
@@ -71,16 +74,16 @@ dojo.declare(
 				// TODO: this is calling filter() on both the display value and the actual value.
 				// I added a comment to the filter() definition about this, but it should be changed.
 				filteredValue = this.filter(value);
-				if(filteredValue !== null && ((typeof filteredValue != "number") || !isNaN(filteredValue))){
-					if(typeof formattedValue != "string"){
+				if(typeof formattedValue != "string"){
+					if(filteredValue !== null && ((typeof filteredValue != "number") || !isNaN(filteredValue))){
 						formattedValue = this.filter(this.format(filteredValue, this.constraints));
-					}
-				}else{ formattedValue = ''; }
+					}else{ formattedValue = ''; }
+				}
 			}
-			if(formattedValue != null && formattedValue != undefined && this.textbox.value != formattedValue){
+			if(formattedValue != null && formattedValue != undefined && ((typeof formattedValue) != "number" || !isNaN(formattedValue)) && this.textbox.value != formattedValue){
 				this.textbox.value = formattedValue;
 			}
-			dijit.form.TextBox.superclass._setValueAttr.call(this, filteredValue, priorityChange);
+			this.inherited(arguments, [filteredValue, priorityChange]);
 		},
 
 		// displayedValue: String
@@ -137,6 +140,8 @@ dojo.declare(
 			//		The widget value is also set to a corresponding,
 			//		but not necessarily the same, value.
 
+			if(value === null || value === undefined){ value = '' }
+			else if(typeof value != "string"){ value = String(value) }
 			this.textbox.value = value;
 			this._setValueAttr(this.attr('value'), undefined, value);
 		},

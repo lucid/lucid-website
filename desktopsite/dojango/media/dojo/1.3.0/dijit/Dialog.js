@@ -8,7 +8,7 @@ dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dijit.form._FormMixin");
 dojo.require("dijit._DialogMixin");
-dojo.require("dijit.DialogUnderlay")
+dojo.require("dijit.DialogUnderlay");
 dojo.require("dijit.layout.ContentPane");
 dojo.requireLocalization("dijit", "common");
 
@@ -95,6 +95,10 @@ dojo.declare(
 		//		can be dragged by it's title. If false it will remain centered
 		//		in the viewport.
 		draggable: true,
+
+		// _fixSizes: Boolean
+		//		Does this Dialog attempt to restore the width and height after becoming too small?
+		_fixSizes: true,
 
 		postMixInProperties: function(){
 			var _nlsResources = dojo.i18n.getLocalization("dijit", "common");
@@ -205,13 +209,18 @@ dojo.declare(
 		},
 
 		uninitialize: function(){
+			var wasPlaying = false;
 			if(this._fadeIn && this._fadeIn.status() == "playing"){
+				wasPlaying = true;
 				this._fadeIn.stop();
 			}
 			if(this._fadeOut && this._fadeOut.status() == "playing"){
+				wasPlaying = true;
 				this._fadeOut.stop();
 			}
-			
+			if(this.open || wasPlaying){
+				dijit._underlay.hide();
+			}
 			if(this._moveable){
 				this._moveable.destroy();
 			}
@@ -244,16 +253,15 @@ dojo.declare(
 			// tags:
 			//		private
 			if(!dojo.hasClass(dojo.body(),"dojoMove")){
-				
 				var node = this.domNode;
 				var viewport = dijit.getViewport();
-				var p = this._relativePosition;
-				var mb = p ? null : dojo.marginBox(node);
-				dojo.style(node,{
-					left: Math.floor(viewport.l + (p ? p.l : (viewport.w - mb.w) / 2)) + "px",
-					top: Math.floor(viewport.t + (p ? p.t : (viewport.h - mb.h) / 2)) + "px"
-				});
-			}
+					var p = this._relativePosition;
+					var mb = p ? null : dojo.marginBox(node);
+					dojo.style(node,{
+						left: Math.floor(viewport.l + (p ? p.l : (viewport.w - mb.w) / 2)) + "px",
+						top: Math.floor(viewport.t + (p ? p.t : (viewport.h - mb.h) / 2)) + "px"
+					});
+				}
 
 		},
 
@@ -321,13 +329,30 @@ dojo.declare(
 			}
 
 			this._modalconnects.push(dojo.connect(window, "onscroll", this, "layout"));
-			this._modalconnects.push(dojo.connect(window, "onresize", this, "layout"));
+			this._modalconnects.push(dojo.connect(window, "onresize", this, function(){
+				// IE gives spurious resize events and can actually get stuck
+				// in an infinite loop if we don't ignore them
+				var viewport = dijit.getViewport();
+				if(!this._oldViewport ||
+						viewport.h != this._oldViewport.h ||
+						viewport.w != this._oldViewport.w){
+					this.layout();
+					this._oldViewport = viewport;
+				}
+			}));
 			this._modalconnects.push(dojo.connect(dojo.doc.documentElement, "onkeypress", this, "_onKey"));
 
 			dojo.style(this.domNode, {
 				opacity:0,
 				visibility:""
 			});
+			
+			if(this._fixSizes){
+				dojo.style(this.containerNode, { // reset width and height so that _size():marginBox works correctly
+					width:"auto",
+					height:"auto"
+				});
+			}
 			
 			this.open = true;
 			this._onShow(); // lazy load trigger
@@ -375,7 +400,7 @@ dojo.declare(
 			//		private
 			if(this.domNode.style.visibility != "hidden"){
 				dijit._underlay.layout();
-				this._position(); 
+				this._position();
 			}
 		},
 		

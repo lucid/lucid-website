@@ -45,7 +45,7 @@ dojo.require("dojo.dnd.Moveable");
 	},{
 		view: null,
 		// boilerplate HTML
-		_table: '<table class="dojoxGridRowTable" border="0" cellspacing="0" cellpadding="0" role="wairole:presentation"',
+		_table: '<table class="dojoxGridRowTable" border="0" cellspacing="0" cellpadding="0" role="'+(dojo.isFF<3 ? "wairole:" : "")+'presentation"',
 
 		// Returns the table variable as an array - and with the view width, if specified
 		getTableArray: function(){
@@ -62,7 +62,8 @@ dojo.require("dojo.dnd.Moveable");
 			var result = [], html;
 			var waiPrefix = dojo.isFF<3 ? "wairole:" : "";
 			if(isHeader){
-				html = ['<th tabIndex="-1" role="', waiPrefix, 'columnheader"'];
+				var sortInfo = inCell.index != inCell.grid.getSortIndex() ? "" : inCell.grid.sortInfo > 0 ? 'aria-sort="ascending"' : 'aria-sort="descending"';
+				html = ['<th tabIndex="-1" role="', waiPrefix, 'columnheader"', sortInfo];
 			}else{
 				html = ['<td tabIndex="-1" role="', waiPrefix, 'gridcell"'];
 			}
@@ -93,7 +94,7 @@ dojo.require("dojo.dnd.Moveable");
 			// SLOT: result[5] => content
 			result.push('');
 			// result[6] => td closes
-			result.push('</td>');
+			result.push(isHeader?'</th>':'</td>');
 			return result; // Array
 		},
 
@@ -298,7 +299,7 @@ dojo.require("dojo.dnd.Moveable");
 							cell.headerClasses = 'dojoDndItem';
 						}
 						if(cell.attrs){
-							if(cell.attrs.indexOf("dndType='gridColumn'") == -1){
+							if(cell.attrs.indexOf("dndType='gridColumn_") == -1){
 								cell.attrs += " dndType='gridColumn_" + this.grid.id + "'";
 							}
 						}else{
@@ -368,10 +369,22 @@ dojo.require("dojo.dnd.Moveable");
 				return false;
 			}
 			var cell = this.grid.getCell(e.cellIndex); 
-			return !cell.noresize && !cell.canResize();
+			return !cell.noresize && cell.canResize();
 		},
 
 		overLeftResizeArea: function(e){
+			//Bugfix for crazy IE problem (#8807).  IE returns position information for the icon and text arrow divs
+			//as if they were still on the left instead of returning the position they were 'float: right' to.
+			//So, the resize check ends up checking the wrong adjacent cell.  This checks to see if the hover was over 
+			//the image or text nodes, then just ignored them/treat them not in scale range.
+			if(dojo.isIE){
+				var tN = e.target;
+				if(dojo.hasClass(tN, "dojoxGridArrowButtonNode") || 
+					dojo.hasClass(tN, "dojoxGridArrowButtonChar")){
+					return false;
+				}
+			}
+
 			if(dojo._isBodyLtr()){
 				return (e.cellIndex>0) && (e.cellX < this.overResizeWidth) && this.prepareResize(e, -1);
 			}
@@ -380,6 +393,18 @@ dojo.require("dojo.dnd.Moveable");
 		},
 
 		overRightResizeArea: function(e){
+			//Bugfix for crazy IE problem (#8807).  IE returns position information for the icon and text arrow divs
+			//as if they were still on the left instead of returning the position they were 'float: right' to.
+			//So, the resize check ends up checking the wrong adjacent cell.  This checks to see if the hover was over 
+			//the image or text nodes, then just ignored them/treat them not in scale range.
+			if(dojo.isIE){
+				var tN = e.target;
+				if(dojo.hasClass(tN, "dojoxGridArrowButtonNode") || 
+					dojo.hasClass(tN, "dojoxGridArrowButtonChar")){
+					return false;
+				}
+			}
+
 			if(dojo._isBodyLtr()){
 				return e.cellNode && (e.cellX >= e.cellNode.offsetWidth - this.overResizeWidth);
 			}

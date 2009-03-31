@@ -8,7 +8,7 @@ dojo.declare("dijit.layout._LayoutWidget",
 	[dijit._Widget, dijit._Container, dijit._Contained],
 	{
 		// summary:
-		//		Base class for widgets that contain a list of children like BorderContainer.
+		//		Base class for a _Container widget which is responsible for laying out its children.
 		//		Widgets which mixin this code must define layout() to lay out the children.
 
 		// baseClass: [protected extension] String
@@ -18,7 +18,9 @@ dojo.declare("dijit.layout._LayoutWidget",
 		baseClass: "dijitLayoutContainer",
 
 		// isLayoutContainer: [private deprecated] Boolean
-		//		TODO: unused, remove
+		//		TODO: this is unused, but maybe it *should* be used for a child to
+		//		detect whether the parent is going to call resize() on it or not
+		//		(see calls to getParent() and resize() in this file)
 		isLayoutContainer: true,
 
 		postCreate: function(){
@@ -42,6 +44,9 @@ dojo.declare("dijit.layout._LayoutWidget",
 
 			if(this._started){ return; }
 
+			// TODO: seems like this code should be in _Container.startup().
+			// Then things that don't extend LayoutContainer (like GridContainer)
+			// would get the behavior for free.
 			dojo.forEach(this.getChildren(), function(child){ child.startup(); });
 
 			// If I am a top level widget
@@ -53,7 +58,15 @@ dojo.declare("dijit.layout._LayoutWidget",
 				// Since my parent isn't a layout container, and my style is width=height=100% (or something similar),
 				// then I need to watch when the window resizes, and size myself accordingly.
 				// (Passing in no arguments to resize means that it has to glean the size itself.)
-				this.connect(dojo.global, 'onresize', dojo.hitch(this, 'resize'));
+				// TODO: make one global listener to avoid getViewport() per widget.
+				this._viewport = dijit.getViewport();
+				this.connect(dojo.global, 'onresize', function(){
+					var newViewport = dijit.getViewport();
+					if(newViewport.w != this._viewport.w ||  newViewport.h != this._viewport.h){
+						this._viewport = newViewport;
+						this.resize();
+					}
+				});
 			}
 			
 			this.inherited(arguments);
@@ -61,11 +74,11 @@ dojo.declare("dijit.layout._LayoutWidget",
 
 		resize: function(changeSize, resultSize){
 			// summary:
-			//		Call this to resize a widget, or after it's size has changed.
+			//		Call this to resize a widget, or after its size has changed.
 			// description:
 			//		Change size mode:
 			//			When changeSize is specified, changes the marginBox of this widget
-			//			 and forces it to relayout it's contents accordingly.
+			//			 and forces it to relayout its contents accordingly.
 			//			changeSize may specify height, width, or both.
 			//
 			//			If resultSize is specified it indicates the size the widget will
@@ -120,10 +133,10 @@ dojo.declare("dijit.layout._LayoutWidget",
 			var cs = dojo.getComputedStyle(node);
 			var me = dojo._getMarginExtents(node, cs);
 			var be = dojo._getBorderExtents(node, cs);
-			var bb = this._borderBox = {
+			var bb = (this._borderBox = {
 				w: mb.w - (me.w + be.w),
 				h: mb.h - (me.h + be.h)
-			};
+			});
 			var pe = dojo._getPadExtents(node, cs);
 			this._contentBox = {
 				l: dojo._toPixelValue(node, cs.paddingLeft),
@@ -138,7 +151,7 @@ dojo.declare("dijit.layout._LayoutWidget",
 
 		layout: function(){
 			// summary:
-			//		Widgets override this method to size & position their contents/children.
+			//		Widgets override this method to size and position their contents/children.
 			//		When this is called this._contentBox is guaranteed to be set (see resize()).
 			//
 			//		This is called after startup(), and also when the widget's size has been
@@ -180,7 +193,7 @@ dojo.declare("dijit.layout._LayoutWidget",
 
 dijit.layout.marginBox2contentBox = function(/*DomNode*/ node, /*Object*/ mb){
 	// summary:
-	//		Given the margin-box size of a node, return it's content box size.
+	//		Given the margin-box size of a node, return its content box size.
 	//		Functions like dojo.contentBox() but is more reliable since it doesn't have
 	//		to wait for the browser to compute sizes.
 	var cs = dojo.getComputedStyle(node);

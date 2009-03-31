@@ -136,10 +136,11 @@ if(typeof dojo != "undefined"){
 	// 					d.isOpera; // float
 	// 					d.isWebKit; // float
 	// 					d.doc ; // document element
-	d._queryListCtor = 		d.NodeList;
+	var qlc = d._queryListCtor = 		d.NodeList;
 	var isString = 		d.isString;
 
 	var getDoc = function(){ return d.doc; };
+	var cssCaseBug = (d.isWebKit && ((getDoc().compatMode) == "BackCompat"));
 
 	////////////////////////////////////////////////////////////////////////
 	// Global utilities
@@ -284,7 +285,6 @@ if(typeof dojo != "undefined"){
 
 			currentPart.oquery = currentPart.query = ts(pStart, x); // save the full expression as a string
 
-			// console.debug("|"+currentPart.oquery+"|");
 
 			// otag/tag are hints to suggest to the system whether or not
 			// it's an operator or a tag. We save a copy of otag since the
@@ -593,42 +593,52 @@ if(typeof dojo != "undefined"){
 		return true;
 	};
 
-
-	//Need to define getNodeIndex before it is first used because of shrinksafe bug.
 	var getNodeIndex = function(node){
-		// NOTE: 
-		//		we could have a more accurate caching mechanism by invalidating
-		//		caches after the query has finished, but I think that'd lead to
-		//		significantly more cache churn than the cache would provide
-		//		value for in the common case. Generally, we're more
-		//		conservative (and therefore, more accurate) than jQuery and
-		//		DomQuery WRT node node indexes, but there may be corner cases
-		//		in which we fall down.  How much we care about them is TBD.
-
 		var root = node.parentNode;
-		var te, x = 0, i = 0, 
-			tret = root[childNodesName], 
-			ret = -1,
-			ci = parseInt(node["_cidx"]||-1),
-			cl = parseInt(root["_clen"]||-1);
+		var i = 0,
+			tret = root[childNodesName],
+			ci = (node["_i"]||-1),
+			cl = (root["_l"]||-1);
 
 		if(!tret){ return -1; }
+		var l = tret.length;
 
-		if( ci >= 0 && cl >= 0 && cl == tret.length){
+		// we calcuate the parent length as a cheap way to invalidate the
+		// cache. It's not 100% accurate, but it's much more honest than what
+		// other libraries do
+		if( cl == l && ci >= 0 && cl >= 0 ){
 			// if it's legit, tag and release
 			return ci;
 		}
 
 		// else re-key things
-		root["_clen"] = tret.length;
-		while(te = tret[x++]){
+		root["_l"] = l;
+		ci = -1;
+		for(var te = root["firstElementChild"]||root["firstChild"]; te; te = te[_ns]){
 			if(_simpleNodeTest(te)){ 
-				i++;
-				if(node === te){ ret = i; }
-				te["_cix"] = i;
+				te["_i"] = ++i;
+				if(node === te){ 
+					// NOTE:
+					// 	shortcuting the return at this step in indexing works
+					// 	very well for benchmarking but we avoid it here since
+					// 	it leads to potential O(n^2) behavior in sequential
+					// 	getNodexIndex operations on a previously un-indexed
+					// 	parent. We may revisit this at a later time, but for
+					// 	now we just want to get the right answer more often
+					// 	than not.
+					ci = i;
+				}
 			}
 		}
-		return ret;
+		return ci;
+	};
+
+	var isEven = function(elem){
+		return !((getNodeIndex(elem)) % 2);
+	};
+
+	var isOdd = function(elem){
+		return ((getNodeIndex(elem)) % 2);
 	};
 
 	var pseudos = {
@@ -671,19 +681,28 @@ if(typeof dojo != "undefined"){
 			}
 		},
 		"not": function(name, condition){
-			var ntf = getSimpleFilterFunc(getQueryParts(condition)[0]);
+			var p = getQueryParts(condition)[0];
+			var ignores = { el: 1 }; 
+			if(p.tag != "*"){
+				ignores.tag = 1;
+			}
+			if(!p.classes.length){
+				ignores.classes = 1;
+			}
+			var ntf = getSimpleFilterFunc(p, ignores);
 			return function(elem){
 				return (!ntf(elem));
 			}
 		},
 		"nth-child": function(name, condition){
 			var pi = parseInt;
+			// avoid re-defining function objects if we can
 			if(condition == "odd"){
-				condition = "2n+1";
+				return isOdd;
 			}else if(condition == "even"){
-				condition = "2n";
+				return isEven;
 			}
-			// FIXME: can we shorten this up?
+			// FIXME: can we shorten this?
 			if(condition.indexOf("n") != -1){
 				var tparts = condition.split("n", 2);
 				var pred = tparts[0] ? ((tparts[0] == '-') ? -1 : pi(tparts[0])) : 1;
@@ -716,7 +735,6 @@ if(typeof dojo != "undefined"){
 					condition = idx;
 				}
 			}
-			//if(condition.indexOf("n") == -1){
 			var ncount = pi(condition);
 			return function(elem){
 				return (getNodeIndex(elem) == ncount);
@@ -753,7 +771,6 @@ if(typeof dojo != "undefined"){
 			ff = agree(ff, _isElement);
 		}
 
-
 		if(!("tag" in ignores)){
 			if(query.tag != "*"){
 				ff = agree(ff, function(elem){
@@ -761,7 +778,6 @@ if(typeof dojo != "undefined"){
 				});
 			}
 		}
-
 
 		if(!("classes" in ignores)){
 			each(query.classes, function(cname, idx, arr){
@@ -931,6 +947,10 @@ if(typeof dojo != "undefined"){
 		//				return def(root):
 		//					return filter(root.getElementsByClassName(cssClass));
 		//
+		//			elif only(tag):
+		//				return def(root):
+		//					return root.getElementsByTagName(tagName);
+		//
 		//			else:
 		//				# search by tag name, then filter
 		//				return def(root):
@@ -959,6 +979,7 @@ if(typeof dojo != "undefined"){
 		var filterFunc = getSimpleFilterFunc(query, { el: 1 });
 		var qt = query.tag;
 		var wildcardTag = ("*" == qt);
+		var ecs = getDoc()["getElementsByClassName"]; 
 
 		if(!oper){
 			// if there's no infix operator, then it's a descendant query. ID
@@ -968,13 +989,13 @@ if(typeof dojo != "undefined"){
 				// testing shows that the overhead of yesman() is acceptable
 				// and can save us some bytes vs. re-defining the function
 				// everywhere.
-				filerFunc = (!query.loops && !qt) ? 
+				filterFunc = (!query.loops && wildcardTag) ? 
 					yesman : 
 					getSimpleFilterFunc(query, { el: 1, id: 1 });
 
 				retFunc = function(root, arr){
 					var te = d.byId(query.id, (root.ownerDocument||root));
-					if(!filterFunc(te)){ return; }
+					if(!te || !filterFunc(te)){ return; }
 					if(9 == root.nodeType){ // if root's a doc, we just return directly
 						return getArr(te, arr);
 					}else{ // otherwise check ancestry
@@ -983,7 +1004,14 @@ if(typeof dojo != "undefined"){
 						}
 					}
 				}
-			}else if(getDoc()["getElementsByClassName"] && query.classes.length){
+			}else if(
+				ecs && 
+				// isAlien check. Workaround for Prototype.js being totally evil/dumb.
+				/\{\s*\[native code\]\s*\}/.test(String(ecs)) && 
+				query.classes.length &&
+				// WebKit bug where quirks-mode docs select by class w/o case sensitivity
+				!cssCaseBug
+			){
 				// it's a class-based query and we've got a fast way to run it.
 
 				// ignore class and ID filters since we will have handled both
@@ -998,6 +1026,16 @@ if(typeof dojo != "undefined"){
 					return ret;
 				};
 
+			}else if(!wildcardTag && !query.loops){
+				// it's tag only. Fast-path it.
+				retFunc = function(root, arr){
+					var ret = getArr(0, arr), te, x=0;
+					var tret = root.getElementsByTagName(query.getTag());
+					while((te = tret[x++])){
+						ret.push(te);
+					}
+					return ret;
+				};
 			}else{
 				// the common case:
 				//		a descendant selector without a fast path. By now it's got
@@ -1092,7 +1130,7 @@ if(typeof dojo != "undefined"){
 			// that need to be fast (e.g., "#someId").
 			var tef = getElementsFunc(qparts[0]);
 			return function(root){
-				var r = tef(root, new d._queryListCtor());
+				var r = tef(root, new qlc());
 				if(r){ r.nozip = true; }
 				return r;
 			}
@@ -1167,10 +1205,9 @@ if(typeof dojo != "undefined"){
 		var qcz = query.charAt(0);
 		var nospace = (-1 == query.indexOf(" "));
 
-		if(
-			(qcz == "#") && (nospace) &&
-			(!/[.:\[\(]/.test(query)) // make sure it's an ID only search
-		){
+		// byId searches are wicked fast compared to QSA, even when filtering
+		// is required
+		if( (query.indexOf("#") >= 0) && (nospace) ){
 			forceDOM = true;
 		}
 
@@ -1181,12 +1218,14 @@ if(typeof dojo != "undefined"){
 			(specials.indexOf(qcz) == -1) && 
 			// IE's QSA impl sucks on pseudos
 			(!d.isIE || (query.indexOf(":") == -1)) &&
+
+			(!(cssCaseBug && (query.indexOf(".") >= 0))) &&
+
 			// FIXME:
 			//		need to tighten up browser rules on ":contains" and "|=" to
 			//		figure out which aren't good
 			(query.indexOf(":contains") == -1) &&
-			(query.indexOf("|=") == -1) && // some browsers don't grok it
-			true
+			(query.indexOf("|=") == -1) // some browsers don't grok it
 		);
 
 		// TODO: 
@@ -1232,9 +1271,9 @@ if(typeof dojo != "undefined"){
 				// constituent parts and return a dispatcher that will
 				// merge the parts when run
 				function(root){
-					var pindex = 0; // avoid array alloc for every invocation
-					var ret = [];
-					var tp;
+					var pindex = 0, // avoid array alloc for every invocation
+						ret = [],
+						tp;
 					while((tp = parts[pindex++])){
 						ret = ret.concat(getStepQueryFunc(tp)(root));
 					}
@@ -1279,10 +1318,10 @@ if(typeof dojo != "undefined"){
 	var _zipIdxName = "_zipIdx";
 	var _zip = function(arr){
 		if(arr && arr.nozip){ 
-			return (d._queryListCtor._wrap) ? d._queryListCtor._wrap(arr) : arr;
+			return (qlc._wrap) ? qlc._wrap(arr) : arr;
 		}
 		// var ret = new d._queryListCtor();
-		var ret = new d._queryListCtor();
+		var ret = new qlc();
 		if(!arr || !arr.length){ return ret; }
 		if(arr[0]){
 			ret.push(arr[0]);
@@ -1318,7 +1357,6 @@ if(typeof dojo != "undefined"){
 				}
 				te[_zipIdxName] = _zipIdx;
 			}
-			// console.debug("zip out length:", ret.length);
 		}
 		return ret;
 	};
@@ -1471,19 +1509,23 @@ if(typeof dojo != "undefined"){
 		//	|		});
 		//	|	});
 
+		//Set list constructor to desired value. This can change
+		//between calls, so always re-assign here.
+		qlc = d._queryListCtor;
+
 		if(!query){
-			return new d._queryListCtor();
+			return new qlc();
 		}
 
-		if(query.constructor == d._queryListCtor){
+		if(query.constructor == qlc){
 			return query;
 		}
 		if(!isString(query)){
-			return new d._queryListCtor(query); // dojo.NodeList
+			return new qlc(query); // dojo.NodeList
 		}
 		if(isString(root)){
 			root = d.byId(root);
-			if(!root){ return new d._queryListCtor(); }
+			if(!root){ return new qlc(); }
 		}
 
 		root = root||getDoc();
@@ -1495,7 +1537,7 @@ if(typeof dojo != "undefined"){
 		// 		Opera in XHTML mode doesn't detect case-sensitivity correctly
 		// 		and it's not clear that there's any way to test for it
 		caseSensitive = (root.contentType && root.contentType=="application/xml") || 
-						(d.isOpera && root.doctype) ||
+						(d.isOpera && (root.doctype || od.toString() == "[object XMLDocument]")) ||
 						(!!od) && 
 						(d.isIE ? od.xml : (root.xmlVersion||od.xmlVersion));
 
@@ -1504,9 +1546,10 @@ if(typeof dojo != "undefined"){
 		//		testing the DOM branch without worrying about the
 		//		behavior/performance of the QSA branch.
 		var r = getQueryFunc(query)(root);
+
 		// FIXME:
 		//		need to investigate this branch WRT #8074 and #8075
-		if(r && r.nozip && !d._queryListCtor._wrap){
+		if(r && r.nozip && !qlc._wrap){
 			return r;
 		}
 		return _zip(r); // dojo.NodeList

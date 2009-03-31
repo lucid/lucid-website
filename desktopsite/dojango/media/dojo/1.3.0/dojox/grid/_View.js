@@ -305,7 +305,7 @@ dojo.require("dojo.dnd.Manager");
 							inCell.grid.sortInfo > 0 ? 'dojoxGridSortUp' : 'dojoxGridSortDown',
 							'"><div class="dojoxGridArrowButtonChar">',
 							inCell.grid.sortInfo > 0 ? '&#9650;' : '&#9660;',
-							'</div><div class="dojoxGridArrowButtonNode"></div>' ]);
+							'</div><div class="dojoxGridArrowButtonNode" role="'+(dojo.isFF<3 ? "wairole:" : "")+'presentation"></div>' ]);
 			}
 			ret = ret.concat([n, '</div>']);
 			return ret.join('');
@@ -356,22 +356,26 @@ dojo.require("dojo.dnd.Manager");
 			// Fix any percentage widths to be pixel values
 			var hasPct = false;
 			var cellNodes = dojo.query("th", this.headerContentNode);
-			var fixedWidths = dojo.map(cellNodes, function(c){
+			var fixedWidths = dojo.map(cellNodes, function(c, vIdx){
 				var w = c.style.width;
+				dojo.attr(c, "vIdx", vIdx);
 				if(w && w.slice(-1) == "%"){
 					hasPct = true;
-					return dojo.contentBox(c).w;
 				}else if(w && w.slice(-2) == "px"){
 					return window.parseInt(w, 10);
 				}
-				return -1;
+				return dojo.contentBox(c).w;
 			});
 			if(hasPct){
 				dojo.forEach(this.grid.layout.cells, function(cell, idx){
 					if(cell.view == this){
-						var vIdx = cell.layoutIndex;
-						this.setColWidth(idx, fixedWidths[vIdx]);
-						cellNodes[vIdx].style.width = cell.unitWidth;
+						var cellNode = cell.view.getHeaderCellNode(cell.index);
+						if(cellNode && dojo.hasAttr(cellNode, "vIdx")){
+							var vIdx = window.parseInt(dojo.attr(cellNode, "vIdx"));
+							this.setColWidth(idx, fixedWidths[vIdx]);
+							cellNodes[vIdx].style.width = cell.unitWidth;
+							dojo.removeAttr(cellNode, "vIdx");
+						}
 					}
 				}, this);
 				return true;
@@ -439,6 +443,7 @@ dojo.require("dojo.dnd.Manager");
 		createRowNode: function(inRowIndex){
 			var node = document.createElement("div");
 			node.className = this.classTag + 'Row';
+			dojo.attr(node,"role","row");
 			node[dojox.grid.util.gridViewTag] = this.id;
 			node[dojox.grid.util.rowIndexTag] = inRowIndex;
 			this.rowNodes[inRowIndex] = node;

@@ -135,7 +135,8 @@ if(typeof window != 'undefined'){
 		//>>excludeStart("webkitMobile", kwArgs.webkitMobile);
 		if(dua.indexOf("Gecko") >= 0 && !d.isKhtml && !d.isWebKit){ d.isMozilla = d.isMoz = tv; }
 		if(d.isMoz){
-			d.isFF = parseFloat(dua.split("Firefox/")[1]) || undefined;
+			//We really need to get away from this. Consider a sane isGecko approach for the future.
+			d.isFF = parseFloat(dua.split("Firefox/")[1] || dua.split("Minefield/")[1] || dua.split("Shiretoko/")[1]) || undefined;
 		}
 		if(document.all && !d.isOpera){
 			d.isIE = parseFloat(dav.split("MSIE ")[1]) || undefined;
@@ -367,7 +368,7 @@ if(typeof window != 'undefined'){
 		// allow multiple calls, only first one will take effect
 		// A bug in khtml calls events callbacks for document for event which isnt supported
 		// for example a created contextmenu event calls DOMContentLoaded, workaround
-		var type = (e && e.type) ? e.type.toLowerCase() : "load";
+		var type = e && e.type ? e.type.toLowerCase() : "load";
 		if(arguments.callee.initialized || (type != "domcontentloaded" && type != "load")){ return; }
 		arguments.callee.initialized = true;
 		if("_khtmlTimer" in dojo){
@@ -378,10 +379,6 @@ if(typeof window != 'undefined'){
 		if(dojo._inFlightCount == 0){
 			dojo._modulesLoaded();
 		}
-	}
-
-	dojo._fakeLoadInit = function(){
-		dojo._loadInit({type: "load"});
 	}
 
 	if(!dojo.config.afterOnLoad){

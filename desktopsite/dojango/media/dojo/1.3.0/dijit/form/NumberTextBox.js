@@ -28,6 +28,16 @@ dojo.declare("dijit.form.NumberTextBoxMixin",
 		constraints: {},
 		======*/
 
+		// value: Number
+		//		The value of this NumberTextBox as a javascript Number (ie, not a String).
+		//		If the displayed value is blank, the value is NaN, and if the user types in
+		//		an gibberish value (like "hello world"), the value is undefined
+		//		(i.e. attr('value') returns undefined).
+		//
+		//		Symetrically, attr('value', NaN) will clear the displayed value,
+		//		whereas attr('value', undefined) will have no effect.
+		value: NaN,
+
 		// editOptions: [protected] Object
 		//		Properties to mix into constraints when the value is being edited.
 		//		This is here because we edit the number in the format "12345", which is
@@ -51,11 +61,21 @@ dojo.declare("dijit.form.NumberTextBoxMixin",
 		 =====*/
 		_formatter: dojo.number.format,
 
+		postMixInProperties: function(){
+			if(typeof this.constraints.max != "number"){
+				this.constraints.max = 9e+15;
+			}
+			this.inherited(arguments);
+		},
+
 		_onFocus: function(){
 			if(this.disabled){ return; }
 			var val = this.attr('value');
 			if(typeof val == "number" && !isNaN(val)){
-				this.textbox.value = this.format(val, this.constraints);
+				var formattedValue = this.format(val, this.constraints);
+				if(formattedValue !== undefined){
+					this.textbox.value = formattedValue;
+				}
 			}
 			this.inherited(arguments);
 		},
@@ -66,10 +86,11 @@ dojo.declare("dijit.form.NumberTextBoxMixin",
 			// tags:
 			//		protected
 
-			if(typeof value == "string") { return value; }
+			if(typeof value != "number") { return String(value) }
 			if(isNaN(value)){ return ""; }
+			if(("rangeCheck" in this) && !this.rangeCheck(value, constraints)){ return String(value) }
 			if(this.editOptions && this._focused){
-				constraints = dojo.mixin(dojo.mixin({}, this.editOptions), this.constraints);
+				constraints = dojo.mixin(dojo.mixin({}, this.editOptions), constraints);
 			}
 			return this._formatter(value, constraints);
 		},
@@ -113,14 +134,42 @@ dojo.declare("dijit.form.NumberTextBoxMixin",
 			return (typeof value != "number" || isNaN(value))? '' : this.inherited(arguments);
 		},
 
+		_setValueAttr: function(/*Number*/ value, /*Boolean?*/ priorityChange, /*String?*/formattedValue){
+			// summary:
+			//		Hook so attr('value', ...) works.
+			if(value !== undefined && formattedValue === undefined){
+				if(typeof value == "number"){
+					if(isNaN(value)){ formattedValue = '' }
+					else if(("rangeCheck" in this) && !this.rangeCheck(value, this.constraints)){
+						formattedValue = String(value);
+					}
+				}else if(!value){ // 0 processed in if branch above, ''|null|undefined flow thru here
+					formattedValue = '';
+					value = NaN;
+				}else{ // non-numeric values
+					formattedValue = String(value);
+					value = undefined;
+				}
+			}
+			this.inherited(arguments, [value, priorityChange, formattedValue]);
+		},
+
+
 		_getValueAttr: function(){
 			// summary:
 			//		Hook so attr('value') works.
-			var v = this.inherited(arguments);
-			return (isNaN(v) && this.textbox.value !== '')? undefined : v;
-		},
+			//		Returns Number, NaN for '', or undefined for unparsable text
+			var v = this.inherited(arguments); // returns Number for all values accepted by parse() or NaN for all other displayed values
 
-		value: NaN
+			// If the displayed value of the textbox is gibberish (ex: "hello world"), this.inherited() above
+			// returns NaN; this if() branch converts the return value to undefined.
+			// Returning undefined prevents user text from being overwritten when doing _setValueAttr(_getValueAttr()).
+			// A blank displayed value is still returned as NaN.
+			if(isNaN(v) && this.textbox.value !== ''){ // if displayed value other than ''
+				var n = Number(this.textbox.value); // check for exponential notation that parse() rejected (erroneously?)
+				return (String(n)===this.textbox.value)? n : undefined; // return exponential Number or undefined for random text
+			}else{ return v } // Number or NaN for ''
+		}
 	}
 );
 
