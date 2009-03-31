@@ -60,7 +60,7 @@ class Command(BaseCommand):
         # copy the profile to the 
         shutil.copyfile(profile['profile_file'], dest_profile_file)
         buildscript_dir = os.path.abspath('%s/buildscripts' % util_base_dir)
-        executable = '%(java_exec)s -jar ../shrinksafe/custom_rhino.jar build.js' % \
+        executable = '%(java_exec)s -jar ../shrinksafe/js.jar build.js' % \
                      {'java_exec':settings.DOJO_BUILD_JAVA_EXEC}
         # use the passed version for building
         version = options.get('build_version', None)
