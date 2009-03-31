@@ -132,7 +132,7 @@ DOJANGO_DOJO_BUILD_PROFILES = {
         'used_src_version': '1.3.0',
         'build_version': '1.3.0',
         'base_url':'/dojango/media/release',
-        'base_root':'/dojango/media/release',
+        'base_root':'%s/dojango/media/release' % ROOT_PATH,
         'is_local':True,
         'is_local_build':True
     }
