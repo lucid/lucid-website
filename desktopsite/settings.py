@@ -127,8 +127,14 @@ DOJANGO_DOJO_BUILD_VERSION = "1.3.0"
 DOJANGO_DOJO_THEME = "nihilo"
 DOJANGO_DOJO_BUILD_PROFILES = {
     'lucidsite': {
-        'profile_file': os.path.abspath(os.path.dirname(__file__)+'/dojango/lucidsite.profile.js'),
-        'options': 'profile=lucidsite action=release optimize=shrinksafe.keepLines cssOptimize=comments.keepLines'                       
+        'profile_file': os.path.abspath(os.path.dirname(__file__)+'/dojango/media/lucidsite.profile.js'),
+        'options': 'profile=lucidsite action=release optimize=shrinksafe.keepLines cssOptimize=comments.keepLines',
+        'used_src_version': '1.3.0',
+        'build_version': '1.3.0',
+        'base_url':'/dojango/media/release',
+        'base_root':'/dojango/media/release',
+        'is_local':True,
+        'is_local_build':True
     }
 }
 
