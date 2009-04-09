@@ -150,6 +150,7 @@
     visibility: hidden;
     text-align: center;
     padding-top: 0.8em;
+    overflow: hidden;
 }
 
 #intro .video.shown {
@@ -159,4 +160,8 @@
 
 #intro .PlayerScreen {
     background: #000;
+}
+
+#introTabs_tablist {
+    text-align: center;
 }
