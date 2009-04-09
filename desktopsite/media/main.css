@@ -147,7 +147,7 @@ body {
 #menu ul li { 
     background: url('images/layout/menu-center.png') repeat-x;
     float: left;
-    height: 39px;
+    height: 19px;
     padding-top: 14px;
 }
 
@@ -156,10 +156,14 @@ body {
     padding-top: 13px;
 }
 
-.dj_safari #menu ul li {
+.dj_webkit #menu ul li {
     padding-top: 20px;
 }
-
+/*
+.dj_webkit #menu ul li::marker {
+    margin-top: 3px;
+}
+*/
 #menu * a {
     color: #ccc;
     text-decoration: none;
@@ -188,11 +192,12 @@ body {
     padding-top: 3px;
 }
 
-.dj_safari #menu * a {
-    padding-top: 0px;
-    padding-left: 0px;
-    line-height: 1px;
-
+.dj_webkit #menu * a {
+    padding-top: 1px;
+    padding-left: .5em;
+    padding-right: .5em;
+    height: 18px;
+    line-height: 18px;
 }
 
 #menu * a:hover {
