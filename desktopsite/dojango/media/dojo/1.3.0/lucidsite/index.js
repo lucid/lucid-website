@@ -40,4 +40,7 @@ lucidsite.hideVideo = function(){
 
 dojo.addOnLoad(function(){
     dojo.query(".PlayerScreen", "intro-video-player").style({width: "888px", height: "499px"});
+    //workaround
+    if(dojo.isWebKit)
+        setTimeout(function(){ dijit.byId("introTabs").resize(); }, 1000);
 });
