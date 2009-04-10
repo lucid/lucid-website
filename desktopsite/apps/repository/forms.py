@@ -10,6 +10,7 @@ class PackageForm(forms.ModelForm):
         exclude=['maintainer']
         
 class VersionForm(forms.ModelForm):
+    _compatible_objs = []
     class Meta:
         model=Version
         exclude=['name', 'package', 'verified_safe', 'compatible']
