@@ -72,8 +72,13 @@ def saveRating(request):
     value = request.POST["value"]
     if not (value < 0 or value > 5):
         return HttpResponse("nice try asshole", mimetype="text/plain")
-    rating, created=Rating.objects.get_or_create(version=version, user=request.user,
+    try:
+        rating, created=Rating.objects.get_or_create(version=version, user=request.user,
                                                  defaults={'score': value})
+    except Rating.MultipleObjectsReturned:
+        #this happens on occasion, not sure why
+        Rating.objects.filter(version=version, user=request.user).delete()
+        rating = Rating(version=version, user=request.user)
     if value == "0":
         rating.delete()
     else:
