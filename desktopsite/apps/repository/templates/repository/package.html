@@ -20,7 +20,7 @@
         <a href="{% url repository-delete-package package.sysname %}">Delete</a>
     </div>
 {% endif %}
-<a href="/repository/feeds/package/{{ package.sysname }}/" class="clear">
+<a href="/repository/feeds/package/{{ package.sysname }}/" class="clear" rel="nofollow">
     {% include "rssbutton.html" %}
 </a>
 <h1>

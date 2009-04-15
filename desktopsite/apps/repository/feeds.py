@@ -10,8 +10,8 @@ class LatestPackages(Feed):
     link = "/packages/"
     description = "The latest community packages for Lucid"
 
-    title_template = "snapboard/feeds/latest_title.html"
-    description_template = "snapboard/feeds/latest_description.html"
+    title_template = "repository/feeds/title.html"
+    description_template = "repository/feeds/description.html"
 
     def items(self):
         return Version.objects.all().order_by("-creation_date")[:20]
@@ -43,8 +43,7 @@ class Featured(LatestPackages):
         return Rating.objects.featured(20)
 
 class PackageFeed(LatestPackages):
-    title_template = "repository/feeds/title.html"
-    description_template = "repository/feeds/description.html"
+    description_template = "repository/feeds/description_package.html"
 
     def title(self, obj):
         return str(SITE) + " Package Repository - %s" % obj.name
