@@ -113,7 +113,7 @@ dojo.require("lucidsite.index");
 	        <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
 	        <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
     	    {{ latest_entry.summary|safe }}
-	        <p class="more"><a href="{{ latest_entry.get_absolute_url }}">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
+	        <p class="more"><a href="{{ latest_entry.get_absolute_url }}" rel="nofollow">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments" rel="nofollow">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
     	{% endfor %}
 	
     </div>
