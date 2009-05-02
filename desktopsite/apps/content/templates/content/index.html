@@ -5,6 +5,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
 <link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/av/widget/resources/Player.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Dialog/Dialog.css" media="screen" />
+<script type="text/javascript" src="/site_media/flowplayer/flowplayer-3.1.0.min.js"></script> {# temporary #}
 <script type="text/javascript">
 dojo.require("lucidsite.index");
 </script>
@@ -49,6 +50,7 @@ dojo.require("lucidsite.index");
             </div>
         </div>
         <div class="video" id="intro-video">
+            {% comment %}
             <div dojoType="dojox.av.widget.Player" playerWidth="100%" id="intro-video-player" style="margin-top: 15px;">
                 <div controlType="video" initialVolume=".5"
             		mediaUrl="site_media/video/intro.flv" autoPlay="false" isDebug="false" dojoType="dojox.av.FLVideo"></div>
@@ -56,6 +58,10 @@ dojo.require("lucidsite.index");
                 <div controlType="volume" dojoType="dojox.av.widget.VolumeButton"></div>
                 <div controlType="progress" dojoType="dojox.av.widget.ProgressSlider"></div>
                 <div controlType="status" dojoType="dojox.av.widget.Status"></div>
+            </div>
+            {% endcomment %}
+            <div id="intro-video-player">
+                <a href="/site_media/video/intro.flv" id="intro-video-player-link">Intro Video</a>
             </div>
             <a href="/site_media/video/intro.mp4">Download High-Quality MP4</a> | <a href="javascript://" onClick="lucidsite.hideVideo();">Close Video</a> 
         </div>
