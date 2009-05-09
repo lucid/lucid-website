@@ -75,6 +75,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.overview"
 			]
 		},
 		{
@@ -84,6 +85,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.index"
 			]
 		},
 		{
@@ -93,6 +95,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.forum"
 			]
 		},
 		{
@@ -102,6 +105,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.documentation"
 			]
 		},
 		{
@@ -111,6 +115,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.blog"
 			]
 		},
 		{
@@ -120,6 +125,7 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
+                "lucidsite.download"
 			]
 		}
 
