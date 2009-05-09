@@ -48,13 +48,23 @@ dependencies = {
 			]
 		},
 		{
+			name: "../lucidsite/lucidsite.js",
+			resourceName: "lucidsite.lucidsite",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
+				"lucidsite.lucidsite",
+                "dijit.dijit"
+			]
+		},
+		{
 			name: "../lucidsite/repository.js",
 			resourceName: "lucidsite.repository",
 			layerDependencies: [
 			"string.discard"
 			],
 			dependencies: [
-				"dijit.dijit",
 				"lucidsite.repository"
 			]
 		},
@@ -65,9 +75,54 @@ dependencies = {
 			"string.discard"
 			],
 			dependencies: [
-				"dijit.dijit"
+			]
+		},
+		{
+			name: "../lucidsite/index.js",
+			resourceName: "lucidsite.index",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
+			]
+		},
+		{
+			name: "../lucidsite/forum.js",
+			resourceName: "lucidsite.forum",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
+			]
+		},
+		{
+			name: "../lucidsite/documentation.js",
+			resourceName: "lucidsite.documentation",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
+			]
+		},
+		{
+			name: "../lucidsite/blog.js",
+			resourceName: "lucidsite.blog",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
+			]
+		},
+		{
+			name: "../lucidsite/download.js",
+			resourceName: "lucidsite.download",
+			layerDependencies: [
+			"string.discard"
+			],
+			dependencies: [
 			]
 		}
+
 	],
 
 	prefixes: [
