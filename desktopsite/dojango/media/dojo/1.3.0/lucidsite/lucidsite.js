@@ -1,4 +1,5 @@
 dojo.provide("lucidsite.lucidsite");
+dojo.require("dojo.string");
 dojo.require("dojox.analytics.Urchin");
 dojo.require("dijit._base");
 
