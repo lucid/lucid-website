@@ -5,17 +5,17 @@ from django.template import RequestContext
 from desktopsite.dojango.util import json_response
 
 def index(request):
-    releases = Release.objects.filter(published=True, stable=True).order_by("-date")
+    releases = Release.objects.filter(published__exact=True, stable__exact=True).order_by("-date")
     try:
         latest = releases[0]
     except IndexError:
-        releases = Release.objects.filter(published=True, stable=False).order_by("-date")
+        releases = Release.objects.filter(published__exact=True, stable__exact=False).order_by("-date")
         try:
             latest = releases[0]
         except IndexError:
             latest=None
     other_stable = releases[1:]
-    other_unstable = Release.objects.filter(published=True, stable=False).order_by("-date")
+    other_unstable = Release.objects.filter(published__exact=True, stable__exact=False).order_by("-date")
     return render_to_response('downloads/index.html', {
         'release': latest,
         'other_stable': other_stable,
