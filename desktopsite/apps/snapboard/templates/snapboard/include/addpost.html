@@ -13,7 +13,7 @@
             <a href="#add_post_div" onclick="lucidsite.forum.toggle('autocomplete_input', 'block'); lucidsite.forum.toggle('autocomplete_p', 'inline');">set private recipients (optional)</a>
         </p>
         <div id="autocomplete_input" style="display:none">
-            <p>{{ postform.private }}</p>
+            <p style="display: none;">{{ postform.private }}</p>
 			<div dojoType="dojox.data.QueryReadStore" url="{{ SNAP_PREFIX }}/rpc/user_lookup/"
 				 doClientPaging="false" jsId="userStore"></div>
 			<div id="privateBoxes">

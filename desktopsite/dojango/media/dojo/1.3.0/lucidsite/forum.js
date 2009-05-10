@@ -111,19 +111,16 @@ lucidsite.forum = {
 		dojo.byId(node).appendChild(div)
 	},
 	compileList: function(node, targetId) {
-		var node = dojo.byId(node);
 		var values = [];
-		dojo.forEach(node.childNodes, function(wid) {
+		dojo.query(".dijitTextBox", node).forEach(function(wid) {
 			try {
-				var wid = dijit.byNode(wid);
+				wid = dijit.byNode(wid);
 			} 
 			catch(e) {
 				return;
 			}
-			var value = wid.getValue();
-			value = wid.store.getItemByIdentity(value);
-			value = wid.store.getValue(value, "name");
-			if(value)
+			var value = wid.getDisplayedValue();
+			if(value && wid.isValid())
 				values.push(value);
 		})
 		dojo.byId(targetId).value = values.join(",")
