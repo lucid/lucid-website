@@ -16,7 +16,7 @@ class Release(models.Model):
         return "/download/%s/" % self.name
 
 class File(models.Model):
-    file=models.FilePathField(path=DOWNLOADS_ROOT, recursive=True, unique=True)
+    file=models.FilePathField(path=DOWNLOADS_ROOT, recursive=True)
     checksum=models.CharField(max_length=100, editable=False)
     release=models.ForeignKey(Release)
     download_count=models.IntegerField(default=0, editable=False)
