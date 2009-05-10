@@ -8,6 +8,6 @@ REPOSITORY_CATEGORIES = (
     ("office", "Office"),
     ("system", "System"),
     ("administration", "Administration"),
-    ("themes", "Themes"),
+    ("theme", "Themes"),
     ("translations", "Translations"),
 )
