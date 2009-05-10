@@ -17,7 +17,8 @@ dependencies = {
 			//other layers -- it is always an implicit dependency.
 			name: "dojo.js",
 			dependencies: [
-				"dojo.parser"
+				"dojo.parser",
+                "dojo.string"
 			]
 		},
 		{
