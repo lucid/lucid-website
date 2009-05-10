@@ -22,16 +22,19 @@
     height: 225px;
 }
 
-.slideshow .screenshot div {
-    background: #000;
-    color: #fff;
+.slideshow .screenshot div.playbutton {
+    background: url('../images/intro/play_large.png') no-repeat;
+    opacity: 0.8;
     margin: 0 auto;
-    width: 120px;
-    height: 20px;
-    line-height: 20px;
+    width: 83px;
+    height: 83px;
     position: relative;
-    top: 100px;
+    top: 71px;
     text-align: center;
+}
+
+.slideshow a:hover .screenshot div.playbutton {
+    opacity: 1;
 }
 
 .intro-content {
