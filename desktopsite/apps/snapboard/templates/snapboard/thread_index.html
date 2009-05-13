@@ -2,6 +2,10 @@
 
 {% block snapboard_main %}
     <div class="index_title">
+    {% if user.is_authenticated %}
+    <a href="{{ SNAP_PREFIX }}/newtopic/" style="font-size: 1.5em; float: right;">New Topic</a>
+    {% endif %}
+
     <h2 style="font-size: 152%;">
     {{ title }}
     </h2>
