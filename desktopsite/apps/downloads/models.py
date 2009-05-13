@@ -21,7 +21,7 @@ class File(models.Model):
     release=models.ForeignKey(Release)
     download_count=models.IntegerField(default=0, editable=False)
     size=models.IntegerField(editable=False)
-    name=models.CharField(max_length=50, editable=False, unique=True)
+    name=models.CharField(max_length=50, editable=False)
 
     def __str__(self):
         return self.file
