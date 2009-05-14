@@ -121,9 +121,9 @@ font-style:italic;
 
 /* scale images that are too big */
 .post_text img {
-    max-width: 950px;
+    max-width: 920px;
 }
 
 .dj_ie6 .post_text img {
-    width: expression(this.width > 950 ? "950px": "auto");
+    width: expression(this.width > 920 ? "920px": "auto");
 }
