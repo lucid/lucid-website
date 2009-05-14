@@ -118,3 +118,12 @@ width:100%;
 .post_text em,i,#snap_markdown_guide em {
 font-style:italic;
 }
+
+/* scale images that are too big */
+.post_text img {
+    max-width: 950px;
+}
+
+.dj_ie6 .post_text img {
+    width: expression(this.width > 950 ? "950px": "auto");
+}
