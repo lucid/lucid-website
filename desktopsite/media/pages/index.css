@@ -13,7 +13,7 @@
 
 .slideshow {
     float: left;
-    margin-top: 1em;
+    margin-top: 4.3em;
 }
 
 .slideshow .screenshot {
@@ -61,8 +61,8 @@
 .link-row {
     width: 400px;
     margin: 0.5em auto 0;
-    padding-left: 70px;
-    font-size: 8pt;
+    padding-left: 45px;
+    font-size: 9pt;
 }
 
 .link-row ul {
