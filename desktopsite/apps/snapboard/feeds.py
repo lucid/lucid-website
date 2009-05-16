@@ -15,7 +15,7 @@ class LatestPosts(Feed):
 
     def items(self):
         # we should only return the non-private messages
-        return Post.objects.filter(private__exact=None).order_by('-odate')[:20]
+        return Post.objects.filter(private__exact=None, censor__exact=False).order_by('-odate')[:20]
 
 
 # vim: ai ts=4 sts=4 et sw=4

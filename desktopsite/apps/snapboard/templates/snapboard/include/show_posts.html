@@ -52,7 +52,8 @@
                     <span title="Link to this specific post" class="popup">Post #{{ post.id }}</span>
                 </a>
 				by
-                <a href="{% url accounts-profile post.user.username %}">
+                {#<a href="{% url accounts-profile post.user.username %}">#}
+                <a href="/user/{{ post.user }}/">
                     <span title="Go to this user's profile." class="popup">{{ post.user }}</span>
                 </a>
             </b>
