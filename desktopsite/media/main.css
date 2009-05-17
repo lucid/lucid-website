@@ -91,6 +91,10 @@ body {
     color: #fff;
 }
 
+#loginPopup {
+    width: 300px;
+}
+
 #search {
     float: right;
     background: url('images/layout/search.png');

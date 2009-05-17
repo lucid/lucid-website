@@ -39,7 +39,8 @@ lucidsite = {
         var widget = dijit.byId("loginPopup");
         dijit.popup.open({
             popup: widget,
-            around: node
+            around: node,
+            orient: "TR"
         });
         var c = dojo.connect(widget, "onBlur", this, function(){
             dojo.disconnect(c);
