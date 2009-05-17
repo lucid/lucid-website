@@ -8,7 +8,10 @@
 	<p>
 		You have been logged out.
 	</p>
-	<a href="/">Continue</a>
+	<a href="{% if request.GET.next %}{{ request.GET.next }}{% else %}/{% endif %}">Continue</a>
+    <script type="text/javascript">
+        setTimeout(function(){ window.location=dojo.query("a", "mainlogin")[0].href; }, 3000);
+    </script>
 </div>
 
 {% endblock %}

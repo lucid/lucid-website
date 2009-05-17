@@ -2,6 +2,9 @@ dojo.provide("lucidsite.lucidsite");
 dojo.require("dojo.string");
 dojo.require("dojox.analytics.Urchin");
 dojo.require("dijit._base");
+dojo.require("dijit.TooltipDialog");
+dojo.require("dijit.form.Button");
+dojo.require("dijit.form.TextBox");
 
 lucidsite = {
     closeMsg: function(node){
@@ -29,6 +32,19 @@ lucidsite = {
         else if(node.value == str && e == "focus"){
             node.value = "";
         }
+    },
+    loginPopup: function(e){
+        dojo.stopEvent(e);
+        var node = e.target;
+        var widget = dijit.byId("loginPopup");
+        dijit.popup.open({
+            popup: widget,
+            around: node
+        });
+        var c = dojo.connect(widget, "onBlur", this, function(){
+            dojo.disconnect(c);
+            dijit.popup.close(widget);
+        });
     }
 };
 
