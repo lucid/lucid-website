@@ -11,6 +11,11 @@
     min-height: 10px;
 }
 
+.dj_ie6 #intro {
+    margin: 0 0 5px 0;
+    zoom: 1;
+}
+
 .slideshow {
     float: left;
     margin-top: 4.3em;

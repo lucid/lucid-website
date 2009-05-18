@@ -51,20 +51,19 @@ body {
 }
 
 #header .side {
-    height: inherit;
     width: 8px;
     height: 140px;
+    position: absolute;
+    top: 0px;
 }
 #header .side.left {
     background: url('images/layout/header-left.png') no-repeat;
-    float: left;
-    margin-left: -8px;
+    left: -8px;
 }
 
 #header .side.right {
     background: url('images/layout/header-right.png') no-repeat;
-    float: right;
-    margin-right: -8px;
+    right: -8px;
 }
 
 #logo {
