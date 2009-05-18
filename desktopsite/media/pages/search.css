@@ -3,5 +3,9 @@
 }
 
 #goog-wm li.search-goog {
-  display: none;
+    display: none;
+}
+
+#goog-wm h3.other-things {
+    display: none;
 }
