@@ -35,12 +35,12 @@ lucidsite = {
     },
     loginPopup: function(e){
         dojo.stopEvent(e);
-        var node = e.target;
+        var node = dojo.byId("loginLink");
         var widget = dijit.byId("loginPopup");
         dijit.popup.open({
             popup: widget,
             around: node,
-            orient: "TR"
+            orient: dojo.isOpera ? null : "TR" //workaround
         });
         var c = dojo.connect(widget, "onBlur", this, function(){
             dojo.disconnect(c);
