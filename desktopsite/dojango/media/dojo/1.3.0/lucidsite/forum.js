@@ -29,6 +29,7 @@ lucidsite.forum = {
 			load: function(data) {
 				previewDiv.innerHTML = data.preview
 				dojo.style(previewDiv, "display", "block");
+                dojo.style(previewDiv.parentNode, "display", "block");
 			},
 			error: function(err) {
 		        var errordiv = document.getElementById("thread_rpc_feedback");
@@ -124,7 +125,23 @@ lucidsite.forum = {
 				values.push(value);
 		})
 		dojo.byId(targetId).value = values.join(",")
-	}
+	},
+    quotePost: function(id){
+        var tarea = dojo.query("#add_post_div textarea")[0];
+        var text = dojo.byId("snap_post_text_quote"+id)[dojo.isIE ? "innerText" : "textContent"].split("\n");
+        var newtext = "";
+        for(var i=0;i<text.length;i++){
+            if(text[i].replace(" ", "") == "")
+                newtext += "> \n";
+            else
+                newtext += "> "+text[i]+"\n";
+        }
+        if(tarea.value == "")
+            tarea.value = newtext;
+        else
+            tarea.value += "\n"+newtext;
+        tarea.focus();
+    }
 }
 
 dojo.forEach([

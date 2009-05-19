@@ -20,6 +20,10 @@
             	<span title="Toggle this post." class="popup">
 	            	<a href="javascript://" onclick="lucidsite.forum.togglePost('{{ post.id }}');">toggle post</a>
 				</span>
+                &#149;
+            	<span title="Quote this post in the reply form." class="popup">
+	            	<a href="javascript://" onclick="lucidsite.forum.quotePost('{{ post.id }}');">quote post</a>
+				</span>
                 {% ifequal post.user_id user.id %}
                 &#149;
                 <span title="Edit this post.  All revisions are saved!" class="popup">
@@ -74,6 +78,9 @@
             <div class="post_text" style="display:block" id="snap_post_text{{ post.id }}">
                 {{ post.text|striptags|markdown:"safe"|safe }}
             </div>
+            <div id="snap_post_text_quote{{ post.id }}" style="display:none;"># {{ post.user }} Wrote: #
+ 
+{{post.text}}</div>
             {% if post.previous %}
             <span id="post_revision_links{{ post.id }}" class="post_menuleft">
                 <a href="javascript://" onclick="lucidsite.forum.revision('{{ post.id }}','{{ post.previous.id }}');">&#171; previous</a>
