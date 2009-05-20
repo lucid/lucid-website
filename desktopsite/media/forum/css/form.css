@@ -21,3 +21,7 @@ textarea,input[type="text"],input[type="password"] {
 width:100%;
 }
 
+
+form td textarea, form p textarea {
+    height: 250px;
+}

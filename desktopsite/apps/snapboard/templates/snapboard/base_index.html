@@ -1,6 +1,6 @@
 {% extends "base_community.html" %}
 
-{% block title %} - Community{% endblock %}
+{% block title %} - Community Forum{% endblock %}
 {% block extrahead %}
 <link type="text/css" rel="stylesheet" href="{{ SNAP_MEDIA_PREFIX }}/css/snapboard.css" />    
 
@@ -24,7 +24,7 @@
                 <li><a href="{{ SNAP_PREFIX }}/threads/"><span>All Discussions</span></a></li>
                 <li><a href="{{ SNAP_PREFIX }}/categories/"><span>Categories</span></a></li>
                 {% if user.is_authenticated %}
-                <li><a href="{{ SNAP_PREFIX }}/favorites/"><span>Favorites</span></a></li>
+                <li><a href="{{ SNAP_PREFIX }}/favorites/"><span>Watched Threads</span></a></li>
                 <li><a href="{{ SNAP_PREFIX }}/private/"><span>Private Posts</span></a></li>
                 <li><a href="{{ SNAP_PREFIX }}/newtopic/">New Topic</a></li>
                 {% endif %}

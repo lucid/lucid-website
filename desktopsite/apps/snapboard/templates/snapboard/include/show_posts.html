@@ -20,6 +20,10 @@
             	<span title="Toggle this post." class="popup">
 	            	<a href="javascript://" onclick="lucidsite.forum.togglePost('{{ post.id }}');">toggle post</a>
 				</span>
+                &#149;
+            	<span title="Quote this post in the reply form." class="popup">
+	            	<a href="javascript://" onclick="lucidsite.forum.quotePost('{{ post.id }}');">quote post</a>
+				</span>
                 {% ifequal post.user_id user.id %}
                 &#149;
                 <span title="Edit this post.  All revisions are saved!" class="popup">
@@ -29,9 +33,8 @@
                 {% if user.is_staff %}
                 &#149;
                 <span title="ADMIN: mark this post for censorship" class="popup">
-                    <a id="censor{{ post.id }}" href="javascript://" onclick="lucidsite.forum.setCensor('{{ post.id }}');">
-                        {{ post.censor|yesno:"uncensor,censor" }}
-                    </a>
+                    <a id="censor{{ post.id }}" href="javascript://" onclick="lucidsite.forum.setCensor('{{ post.id }}');"
+                        >{{ post.censor|yesno:"uncensor,censor" }}</a>
                 </span>
                 {% endif %}
                 {% if user.is_authenticated and not post.freespeech %}
@@ -48,14 +51,12 @@
                 </a>
             {% endif %}
             <b>
-            	<a href="#snap_post{{ post.id }}">
-                    <span title="Link to this specific post" class="popup">Post #{{ post.id }}</span>
-                </a>
+            	<a href="#snap_post{{ post.id }}"
+                    ><span title="Link to this specific post" class="popup">Post #{{ post.id }}</span></a>
 				by
                 {#<a href="{% url accounts-profile post.user.username %}">#}
-                <a href="/user/{{ post.user }}/">
-                    <span title="Go to this user's profile." class="popup">{{ post.user }}</span>
-                </a>
+                <a href="/user/{{ post.user }}/"
+                    ><span title="Go to this user's profile." class="popup">{{ post.user }}</span></a>
             </b>
 
             {% if post.private.all %}
@@ -77,6 +78,9 @@
             <div class="post_text" style="display:block" id="snap_post_text{{ post.id }}">
                 {{ post.text|striptags|markdown:"safe"|safe }}
             </div>
+            <div id="snap_post_text_quote{{ post.id }}" style="display:none;"># {{ post.user }} Wrote: #
+ 
+{{post.text}}</div>
             {% if post.previous %}
             <span id="post_revision_links{{ post.id }}" class="post_menuleft">
                 <a href="javascript://" onclick="lucidsite.forum.revision('{{ post.id }}','{{ post.previous.id }}');">&#171; previous</a>

@@ -1,0 +1,17 @@
+User-agent: *
+Crawl-delay: 10
+Request-rate: 1/5         # maximum rate is one page every 5 seconds
+Visit-time: 0300-0545     # only visit between 06:00 and 08:45 UTC (GMT)
+
+Disallow: /accounts/
+Disallow: /accounts/login/
+Disallow: /accounts/logout/
+Disallow: /accounts/profile/
+Disallow: /accounts/register/
+Disallow: /accounts/password_reset/
+Disallow: /accounts/profile/edit/
+Disallow: /accounts/password_change/
+Disallow: /forum/profile/
+Disallow: /search/
+Disallow: /admin/
+Disallow: /dojango/

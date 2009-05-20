@@ -54,22 +54,24 @@
 				{% endif %}
 				 - <a href="{% url accounts-logout %}?next={{ request.path }}" rel="nofollow">Logout</a>
 			{% else %}
-				<a href="{% url accounts-login %}" onclick="lucidsite.loginPopup(arguments[0]);" rel="nofollow">Login</a>
+				<a href="{% url accounts-login %}" onclick="lucidsite.loginPopup(arguments[0]);" id="loginLink" rel="nofollow">Login</a>
                 |
                 <a href="{% url registration_register %}" rel="nofollow">Register</a>
-                <div dojoType="dijit.TooltipDialog" id="loginPopup" style="display: none;">
-                    <form action="/accounts/login/" method="POST">
-                        <div>
-                            <label for="loginPopup_username">Username: </label>
-                            <div type="text" id="loginPopup_username" dojoType="dijit.form.TextBox" name="username"></div>
-                        </div>
-                        <div>
-                            <label for="loginPopup_password">Password: </label>
-                            <div type="password" id="loginPopup_password" dojoType="dijit.form.TextBox" name="password"></div>
-                        </div>
-                        <input name="next" type="hidden" value="{{ request.path }}" />
-                        <div dojoType="dijit.form.Button" label="Login" type="submit"></div>
-                   </form>
+                <div style="display: none;">
+                    <div dojoType="dijit.TooltipDialog" id="loginPopup">
+                        <form action="/accounts/login/" method="POST">
+                            <div>
+                                <label for="loginPopup_username">Username: </label>
+                                <div type="text" id="loginPopup_username" dojoType="dijit.form.TextBox" name="username"></div>
+                            </div>
+                            <div>
+                                <label for="loginPopup_password">Password: </label>
+                                <div type="password" id="loginPopup_password" dojoType="dijit.form.TextBox" name="password"></div>
+                            </div>
+                            <input name="next" type="hidden" value="{{ request.path }}" />
+                            <div dojoType="dijit.form.Button" label="Login" type="submit"></div>
+                        </form>
+                    </div>
                 </div>
 			{% endif %}
 		</div>

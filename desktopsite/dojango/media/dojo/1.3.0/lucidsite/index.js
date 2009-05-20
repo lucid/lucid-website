@@ -47,8 +47,8 @@ lucidsite.hideVideo = function(){
 dojo.addOnLoad(function(){
     //dojo.query(".PlayerScreen", "intro-video-player").style({width: "888px", height: "499px"});
     //workaround
-    //if(dojo.isWebKit)
-    //    setTimeout(function(){ dijit.byId("introTabs").resize(); }, 1000);
+    if(dojo.isWebKit)
+        setTimeout(function(){ dijit.byId("introTabs").resize(); }, 1000);
     
     flowplayer("intro-video-player", "/site_media/flowplayer/flowplayer-3.1.0.swf");
     $f("intro-video-player", "/site_media/flowplayer/flowplayer-3.1.0.swf", {

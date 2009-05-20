@@ -1,6 +1,6 @@
 {% extends "snapboard/base_forum.html" %}
 
-{% block title %} - Community - {{ thr.subject }}{% endblock %}
+{% block title %} - {{ thr.subject }} - Community Forum{% endblock %}
 
 {% block snap_extra_head %}
     {{ block.super }}
@@ -17,36 +17,32 @@
         <span class="thread_menu">
             {% if user.is_staff %}
                 <span>
-                    <a id="csticky{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setCsticky('{{ thr.id }}');">
-                        {{ thr.csticky|yesno:"unset,set" }} csticky
-                    </a> 
+                    <a id="csticky{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setCsticky('{{ thr.id }}');"
+                        >{{ thr.csticky|yesno:"unset,set" }} csticky</a> 
                 </span>
                 &#149;
                 <span>
-                    <a id="gsticky{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setGsticky('{{ thr.id }}');">
-                        {{ thr.gsticky|yesno:"unset,set" }} gsticky
-                    </a> 
+                    <a id="gsticky{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setGsticky('{{ thr.id }}');"
+                        >{{ thr.gsticky|yesno:"unset,set" }} gsticky</a> 
                 </span>
                 &#149;
                 <span>
-                    <a id="close{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setClose('{{ thr.id }}');">
-                        {{ thr.closed|yesno:"open,close" }} thread
-                    </a> 
+                    <a id="close{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setClose('{{ thr.id }}');"
+                        >{{ thr.closed|yesno:"open,close" }} thread</a>
                 </span>
             {% endif %}
             {% if user.is_authenticated %}
                 &#149;
                 <span>
-                    <a id="watch{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setWatch('{{ thr.id }}');">
-                        {{ watched|yesno:"don't," }} watch
-                    </a> 
+                    <a id="watch{{ thr.id }}" href="javascript://" onclick="lucidsite.forum.setWatch('{{ thr.id }}');"
+                        >{{ watched|yesno:"don't," }} watch</a> 
                 </span>
             {% endif %}
         </span>
-        <b style="font-size: large;">
+        <h2 style="font-size: 152%font-size: 152%;">
             <a href="{{ SNAP_PREFIX }}/threads/category/{{ thr.category.id }}/">{{ thr.category }}</a>:
             {{ thr.subject }}
-        </b>
+        </h2>
     </p>
     <br />
 
