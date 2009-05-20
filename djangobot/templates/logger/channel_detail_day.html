@@ -1,0 +1,37 @@
+{% extends "base_irc.html" %}
+{% block title %}DjangoBot: {{ date|date:"Y-n-j" }} | {{ channel }} logs{% endblock %}
+{% block heading %}DjangoBot: {{ channel }}{% endblock %}
+{% block search_post_url %}{% url channel_search channel_name %}{% endblock %}
+{% block content %}
+
+    <h2>{{ date|date:"Y-n-j" }}</h2>
+
+	{% load cache %}
+	
+    <table>
+        {% if today %}
+        {% include "logger/inner_messages.html" %}
+        {% else %}
+        {% cache 43200 messages channel date page_number %}
+        {% include "logger/inner_messages.html" %}
+        {% endcache %}
+        {% endif %}
+    </table>
+    {% if is_paginated %}
+        {% include "logger/paginator.html" %}
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+{% load cal %}
+{% display_calendar for date in channel %}
+
+<h2>Top Talkers</h2>
+<ol>
+    {% cache 43200 top_talkers channel %}
+    {% for line in channel.top_talkers %}
+    <li>{{ line.nickname }}</li>
+    {% endfor %}
+    {% endcache %}
+</ol>
+{% endblock %}
