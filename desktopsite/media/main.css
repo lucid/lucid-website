@@ -312,6 +312,9 @@ body {
     top: 3px;
 }
 
+.dj_ie6 .content-bottom {
+    top: 15px;
+}
 
 .dj_ie #intro {
     margin-top: 0px;
