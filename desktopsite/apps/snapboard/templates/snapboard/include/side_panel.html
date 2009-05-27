@@ -5,15 +5,14 @@
         </p>
         <br />
         <p>
-            You are signed in as <a href="{{ SNAP_PREFIX }}/profile/">{{ user.username }}</a>
+            You are signed in as <a href="/accounts/profile/">{{ user.username }}</a>
             {% if user.is_staff %}
             <b>(STAFF)</b>
             {% endif %}
         </p>
-        <br />
-        <p><a href="{{ SNAP_PREFIX }}/signout">Sign out</a></p>
     {% else %}
-        <p>You are not logged in.</p>
+        <p>You are not logged in. You must log in or create an account to contribute to discussions.</p>
+        {% comment %}
         <br />
         {% if form.has_errors %}
         <p>Your username and password didn't match.</p>
@@ -31,6 +30,7 @@
         <p>You need to have a user account in order to contribute
         to discussions on this forum.</p>
         <p style="font-size:small"><a href="/accounts/register/">Create an account</a></p>
+        {% endcomment %}
     {% endif %}
 </div>
 
