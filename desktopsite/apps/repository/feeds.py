@@ -7,7 +7,7 @@ SITE = Site.objects.get_current()
 
 class LatestPackages(Feed):
     title = str(SITE) + ' Latest Packages'
-    link = "/packages/"
+    link = "/repository/"
     description = "The latest community packages for Lucid"
 
     title_template = "repository/feeds/title.html"
