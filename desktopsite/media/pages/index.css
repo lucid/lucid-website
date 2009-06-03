@@ -11,6 +11,37 @@
     min-height: 10px;
 }
 
+
+#intro .intro-content p.learnmore {
+    text-align: right;
+    margin-top: 0px;
+}
+
+#intro .summary div {
+    min-height: 32px;
+    margin-bottom: 0.5em;
+}
+
+#intro .summary .icon {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 1em;
+    background-repeat: no-repeat;
+}
+
+#intro .summary .icon.files {
+    background-image: url('../images/intro/icons/files.png');
+}
+
+#intro .summary .icon.web {
+    background-image: url('../images/intro/icons/news.png');
+}
+
+#intro .summary .icon.dev {
+    background-image: url('../images/intro/icons/development.png');
+}
+
 .dj_ie6 #intro {
     margin: 0 0 5px 0;
     zoom: 1;
