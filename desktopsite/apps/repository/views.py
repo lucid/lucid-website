@@ -32,7 +32,10 @@ def userPackages(request):
     
     
 def search(request):
-    query = request.GET["q"]
+    if request.GET.has_key("q"):
+        query = request.GET["q"]
+    else:
+        query = ""
     if query:
         results = Package.objects.filter(name__contains=query)
     else:

@@ -4,13 +4,21 @@
 
 {% block extrahead %}
 <link type="text/css" rel="stylesheet" href="/site_media/pages/repository.css" media="screen" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/form/resources/Rating.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ DOJANGO.DOJO_URL }}/../dojox/layout/resources/RotatorContainer.css" />
+<script type="text/javascript">
+  dojo.require("lucidsite.repository");
+</script>
 {% endblock %}
 
 {% block content %}
 <h1>{{ title }}</h1>
-<ul>
-	{% for package in results %}
-		<li><a href="{{ package.get_absolute_url }}">{{ package.name }}</a></li>
-	{% endfor %}
-</ul>
+<div class="packageList">
+			{% for package in results %}
+				{% include "repository/packageListItem.html" %}
+			{% endfor %}
+</div>
+<p>
+    <a href="/repository/">&larr; Back to Repository Index</a>
+</p>
 {% endblock %}
