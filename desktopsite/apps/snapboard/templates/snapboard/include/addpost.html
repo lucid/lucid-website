@@ -37,7 +37,7 @@
         </div>
     </div>
     {% else %}
-    <p>You need to <a href="{{ SNAP_PREFIX }}/signin/?next={{ request.path|urlencode }}#add_post_div">sign in</a> to post messages.</p>
+    <p>You need to <a href="/accounts/login/?next={{ request.path|urlencode }}#add_post_div">sign in</a> to post messages.</p>
     {% endif %}
 {% endif %}
 {% if thr.closed %}
