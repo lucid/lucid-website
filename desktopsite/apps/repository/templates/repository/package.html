@@ -20,7 +20,7 @@
         <a href="{% url repository-delete-package package.sysname %}">Delete</a>
     </div>
 {% endif %}
-<a href="/repository/feeds/package/{{ package.sysname }}/" class="clear" rel="nofollow">
+<a href="/repository/feeds/package/{{ package.sysname }}/" class="clear">
     {% include "rssbutton.html" %}
 </a>
 <h1>
@@ -86,7 +86,7 @@
     <div class="comment" id="c{{ comment.id }}">
         <h3>
             {% if comment.user_url %}
-                <a href="{{ comment.user_url }}" rel="nofollow">
+                <a href="{{ comment.user_url }}">
             {% endif %}
                 {{ comment.user_name|escape }}{% if comment.user_url %}</a>{% endif %}
             <span class="small quiet">{{ comment.submit_date|date:"F j, Y" }} at {{ comment.submit_date|date:"P" }}</span>

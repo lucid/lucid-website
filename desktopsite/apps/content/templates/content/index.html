@@ -84,22 +84,22 @@ dojo.require("lucidsite.index");
         <div dojoType="dijit.layout.ContentPane" title="Portable">
             <div class="centered">
                 <div class="block">
-                    <img src="/site_media/images/intro/browser.png" />
+                    <img src="/site_media/images/intro/browser.png" alt="Lucid running in Firefox" />
                     <p>Runs in any standards-compliant web browser</p>
                 </div>
                 <div class="block">
-                    <img src="/site_media/images/intro/mobile.png" />
+                    <img src="/site_media/images/intro/mobile.png" alt="Lucid's mobile phone interface"/>
                     <p>Access your files from your mobile phone</p>
                 </div>
                 <div class="block">
-                    <img src="/site_media/images/intro/settings.png" />
+                    <img src="/site_media/images/intro/settings.png" alt="Lucid's settings and control panel" />
                     <p>Take your theme, settings, and apps with you</p>
                 </div>
             </div>
         </div>
         <div dojoType="dijit.layout.ContentPane" title="Customizable">
             <div class="padding">
-                <img class="graphic" src="/site_media/images/intro/package.png" />
+                <img class="graphic" src="/site_media/images/intro/package.png" alt="Package icon" />
                 <p>
                     Lucid supports 3rd party apps and themes. You can take a look at our <a href="{% url repository-index %}">package repository</a> to get addons for Lucid. You can take a look at the <a href="/documentation/en/dev/dev/">developer documentation</a> to learn how to make your own apps and themes for Lucid.
                 </p>
@@ -107,7 +107,7 @@ dojo.require("lucidsite.index");
         </div>
         <div dojoType="dijit.layout.ContentPane" title="Open Source">
             <div class="padding">
-                <img class="graphic" src="/site_media/images/intro/opensource.png" />
+                <img class="graphic" src="/site_media/images/intro/opensource.png" alt="Open Source icon" />
                 <p>
                     Lucid is open source software distributed under the <a href="http://www.opensource.org/licenses/academic.php">Academic Free License</a>. The license is very liberal, and allows anyone to modify and redistribute the software any way they want, even comercially. Additionally, we use a Contributor License Agreement (or CLA) to ensure that there are no licensing problems.
                 </p>
@@ -119,7 +119,7 @@ dojo.require("lucidsite.index");
 
 <div class="content-separate">
     <div id="blogposts">
-        <a href="/rss/weblog/" rel="nofollow">
+        <a href="/rss/weblog/">
             {% include "rssbutton.html" %}
         </a>
 	    <h2>Recent Blog Posts</h2>
@@ -131,7 +131,7 @@ dojo.require("lucidsite.index");
 	        <h3><a href="{{ latest_entry.get_absolute_url }}">{{ latest_entry.headline }}</a></h3>
 	        <p class="date">by <strong>{{ latest_entry.author }}</strong> on {{ latest_entry.pub_date|date:"M. j, Y" }}</p>
     	    {{ latest_entry.summary|safe }}
-	        <p class="more"><a href="{{ latest_entry.get_absolute_url }}" rel="nofollow">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments" rel="nofollow">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
+	        <p class="more"><a href="{{ latest_entry.get_absolute_url }}">Read more</a>{% if comment_count %} / <a href="{{ latest_entry.get_absolute_url }}#comments">{{ comment_count }} comment{{ comment_count|pluralize }}</a>{% endif %}</p>
     	{% endfor %}
 	
     </div>
