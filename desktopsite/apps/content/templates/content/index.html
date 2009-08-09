@@ -3,9 +3,9 @@
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="/site_media/pages/index.css" media="screen" />
 <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss/weblog/" />
-<link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/av/widget/resources/Player.css" media="screen" />
+{% comment %}<link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/av/widget/resources/Player.css" media="screen" />{% endcomment %}
 <link rel="stylesheet" type="text/css" href="{{ DOJANGO.DOJO_URL }}/../dojox/widget/Dialog/Dialog.css" media="screen" />
-<script type="text/javascript" src="/site_media/flowplayer/flowplayer-3.1.0.min.js"></script> {# temporary #}
+{% comment %}<script type="text/javascript" src="/site_media/flowplayer/flowplayer-3.1.0.min.js"></script>{% endcomment %}
 <script type="text/javascript">
 dojo.require("lucidsite.index");
 </script>
