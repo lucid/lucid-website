@@ -1,0 +1,48 @@
+/*
+	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Available via Academic Free License >= 2.1 OR the modified BSD license.
+	see: http://dojotoolkit.org/license for details
+*/
+
+
+if(!dojo._hasResource["lucidsite.repository._base"]){ //_hasResource checks added by build. Do not use _hasResource directly in your code.
+dojo._hasResource["lucidsite.repository._base"] = true;
+dojo.provide("lucidsite.repository._base");
+dojo.require("lucidsite.repository.Rating");
+dojo.require("dijit.layout.TabContainer");
+dojo.require("dijit.layout.ContentPane");
+dojo.require("dijit.TitlePane");
+dojo.require("dojox.layout.RotatorContainer");
+dojo.require("dojox.image.Lightbox");
+dojo.require("dojox.fx");
+
+dojo.mixin(lucidsite.repository, {
+	toggle: function(node) {
+		node = dojo.byId(node);
+		if(dojo.style(node, "display") == "none") {
+			dojo.style(node, {
+				display: "block",
+				height: "auto"
+			});
+			var anim = dojox.fx.wipeTo({
+				node: node,
+				height: node.clientHeight
+			});
+			dojo.style(node, "height", "0px");
+			setTimeout(dojo.hitch(anim, "play"), 75);
+		}
+		else {
+			dojox.fx.wipeTo({
+				node: node,
+				height: 0,
+				onEnd: function() {
+					setTimeout(function() {
+						dojo.style(node, "display", "none");
+					}, 75);
+				}
+			}).play();
+		}
+	}
+})
+
+}
