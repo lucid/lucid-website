@@ -61,8 +61,8 @@ dojo.require("lucidsite.index");
                 </ul>
             </div>
         </div>
+        {% comment %}
         <div class="video" id="intro-video">
-            {% comment %}
             <div dojoType="dojox.av.widget.Player" playerWidth="100%" id="intro-video-player" style="margin-top: 15px;">
                 <div controlType="video" initialVolume=".5"
             		mediaUrl="site_media/video/intro.flv" autoPlay="false" isDebug="false" dojoType="dojox.av.FLVideo"></div>
@@ -71,12 +71,12 @@ dojo.require("lucidsite.index");
                 <div controlType="progress" dojoType="dojox.av.widget.ProgressSlider"></div>
                 <div controlType="status" dojoType="dojox.av.widget.Status"></div>
             </div>
-            {% endcomment %}
             <div id="intro-video-player">
                 <a href="/site_media/video/intro.flv" id="intro-video-player-link">Intro Video</a>
             </div>
             <a href="/site_media/video/intro.mp4">Download High-Quality MP4</a> | <a href="javascript://" onClick="lucidsite.hideVideo();">Close Video</a> 
         </div>
+        {% endcomment %}
         <div class="side right"></div>
         <div class="side left"></div>
     </div>

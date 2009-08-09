@@ -6,11 +6,11 @@ dojo.require("dojox.av.widget.Player");
 dojo.require("dojox.av.widget.PlayButton");
 dojo.require("dojox.av.widget.VolumeButton");
 dojo.require("dojox.av.widget.ProgressSlider");
-dojo.require("dojox.av.widget.Status");*/
+dojo.require("dojox.av.widget.Status");
 dojo.require("dojox.fx.scroll");
-dojo.require("dojox.fx.easing");
+dojo.require("dojox.fx.easing");*/
 
-lucidsite.showVideo = function(){
+/*lucidsite.showVideo = function(){
     var nl = dojo.query("#intro .video").addClass("shown");
     //setTimeout(dojo.hitch(dijit.byId("intro-video-player").children[0], "onClick"), 1500);
     dojox.fx.smoothScroll({
@@ -70,4 +70,4 @@ dojo.addOnLoad(function(){
             //dojo.byId($f().id()).childNodes[0].height="522px";
         } 
     });
-});
+});*/
