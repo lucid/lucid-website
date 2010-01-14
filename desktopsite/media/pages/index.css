@@ -112,8 +112,14 @@
     position: relative;
 }
 
-.download-button div {
+.download-button div,
+.demo-button div {
+    visibility: hidden;
+}
+
+.download-button div.version {
     position: absolute;
+    display: block;
     top: 45px;
     left: 36px;
     color: #efefef;
