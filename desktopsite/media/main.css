@@ -186,7 +186,7 @@ body {
     top: -10px;
     line-height: 32px;
     display: block;
-    padding: 1px 1em 0 1.5em;
+    padding: 1px 1em 0 1.7em;
     height: 35px;
     text-align: center;
     /*font-weight: 700;*/
@@ -212,8 +212,8 @@ body {
 
 .dj_webkit #menu * a {
     padding-top: 1px;
-    padding-left: .5em;
-    padding-right: .5em;
+    padding-left: 1.6em;
+    padding-right: .7em;
     height: 18px;
     line-height: 18px;
 }
