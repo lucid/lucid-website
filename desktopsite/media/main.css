@@ -223,70 +223,32 @@ body {
 }
 
 /* menu icons */
-#menu ul li.home {
-    list-style-image: url('images/layout/icons/home.png');
-}
-
-.dj_ie #menu ul li.home a,
-.dj_opera #menu ul li.home a {
+#menu ul li.home a {
     background: url('images/layout/icons/home.png') no-repeat left center;
 }
 
-#menu ul li.download {
-    list-style-image: url('images/layout/icons/download.png');
-}
-
-.dj_ie #menu ul li.download a,
-.dj_opera #menu ul li.download a {
+#menu ul li.download a {
     background: url('images/layout/icons/download.png') no-repeat left center;
 }
 
-
-#menu ul li.documentation {
-    list-style-image: url('images/layout/icons/documentation.png');
-}
-
-.dj_ie #menu ul li.documentation a,
-.dj_opera #menu ul li.documentation a {
+#menu ul li.documentation a {
     background: url('images/layout/icons/documentation.png') no-repeat left center;
 }
 
 
-#menu ul li.blog {
-    list-style-image: url('images/layout/icons/blog.png');
-}
-
-.dj_ie #menu ul li.blog a,
-.dj_opera #menu ul li.blog a {
+#menu ul li.blog a {
     background: url('images/layout/icons/blog.png') no-repeat left center;
 }
 
-
-#menu ul li.community {
-    list-style-image: url('images/layout/icons/community.png');
-}
-
-.dj_ie #menu ul li.community a,
-.dj_opera #menu ul li.community a {
+#menu ul li.community a {
     background: url('images/layout/icons/community.png') no-repeat left center;
 }
 
-
-#menu ul li.packages {
-    list-style-image: url('images/layout/icons/packages.png');
-}
-
-.dj_ie #menu ul li.packages a,
-.dj_opera #menu ul li.packages a {
+#menu ul li.packages a {
     background: url('images/layout/icons/packages.png') no-repeat left center;
 }
 
-#menu ul li.code {
-    list-style-image: url('images/layout/icons/code.png');
-}
-
-.dj_ie #menu ul li.code a,
-.dj_opera #menu ul li.code a {
+#menu ul li.code a {
     background: url('images/layout/icons/code.png') no-repeat left center;
 }
 /* end icons */
