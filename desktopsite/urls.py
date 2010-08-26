@@ -7,7 +7,7 @@ admin.autodiscover()
 
 feeds = {
      'weblog': WeblogEntryFeed,
-     'comments': LatestCommentFeed,
+#     'comments': LatestCommentFeed,
 }
 
 urlpatterns = patterns('',
