@@ -81,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'desktopsite.disable.DisableCSRF',
     'desktopsite.apps.snapboard.middleware.threadlocals.ThreadLocals',
     'desktopsite.apps.repository.middleware.threadlocals.ThreadLocals',
 )
